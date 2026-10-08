@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#000000">
+<title>Tamil Voice Reader</title>
+<style>
+  :root { --bg:#000; --fg:#fff; --accent:#ffd400; --btn:#1a1a1a; --border:#fff; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font-family: system-ui, "Noto Sans Tamil", sans-serif; font-size:20px; line-height:1.5; }
+  main { max-width:720px; margin:0 auto; padding:16px; }
+  h1 { font-size:28px; margin:8px 0 4px; }
+  p.lead { margin:0 0 16px; color:#ddd; }
+  .row { display:flex; flex-wrap:wrap; gap:12px; margin:12px 0; }
+  button, label.btn, select, input[type=range] { font-size:22px; }
+  button, label.btn {
+    flex:1 1 45%; min-height:72px; padding:12px; border:3px solid var(--border); border-radius:12px;
+    background:var(--btn); color:var(--fg); font-weight:700; text-align:center; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+  }
+  button.primary, label.primary { background:var(--accent); color:#000; border-color:var(--accent); flex-basis:100%; min-height:96px; font-size:26px; }
+  button:focus-visible, label.btn:focus-within, select:focus-visible, textarea:focus-visible, input:focus-visible {
+    outline:4px solid #00e5ff; outline-offset:3px;
+  }
+  button[aria-pressed="true"] { background:#00e5ff; color:#000; border-color:#00e5ff; }
+  select, textarea { width:100%; background:var(--btn); color:var(--fg); border:3px solid var(--border); border-radius:12px; padding:12px; font-size:20px; }
+  textarea { min-height:220px; }
+  fieldset { border:3px solid #555; border-radius:12px; margin:16px 0; padding:12px; }
+  legend { padding:0 8px; font-weight:700; }
+  .field { margin:12px 0; }
+  .field label { display:block; font-weight:700; margin-bottom:6px; }
+  input[type=range] { width:100%; height:44px; accent-color:var(--accent); }
+  #status { min-height:32px; font-weight:700; color:var(--accent); }
+  .warn { border:3px solid #ff6b6b; border-radius:12px; padding:10px; margin:12px 0; }
+  .info { color:#bbb; font-size:17px; }
+  #preview { max-width:100%; border-radius:12px; margin-top:8px; display:none; }
+  input[type=file] { position:absolute; opacity:0; width:1px; height:1px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Tamil Voice Reader</h1>
+  <p class="lead">Take a photo of a page, bill or label. It reads the text aloud in Tamil or English.</p>
+
+  <div id="status" role="status" aria-live="polite"></div>
+  <div id="voiceWarning" class="warn" role="alert" hidden></div>
+
+  <div class="row">
+    <label class="btn primary" id="scanLabel">
+      Take a photo
+      <input type="file" id="fileInput" accept="image/*" capture="environment" aria-label="Take a photo of a document">
+    </label>
+    <label class="btn" id="galleryLabel">
+      Choose from gallery
+      <input type="file" id="galleryInput" accept="image/*" aria-label="Choose a photo from your gallery">
+    </label>
+  </div>
+  <img id="preview" alt="Photo being read">
+
+  <div class="row">
+    <button id="readBtn" type="button">Read aloud</button>
+    <button id="pauseBtn" type="button">Pause</button>
+    <button id="stopBtn" type="button">Stop</button>
+    <button id="micBtn" type="button" aria-pressed="false">Voice commands: off</button>
+  </div>
+
+  <div class="field">
+    <label for="textBox">Text found in the photo (you can edit it)</label>
+    <textarea id="textBox" lang="ta" placeholder="The text from your photo appears here."></textarea>
+  </div>
+
+  <fieldset>
+    <legend>Settings</legend>
+    <div class="field">
+      <label for="ocrLang">Language in the photo</label>
+      <select id="ocrLang">
+        <option value="tam+eng" selected>Tamil and English</option>
+        <option value="tam">Tamil only</option>
+        <option value="eng">English only</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="rate">Speed: <span id="rateVal">1.0</span></label>
+      <input type="range" id="rate" min="0.5" max="1.6" step="0.1" value="1.0">
+    </div>
+    <div class="field">
+      <label for="cmdLang">Voice command language</label>
+      <select id="cmdLang">
+        <option value="en-IN" selected>English</option>
+        <option value="ta-IN">Tamil</option>
+      </select>
+    </div>
+  </fieldset>
+
+  <details>
+    <summary>Quality check (for testing)</summary>
+    <p class="info" id="diag">Run a photo to see the OCR confidence and time.</p>
+    <p class="info" id="voiceList"></p>
+  </details>
+
+  <p class="info">Voice commands: say "scan", "read", "pause", "resume", "stop", "faster", "slower". Tamil: "படி", "இடைநிறுத்து", "தொடர்", "நிறுத்து", "வேகமாக", "மெதுவாக".</p>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var statusEl = $("status"), textBox = $("textBox"), preview = $("preview");
+  var synth = window.speechSynthesis;
+  var voices = [];
+  var queue = [], qIndex = 0, speaking = false, paused = false;
+
+  // ---------- status (visual + spoken for blind users) ----------
+  function setStatus(msg, speak) {
+    statusEl.textContent = msg;
+    if (speak) say(msg, /[\u0B80-\u0BFF]/.test(msg) ? "ta" : "en", true);
+  }
+
+  // ---------- voices ----------
+  function loadVoices() {
+    voices = synth ? synth.getVoices() : [];
+    var tamil = voices.filter(function (v) { return /^ta/i.test(v.lang); });
+    $("voiceList").textContent = "Voices on this device: " + voices.length +
+      ". Tamil voices: " + (tamil.length ? tamil.map(function (v) { return v.name; }).join(", ") : "none") + ".";
+    var warn = $("voiceWarning");
+    if (!synth) {
+      warn.hidden = false; warn.textContent = "This browser cannot speak text. Try Chrome on Android.";
+    } else if (voices.length && !tamil.length) {
+      warn.hidden = false;
+      warn.textContent = "No Tamil voice was found on this device. English will read fine. To add Tamil: Android Settings > Text-to-speech output > install Tamil voice data.";
+    } else { warn.hidden = true; }
+  }
+  if (synth) { loadVoices(); synth.addEventListener("voiceschanged", loadVoices); }
+
+  function pickVoice(kind) {
+    var want = kind === "ta" ? /^ta/i : /^en-IN/i;
+    var v = voices.filter(function (x) { return want.test(x.lang); })[0];
+    if (!v && kind === "en") v = voices.filter(function (x) { return /^en/i.test(x.lang); })[0];
+    return v || null;
+  }
+
+  // iPhone only allows speech that starts from a tap, so "unlock" it on the first tap
+  var speechUnlocked = false;
+  function unlockSpeech() {
+    if (speechUnlocked || !synth) return;
+    try {
+      var u = new SpeechSynthesisUtterance(" ");
+      u.volume = 0;
+      synth.speak(u);
+      speechUnlocked = true;
+    } catch (e) {}
+  }
+  document.addEventListener("click", unlockSpeech, true);
+  document.addEventListener("touchend", unlockSpeech, true);
+
+  // ---------- speaking ----------
+  function say(text, kind, interrupt) {
+    if (!synth) return;
+    if (interrupt) synth.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    var v = pickVoice(kind);
+    if (v) { u.voice = v; u.lang = v.lang; } else { u.lang = kind === "ta" ? "ta-IN" : "en-IN"; }
+    u.rate = parseFloat($("rate").value);
+    synth.speak(u);
+  }
+
+  function splitChunks(text) {
+    var parts = text.replace(/\r/g, "").replace(/([.!?\u0964])\s+/g, "$1\n").split(/\n+/);
+    var out = [];
+    parts.forEach(function (p) {
+      p = p.trim();
+      if (!p) return;
+      while (p.length > 220) {
+        var cut = p.lastIndexOf(" ", 220); if (cut < 60) cut = 220;
+        out.push(p.slice(0, cut)); p = p.slice(cut).trim();
+      }
+      if (p) out.push(p);
+    });
+    return out;
+  }
+
+  function speakNext() {
+    if (!speaking) return;
+    if (qIndex >= queue.length) { speaking = false; setStatus("Finished reading.", false); return; }
+    var chunk = queue[qIndex++];
+    var kind = /[\u0B80-\u0BFF]/.test(chunk) ? "ta" : "en";
+    var u = new SpeechSynthesisUtterance(chunk);
+    var v = pickVoice(kind);
+    if (v) { u.voice = v; u.lang = v.lang; } else { u.lang = kind === "ta" ? "ta-IN" : "en-IN"; }
+    u.rate = parseFloat($("rate").value);
+    u.onend = speakNext;
+    u.onerror = speakNext;
+    synth.speak(u);
+  }
+
+  function readAloud() {
+    var text = textBox.value.trim();
+    if (!text) { setStatus("There is no text yet. Take a photo first.", true); return; }
+    if (!synth) return;
+    synth.cancel();
+    queue = splitChunks(text); qIndex = 0; speaking = true; paused = false;
+    $("pauseBtn").textContent = "Pause";
+    setStatus("Reading.", false);
+    speakNext();
+  }
+  function pauseResume() {
+    if (!synth || !speaking) return;
+    if (paused) { synth.resume(); paused = false; $("pauseBtn").textContent = "Pause"; setStatus("Resumed.", false); }
+    else { synth.pause(); paused = true; $("pauseBtn").textContent = "Resume"; setStatus("Paused.", false); }
+  }
+  function stopReading() {
+    speaking = false; paused = false; if (synth) synth.cancel();
+    $("pauseBtn").textContent = "Pause"; setStatus("Stopped.", false);
+  }
+
+  // ---------- OCR ----------
+  function prepImage(file) {
+    return new Promise(function (resolve, reject) {
+      var img = new Image();
+      var url = URL.createObjectURL(file);
+      img.onload = function () {
+        var max = 1800, s = Math.min(1, max / Math.max(img.width, img.height));
+        var c = document.createElement("canvas");
+        c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+        var ctx = c.getContext("2d");
+        ctx.drawImage(img, 0, 0, c.width, c.height);
+        var d = ctx.getImageData(0, 0, c.width, c.height), px = d.data;
+        for (var i = 0; i < px.length; i += 4) {
+          var g = 0.299 * px[i] + 0.587 * px[i + 1] + 0.114 * px[i + 2];
+          g = Math.max(0, Math.min(255, (g - 128) * 1.4 + 128));   // add contrast
+          px[i] = px[i + 1] = px[i + 2] = g;
+        }
+        ctx.putImageData(d, 0, 0);
+        preview.src = url; preview.style.display = "block";
+        c.toBlob(function (b) { b ? resolve(b) : reject(new Error("image failed")); }, "image/png");
+      };
+      img.onerror = function () { reject(new Error("Could not open the image")); };
+      img.src = url;
+    });
+  }
+
+  function runOcr(file) {
+    if (typeof Tesseract === "undefined") {
+      setStatus("Text recognition could not load. Check your internet and reload.", true); return;
+    }
+    stopReading();
+    setStatus("Reading the photo. Please wait.", true);
+    var t0 = Date.now();
+    prepImage(file).then(function (blob) {
+      return Tesseract.recognize(blob, $("ocrLang").value, {
+        logger: function (m) {
+          if (m.status === "recognizing text") statusEl.textContent = "Reading the photo: " + Math.round(m.progress * 100) + "%";
+        }
+      });
+    }).then(function (res) {
+      var text = (res.data.text || "").trim();
+      textBox.value = text;
+      var secs = ((Date.now() - t0) / 1000).toFixed(1);
+      $("diag").textContent = "Confidence: " + Math.round(res.data.confidence) + "%. Time: " + secs + " s. Characters: " + text.length + ".";
+      if (!text) { setStatus("I could not find any text. Try a clearer, brighter photo.", true); return; }
+      setStatus("Done. Reading now.", false);
+      readAloud();
+    }).catch(function (e) {
+      setStatus("Sorry, something went wrong: " + e.message, true);
+    });
+  }
+
+  ["fileInput", "galleryInput"].forEach(function (id) {
+    $(id).addEventListener("change", function (e) {
+      var f = e.target.files && e.target.files[0];
+      if (f) runOcr(f);
+      e.target.value = "";
+    });
+  });
+
+  // ---------- buttons ----------
+  $("readBtn").addEventListener("click", readAloud);
+  $("pauseBtn").addEventListener("click", pauseResume);
+  $("stopBtn").addEventListener("click", stopReading);
+  $("rate").addEventListener("input", function () { $("rateVal").textContent = parseFloat(this.value).toFixed(1); });
+
+  function changeRate(delta) {
+    var r = $("rate"), v = Math.max(0.5, Math.min(1.6, parseFloat(r.value) + delta));
+    r.value = v.toFixed(1); $("rateVal").textContent = v.toFixed(1);
+    setStatus("Speed " + v.toFixed(1), false);
+  }
+
+  // ---------- voice commands ----------
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  var rec = null, micOn = false;
+
+  function handleCommand(heard) {
+    var t = heard.toLowerCase();
+    var has = function (arr) { return arr.some(function (w) { return t.indexOf(w) !== -1; }); };
+    if (has(["scan", "photo", "camera", "ஸ்கேன்", "படம்"])) { $("fileInput").click(); }
+    else if (has(["resume", "continue", "தொடர்"])) { if (paused) pauseResume(); else readAloud(); }
+    else if (has(["pause", "wait", "இடைநிறுத்து"])) { if (!paused) pauseResume(); }
+    else if (has(["stop", "நிறுத்து"])) { stopReading(); }
+    else if (has(["faster", "வேகமாக"])) { changeRate(0.2); }
+    else if (has(["slower", "மெதுவாக"])) { changeRate(-0.2); }
+    else if (has(["read", "படி", "வாசி"])) { readAloud(); }
+  }
+
+  function startMic() {
+    if (!SR) { setStatus("Voice commands are not supported in this browser. Try Chrome.", true); return; }
+    rec = new SR();
+    rec.lang = $("cmdLang").value; rec.continuous = true; rec.interimResults = false;
+    rec.onresult = function (ev) {
+      var r = ev.results[ev.results.length - 1];
+      if (r.isFinal) handleCommand(r[0].transcript);
+    };
+    rec.onend = function () { if (micOn) { try { rec.lang = $("cmdLang").value; rec.start(); } catch (e) {} } };
+    rec.onerror = function (ev) {
+      if (ev.error === "not-allowed") { micOn = false; updateMicBtn(); setStatus("Microphone permission was denied.", true); }
+    };
+    try { rec.start(); } catch (e) {}
+  }
+  function updateMicBtn() {
+    var b = $("micBtn");
+    b.setAttribute("aria-pressed", micOn ? "true" : "false");
+    b.textContent = "Voice commands: " + (micOn ? "on" : "off");
+  }
+  $("micBtn").addEventListener("click", function () {
+    micOn = !micOn; updateMicBtn();
+    if (micOn) { startMic(); setStatus("Voice commands on.", true); }
+    else { if (rec) { try { rec.stop(); } catch (e) {} } setStatus("Voice commands off.", false); }
+  });
+
+  // show any hidden error on screen so it can be reported
+  window.addEventListener("error", function (e) {
+    statusEl.textContent = "Error: " + (e.message || "unknown") + " (line " + (e.lineno || "?") + ")";
+  });
+  window.addEventListener("unhandledrejection", function (e) {
+    statusEl.textContent = "Error: " + ((e.reason && e.reason.message) || e.reason || "unknown");
+  });
+
+  if (location.protocol === "file:") {
+    var w = $("voiceWarning");
+    w.hidden = false;
+    w.textContent = "Open this app from a web link (https), not as a saved file. Saved files cannot load the Tamil text recognition on iPhone.";
+  }
+
+  setStatus("Ready. Press the big yellow button to take a photo.", false);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INAI Creative — Brand, Design, Content</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel+Decorative:wght@400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0F172A;--charcoal:#111827;--gold:#B8860B;--copper:#C47A2C;--ivory:#F8F6F2;--muted:#94A3B8;--gold-light:#D4A843;--black:#06090F}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--ivory);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:1rem 4rem;background:rgba(15,23,42,0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(184,134,11,0.1)}
+.nav-brand{display:flex;align-items:center;gap:0.7rem}
+.nav-kolam{width:36px;height:36px;border-radius:50%;border:1px solid rgba(184,134,11,0.3);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.nav-wordmark{font-family:'Cinzel Decorative',serif;font-size:1.1rem;letter-spacing:0.2em;color:var(--ivory);text-decoration:none}
+.nav-tamil{font-size:0.58rem;color:var(--gold);letter-spacing:0.05em;opacity:0.7;display:block;line-height:1;margin-top:1px}
+.nav-links{display:flex;gap:2.2rem;align-items:center}
+.nav-links a{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.3s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold)!important;color:var(--navy)!important;padding:0.5rem 1.2rem;border-radius:2px;font-weight:500!important}
+.svc-hero{min-height:65vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:5rem;padding:9rem 4rem 5rem;position:relative;overflow:hidden}
+.svc-hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 50% 70% at 20% 50%,rgba(184,134,11,0.06) 0%,transparent 70%)}
+.breadcrumb{font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.5rem}
+.breadcrumb a{color:var(--muted);text-decoration:none}.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb span{color:var(--gold)}
+.eyebrow{font-size:0.65rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem}
+.eyebrow::before{content:'';width:1.8rem;height:1px;background:var(--gold)}
+.svc-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5vw,5rem);font-weight:300;line-height:1.05;margin-bottom:1.2rem}
+.svc-h1 em{color:var(--gold);font-style:italic}
+.svc-hero-sub{font-size:1rem;color:var(--muted);line-height:1.85;max-width:460px;font-weight:300;margin-bottom:2rem}
+.gold-bar{width:3rem;height:1px;background:var(--gold);margin:1.2rem 0}
+.btn-gold{background:var(--gold);color:var(--navy);padding:0.85rem 2rem;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.76rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;transition:background 0.3s,transform 0.2s;text-decoration:none;display:inline-block}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--ivory);padding:0.85rem 2rem;border:1px solid rgba(248,246,242,0.18);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.76rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;transition:border-color 0.3s,color 0.3s;text-decoration:none;display:inline-block;margin-left:1rem}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.hero-visual{display:flex;align-items:center;justify-content:center}
+.icon-ring{width:300px;height:300px;border-radius:50%;border:1px solid rgba(184,134,11,0.12);display:flex;align-items:center;justify-content:center;position:relative;animation:breathe 4s ease-in-out infinite}
+.icon-ring::before{content:'';position:absolute;inset:-20px;border-radius:50%;border:1px solid rgba(184,134,11,0.06)}
+.icon-ring::after{content:'';position:absolute;inset:-40px;border-radius:50%;border:1px solid rgba(184,134,11,0.03)}
+@keyframes breathe{0%,100%{box-shadow:0 0 0 0 rgba(184,134,11,0)}50%{box-shadow:0 0 40px rgba(184,134,11,0.12)}}
+.icon-ring svg{width:90px;height:90px;stroke:var(--gold);fill:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round}
+section{padding:6rem 4rem}
+.sec-eyebrow{font-size:0.63rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;display:flex;align-items:center;gap:0.7rem}
+.sec-eyebrow::after{content:'';flex:0 0 2rem;height:1px;background:var(--gold)}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.6vw,3.2rem);font-weight:300;line-height:1.13;margin-bottom:1.3rem}
+.sec-title em{color:var(--gold);font-style:italic}
+.services-detail{background:var(--charcoal)}
+.svc-list-full{margin-top:3rem;display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
+.svc-item{background:var(--navy);padding:2.5rem;border:1px solid rgba(184,134,11,0.08);position:relative;overflow:hidden;transition:border-color 0.4s}
+.svc-item:hover{border-color:rgba(184,134,11,0.3)}
+.svc-item::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:transform 0.5s;transform-origin:left}
+.svc-item:hover::after{transform:scaleX(1)}
+.svc-item-name{font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:0.6rem}
+.svc-item-desc{font-size:0.88rem;color:var(--muted);line-height:1.75;font-weight:300;margin-bottom:1rem}
+.svc-item-includes{font-size:0.72rem;color:rgba(248,246,242,0.35);font-style:italic}
+.process{background:var(--navy)}
+.process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem}
+.process-card{padding:2.5rem;border:1px solid rgba(184,134,11,0.08)}
+.process-num{font-family:'Cormorant Garamond',serif;font-size:3.5rem;color:rgba(184,134,11,0.1);font-weight:300;line-height:1;margin-bottom:0.8rem}
+.process-title{font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:0.6rem}
+.process-desc{font-size:0.85rem;color:var(--muted);line-height:1.75;font-weight:300}
+.audience{background:var(--charcoal)}
+.audience-tags{display:flex;flex-wrap:wrap;gap:0.8rem;margin-top:2.5rem}
+.aud-tag{padding:0.8rem 1.4rem;border:1px solid rgba(184,134,11,0.15);border-radius:2px;font-size:0.8rem;color:var(--muted);font-weight:300;transition:all 0.3s;cursor:default}
+.aud-tag:hover{border-color:var(--gold);color:var(--ivory)}
+.philosophy{background:var(--navy);display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.philosophy-quote{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;line-height:1.5;font-style:italic;color:var(--ivory);border-left:2px solid var(--gold);padding-left:1.5rem}
+.philosophy-quote span{color:var(--gold);font-style:normal}
+.philosophy-text p{font-size:0.92rem;color:var(--muted);line-height:1.85;font-weight:300;margin-bottom:1.2rem}
+.other-services{background:var(--black);padding:5rem 4rem}
+.other-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+.other-card{text-decoration:none;color:inherit;padding:2rem;border:1px solid rgba(184,134,11,0.08);display:block;transition:border-color 0.3s}
+.other-card:hover{border-color:rgba(184,134,11,0.3)}
+.other-icon{font-size:1.4rem;margin-bottom:0.8rem;display:block}
+.other-name{font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:0.4rem}
+.other-desc{font-size:0.78rem;color:var(--muted);font-weight:300;line-height:1.5}
+.cta-band{background:var(--charcoal);padding:5rem 4rem;text-align:center}
+.cta-band h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:300;margin-bottom:0.8rem}
+.cta-band h2 em{color:var(--gold);font-style:italic}
+.cta-band p{font-size:0.88rem;color:var(--muted);max-width:400px;margin:0 auto 2.2rem;line-height:1.8;font-weight:300}
+footer{background:#040710;padding:2.2rem 4rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(184,134,11,0.07)}
+.footer-brand{font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--ivory);letter-spacing:0.18em}
+.footer-tag{font-size:0.6rem;color:rgba(148,163,184,0.35);letter-spacing:0.12em;text-transform:uppercase;margin-top:0.2rem}
+.footer-fw{font-size:0.58rem;color:rgba(148,163,184,0.25);letter-spacing:0.18em}
+.footer-copy{font-size:0.62rem;color:rgba(148,163,184,0.25)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.75s ease,transform 0.75s ease}
+.reveal.on{opacity:1;transform:none}
+.stagger>*{opacity:0;transform:translateY(16px);transition:opacity 0.6s ease,transform 0.6s ease}
+.stagger.on>*:nth-child(1){opacity:1;transform:none;transition-delay:0s}
+.stagger.on>*:nth-child(2){opacity:1;transform:none;transition-delay:0.12s}
+.stagger.on>*:nth-child(3){opacity:1;transform:none;transition-delay:0.24s}
+.stagger.on>*:nth-child(4){opacity:1;transform:none;transition-delay:0.36s}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-brand">
+    <div class="nav-kolam">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M50 8 C58 22 62 38 50 44 C38 38 42 22 50 8Z" stroke="#B8860B" stroke-width="2" fill="none"/><path d="M92 50 C78 58 62 62 56 50 C62 38 78 42 92 50Z" stroke="#B8860B" stroke-width="2" fill="none"/><path d="M50 92 C42 78 38 62 50 56 C62 62 58 78 50 92Z" stroke="#B8860B" stroke-width="2" fill="none"/><path d="M8 50 C22 42 38 38 44 50 C38 62 22 58 8 50Z" stroke="#B8860B" stroke-width="2" fill="none"/><circle cx="50" cy="50" r="10" stroke="#C47A2C" stroke-width="1.5" fill="none"/><circle cx="50" cy="50" r="3" fill="#B8860B"/></svg>
+    </div>
+    <div><a href="index.html" class="nav-wordmark">INAI</a><span class="nav-tamil">இணை</span></div>
+  </div>
+  <div class="nav-links">
+    <a href="about.html">About</a><a href="services.html" style="color:var(--gold)">Services</a>
+    <a href="work.html">Work</a><a href="blog.html">Insights</a>
+    <a href="contact.html" class="nav-cta">Book a Consultation</a>
+  </div>
+</nav>
+
+<section class="svc-hero">
+  <div style="animation:fadeUp 1s ease 0.1s both">
+    <div class="breadcrumb"><a href="services.html">Services</a> <span>/</span> <span>INAI Creative</span></div>
+    <div class="eyebrow">INAI Creative</div>
+    <h1 class="svc-h1">Brand identity that<br><em>means something.</em></h1>
+    <div class="gold-bar"></div>
+    <p class="svc-hero-sub">Most brands look professional. Few feel true. INAI Creative exists to close that gap. We build visual identities, content systems, and communication frameworks that reflect who a business actually is, not just how it wants to appear.</p>
+    <a href="contact.html" class="btn-gold">Start a Creative Project</a>
+    <a href="services.html" class="btn-outline">All Services</a>
+  </div>
+  <div class="hero-visual" style="animation:fadeUp 1s ease 0.3s both">
+    <div class="icon-ring">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 19l7-7-7-7"/>
+        <path d="M5 12h14"/>
+        <circle cx="5" cy="12" r="2"/>
+        <circle cx="19" cy="5" r="2"/>
+        <circle cx="19" cy="19" r="2"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE OFFER -->
+<section class="services-detail">
+  <div class="reveal">
+    <div class="sec-eyebrow">What We Offer</div>
+    <h2 class="sec-title">Six creative capabilities.<br>One <em>integrated practice.</em></h2>
+    <p style="font-size:0.92rem;color:var(--muted);line-height:1.8;font-weight:300;max-width:600px">Every creative service at INAI is connected to a strategic outcome. Nothing is decorative for its own sake.</p>
+  </div>
+  <div class="svc-list-full stagger">
+    <div class="svc-item">
+      <div class="svc-item-name">Brand Identity</div>
+      <p class="svc-item-desc">Your brand is not your logo. It is the total impression your business makes on every person who encounters it. We build complete visual identities that hold together across every touchpoint, from business card to billboard, from website to social media story.</p>
+      <div class="svc-item-includes">Includes: logo design, colour system, typography, icon set, brand guidelines document, usage rules</div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-item-name">Visual Design</div>
+      <p class="svc-item-desc">Design that does a job. Packaging, marketing materials, digital assets, print collateral. Every design decision is made with the audience in mind and the brand guidelines as the constraint. The result is visual work that feels consistent and intentional.</p>
+      <div class="svc-item-includes">Includes: print collateral, digital graphics, poster and banner design, brand asset library</div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-item-name">Social Media Design</div>
+      <p class="svc-item-desc">A social media presence that actually looks like one business, not a collection of individually designed posts. We build template systems, content frameworks, and campaign assets that keep your feed consistent and your brand recognisable at a scroll.</p>
+      <div class="svc-item-includes">Includes: post templates, story templates, highlight covers, profile setup, content calendar design</div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-item-name">Content Strategy</div>
+      <p class="svc-item-desc">What to say, when to say it, and how to say it so the right people actually pay attention. A content strategy is the architecture underneath the posts, the articles, and the campaigns. Without it, you are producing content. With it, you are building an audience.</p>
+      <div class="svc-item-includes">Includes: audience mapping, content pillar framework, posting schedule, tone of voice guide, content calendar</div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-item-name">Marketing Collateral</div>
+      <p class="svc-item-desc">The materials that represent you when you are not in the room. Brochures, pitch documents, one-pagers, capability statements. Designed to the standard of the business you are presenting to, not the standard of what the template allows.</p>
+      <div class="svc-item-includes">Includes: brochures, flyers, capability decks, sales one-pagers, event materials, exhibition graphics</div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-item-name">Corporate Presentations</div>
+      <p class="svc-item-desc">Investor decks, client proposals, board presentations, team briefings. A presentation is a persuasion tool. We design them to move the audience from where they are to where you need them to be, with structure, clarity, and visual authority.</p>
+      <div class="svc-item-includes">Includes: pitch deck design, proposal templates, keynote and PowerPoint master slides, presentation coaching</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section class="process">
+  <div class="reveal">
+    <div class="sec-eyebrow">How We Work</div>
+    <h2 class="sec-title">From brief to brand.<br>The <em>INAI Creative process.</em></h2>
+  </div>
+  <div class="process-grid stagger">
+    <div class="process-card">
+      <div class="process-num">01</div>
+      <div class="process-title">Discovery</div>
+      <p class="process-desc">Before a single pixel is touched, we understand the business, the audience, the competitors, and the outcome the work needs to achieve. This is the work that makes everything else faster.</p>
+    </div>
+    <div class="process-card">
+      <div class="process-num">02</div>
+      <div class="process-title">Direction</div>
+      <p class="process-desc">We present two or three distinct creative directions. Not variations on one idea. Genuinely different approaches, each with a clear rationale. You choose the direction, we execute it completely.</p>
+    </div>
+    <div class="process-card">
+      <div class="process-num">03</div>
+      <div class="process-title">Delivery</div>
+      <p class="process-desc">Final files in every format you need, with a brand guidelines document that means the next designer, marketer, or printer can work within the system without asking you to explain it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy reveal">
+  <div>
+    <div class="sec-eyebrow">The INAI Approach</div>
+    <h2 class="sec-title">Creative work is<br><em>strategic work.</em></h2>
+    <div class="philosophy-text">
+      <p>There is a version of creative work that is about aesthetic preference. A slightly different shade of blue. A font that feels more premium. A logo that is rounder or sharper. That version of creative work produces beautiful things that do not move the business forward.</p>
+      <p>At INAI Creative, every creative decision is connected to a strategic question. Who needs to understand something, and what do we need them to understand? What does trust look like in this industry? What does the brand need to communicate at first glance to the right person?</p>
+      <p>The kolam is the metaphor. Every line is intentional. Every dot is connected. The beauty is a consequence of the structure, not a substitute for it.</p>
+    </div>
+  </div>
+  <div>
+    <div class="philosophy-quote">
+      "Creative work that does not serve a strategic purpose is decoration. <span>INAI Creative builds brands that work.</span>"
+    </div>
+  </div>
+</section>
+
+<!-- AUDIENCE -->
+<section style="background:var(--charcoal);padding:6rem 4rem">
+  <div class="reveal">
+    <div class="sec-eyebrow">Who This Is For</div>
+    <h2 class="sec-title">The right fit for<br><em>INAI Creative.</em></h2>
+  </div>
+  <div class="audience-tags reveal">
+    <span class="aud-tag">Startups building their first brand</span>
+    <span class="aud-tag">Established businesses rebranding</span>
+    <span class="aud-tag">Founders going independent and needing a professional presence</span>
+    <span class="aud-tag">Agencies with creative overflow work</span>
+    <span class="aud-tag">Education businesses needing a premium visual identity</span>
+    <span class="aud-tag">Consultancies preparing for a new market</span>
+    <span class="aud-tag">Businesses with a strong product but a weak brand</span>
+    <span class="aud-tag">Teams that need a content system, not just a post</span>
+  </div>
+</section>
+
+<!-- OTHER SERVICES -->
+<div class="other-services">
+  <div class="sec-eyebrow reveal" style="justify-content:left">The Other Pillars</div>
+  <h2 class="sec-title reveal">Creative is one part<br>of the <em>full picture.</em></h2>
+  <div class="other-grid stagger">
+    <a href="systems.html" class="other-card">
+      <span class="other-icon">⚙</span>
+      <div class="other-name">INAI Systems</div>
+      <div class="other-desc">AI automation, CRM architecture, and operational infrastructure for businesses that are ready to scale.</div>
+    </a>
+    <a href="digital.html" class="other-card">
+      <span class="other-icon">◻</span>
+      <div class="other-name">INAI Digital</div>
+      <div class="other-desc">Websites, landing pages, portals, and digital experiences built to convert and built to last.</div>
+    </a>
+    <a href="growth.html" class="other-card">
+      <span class="other-icon">↗</span>
+      <div class="other-name">INAI Growth</div>
+      <div class="other-desc">Marketing strategy, lead generation, and business development for teams that need traction.</div>
+    </a>
+  </div>
+</div>
+
+<div class="cta-band">
+  <h2>Ready to build a brand<br>that <em>actually works?</em></h2>
+  <p>Tell us what you are building and we will tell you what it needs to look like.</p>
+  <a href="contact.html" class="btn-gold">Start the Conversation</a>
+</div>
+
+<footer>
+  <div><div class="footer-brand">INAI</div><div class="footer-tag">Where Creativity Meets Intelligence</div></div>
+  <div class="footer-fw">I → N → A → I &nbsp;·&nbsp; IDEA · NETWORK · ACTION · IMPACT</div>
+  <div class="footer-copy">© 2025 INAI. All rights reserved.</div>
+</footer>
+<script>
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('on')}),{threshold:0.1});
+document.querySelectorAll('.reveal,.stagger').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

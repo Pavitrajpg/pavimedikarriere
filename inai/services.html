@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — INAI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel+Decorative:wght@400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0F172A;--charcoal:#111827;--gold:#B8860B;--copper:#C47A2C;--ivory:#F8F6F2;--muted:#94A3B8;--gold-light:#D4A843;--black:#06090F}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--ivory);overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:1rem 4rem;background:rgba(15,23,42,0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(184,134,11,0.1)}
+.nav-brand{display:flex;align-items:center;gap:0.7rem}
+.nav-kolam{width:36px;height:36px;border-radius:50%;border:1px solid rgba(184,134,11,0.3);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.nav-wordmark{font-family:'Cinzel Decorative',serif;font-size:1.1rem;letter-spacing:0.2em;color:var(--ivory);text-decoration:none}
+.nav-tamil{font-size:0.58rem;color:var(--gold);letter-spacing:0.05em;opacity:0.7;display:block;line-height:1;margin-top:1px}
+.nav-links{display:flex;gap:2.2rem;align-items:center}
+.nav-links a{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.3s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold)!important;color:var(--navy)!important;padding:0.5rem 1.2rem;border-radius:2px;font-weight:500!important}
+
+/* HERO */
+.services-hero{
+  min-height:55vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:9rem 4rem 5rem;text-align:center;
+  position:relative;overflow:hidden;
+}
+.services-hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(184,134,11,0.06) 0%,transparent 70%);
+}
+.hero-eyebrow{font-size:0.65rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;display:flex;align-items:center;justify-content:center;gap:0.7rem}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:1.8rem;height:1px;background:var(--gold)}
+.services-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,5.5vw,5.5rem);font-weight:300;line-height:1.05;margin-bottom:1.2rem}
+.services-h1 em{color:var(--gold);font-style:italic}
+.services-sub{font-size:1rem;color:var(--muted);line-height:1.8;max-width:560px;font-weight:300}
+.gold-bar{width:3rem;height:1px;background:var(--gold);margin:1.5rem auto}
+
+/* PILLARS NAV */
+.pillars-nav{
+  display:flex;justify-content:center;gap:0;
+  border:1px solid rgba(184,134,11,0.15);
+  margin:0 4rem;
+  position:sticky;top:72px;z-index:100;
+  background:rgba(15,23,42,0.98);backdrop-filter:blur(16px);
+}
+.pillar-tab{
+  flex:1;padding:1rem 1.5rem;text-align:center;
+  font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--muted);border-right:1px solid rgba(184,134,11,0.12);
+  cursor:pointer;transition:all 0.3s;text-decoration:none;
+  display:block;
+}
+.pillar-tab:last-child{border-right:none}
+.pillar-tab:hover,.pillar-tab.active{color:var(--gold);background:rgba(184,134,11,0.05)}
+.pillar-tab .tab-icon{display:block;font-size:1.1rem;margin-bottom:0.3rem}
+
+/* PILLAR SECTIONS */
+.pillar{padding:7rem 4rem;position:relative}
+.pillar:nth-child(odd){background:var(--charcoal)}
+.pillar:nth-child(even){background:var(--navy)}
+.pillar-inner{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;max-width:1200px;margin:0 auto}
+.pillar-inner.reverse{direction:rtl}
+.pillar-inner.reverse>*{direction:ltr}
+
+.sec-eyebrow{font-size:0.63rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;display:flex;align-items:center;gap:0.7rem}
+.sec-eyebrow::after{content:'';flex:0 0 2rem;height:1px;background:var(--gold)}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.6vw,3.2rem);font-weight:300;line-height:1.13;margin-bottom:1.2rem}
+.sec-title em{color:var(--gold);font-style:italic}
+.pillar-desc{font-size:0.95rem;color:rgba(248,246,242,0.65);line-height:1.85;font-weight:300;margin-bottom:2rem}
+.pillar-desc strong{color:var(--ivory);font-weight:400}
+
+/* Service list */
+.service-items{list-style:none;margin-bottom:2.5rem}
+.service-items li{
+  font-size:0.85rem;color:var(--muted);font-weight:300;
+  padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.05);
+  display:flex;align-items:flex-start;gap:0.8rem;
+}
+.service-items li:last-child{border:none}
+.service-items li::before{content:'→';color:var(--gold);font-size:0.75rem;margin-top:2px;flex-shrink:0}
+.service-items li span{color:var(--ivory);font-weight:400;display:block;margin-bottom:0.15rem}
+.service-items li p{font-size:0.78rem;color:var(--muted);line-height:1.5}
+
+/* Who it's for */
+.for-box{
+  background:rgba(184,134,11,0.06);border:1px solid rgba(184,134,11,0.15);
+  padding:1.5rem;border-radius:3px;margin-bottom:2rem;
+}
+.for-label{font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;font-weight:500}
+.for-tags{display:flex;flex-wrap:wrap;gap:0.5rem}
+.for-tag{padding:0.3rem 0.8rem;border:1px solid rgba(184,134,11,0.25);border-radius:2px;font-size:0.72rem;color:var(--muted)}
+
+/* Visual side */
+.pillar-visual{display:flex;align-items:center;justify-content:center;position:relative}
+.pillar-icon-large{
+  width:280px;height:280px;border-radius:50%;
+  border:1px solid rgba(184,134,11,0.15);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.pillar-icon-large::before{
+  content:'';position:absolute;inset:-20px;border-radius:50%;
+  border:1px solid rgba(184,134,11,0.07);
+}
+.pillar-icon-large::after{
+  content:'';position:absolute;inset:-40px;border-radius:50%;
+  border:1px solid rgba(184,134,11,0.04);
+}
+.pillar-icon-large svg{width:80px;height:80px;stroke:var(--gold);fill:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round}
+
+/* Result callout */
+.result-callout{
+  border-left:2px solid var(--gold);padding-left:1.2rem;margin-bottom:2rem;
+}
+.result-callout .result-num{font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:var(--gold);font-weight:300;line-height:1}
+.result-callout .result-label{font-size:0.72rem;color:var(--muted);letter-spacing:0.08em;margin-top:0.2rem}
+
+/* CTA button */
+.btn-gold{background:var(--gold);color:var(--navy);padding:0.82rem 1.8rem;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.74rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;transition:background 0.3s,transform 0.2s;text-decoration:none;display:inline-block}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-1px)}
+.btn-copper{background:var(--copper);color:var(--ivory);padding:0.82rem 1.8rem;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.74rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;transition:background 0.3s;text-decoration:none;display:inline-block}
+
+/* HOW IT WORKS */
+.process{background:var(--black);padding:7rem 4rem;text-align:center}
+.process-steps{display:flex;gap:0;margin-top:4rem;border:1px solid rgba(184,134,11,0.1);max-width:1000px;margin-left:auto;margin-right:auto}
+.process-step{flex:1;padding:2.5rem 1.5rem;border-right:1px solid rgba(184,134,11,0.08);position:relative;transition:background 0.4s}
+.process-step:last-child{border-right:none}
+.process-step:hover{background:rgba(184,134,11,0.03)}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:3rem;color:rgba(184,134,11,0.15);font-weight:300;line-height:1;margin-bottom:0.8rem}
+.step-title{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:0.6rem}
+.step-desc{font-size:0.8rem;color:var(--muted);line-height:1.65;font-weight:300}
+.step-arr{position:absolute;right:-0.6rem;top:50%;transform:translateY(-50%);color:var(--gold);font-size:0.9rem;z-index:1}
+.process-step:last-child .step-arr{display:none}
+
+/* BOTTOM CTA */
+.bottom-cta{background:var(--charcoal);padding:6rem 4rem;text-align:center}
+.bottom-cta h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:300;margin-bottom:1rem}
+.bottom-cta h2 em{color:var(--gold);font-style:italic}
+.bottom-cta p{font-size:0.9rem;color:var(--muted);max-width:440px;margin:0 auto 2.5rem;line-height:1.8;font-weight:300}
+
+footer{background:#040710;padding:2.2rem 4rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(184,134,11,0.07)}
+.footer-brand{font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--ivory);letter-spacing:0.18em}
+.footer-tag{font-size:0.6rem;color:rgba(148,163,184,0.35);letter-spacing:0.12em;text-transform:uppercase;margin-top:0.2rem}
+.footer-fw{font-size:0.58rem;color:rgba(148,163,184,0.25);letter-spacing:0.18em}
+.footer-copy{font-size:0.62rem;color:rgba(148,163,184,0.25)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.75s ease,transform 0.75s ease}
+.reveal.on{opacity:1;transform:none}
+.stagger>*{opacity:0;transform:translateY(16px);transition:opacity 0.6s ease,transform 0.6s ease}
+.stagger.on>*:nth-child(1){opacity:1;transform:none;transition-delay:0s}
+.stagger.on>*:nth-child(2){opacity:1;transform:none;transition-delay:0.12s}
+.stagger.on>*:nth-child(3){opacity:1;transform:none;transition-delay:0.24s}
+.stagger.on>*:nth-child(4){opacity:1;transform:none;transition-delay:0.36s}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-kolam">
+      <svg viewBox="0 0 100 100" fill="none">
+        <path d="M50 8 C58 22 62 38 50 44 C38 38 42 22 50 8Z" stroke="#B8860B" stroke-width="2" fill="none"/>
+        <path d="M92 50 C78 58 62 62 56 50 C62 38 78 42 92 50Z" stroke="#B8860B" stroke-width="2" fill="none"/>
+        <path d="M50 92 C42 78 38 62 50 56 C62 62 58 78 50 92Z" stroke="#B8860B" stroke-width="2" fill="none"/>
+        <path d="M8 50 C22 42 38 38 44 50 C38 62 22 58 8 50Z" stroke="#B8860B" stroke-width="2" fill="none"/>
+        <circle cx="50" cy="50" r="10" stroke="#C47A2C" stroke-width="1.5" fill="none"/>
+        <circle cx="50" cy="50" r="3" fill="#B8860B"/>
+      </svg>
+    </div>
+    <div>
+      <a href="index.html" class="nav-wordmark">INAI</a>
+      <span class="nav-tamil">இணை</span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="about.html">About</a>
+    <a href="services.html" style="color:var(--gold)">Services</a>
+    <a href="work.html">Work</a>
+    <a href="blog.html">Insights</a>
+    <a href="contact.html" class="nav-cta">Book a Consultation</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="services-hero">
+  <div style="animation:fadeUp 1s ease 0.1s both">
+    <div class="hero-eyebrow">Our Services</div>
+    <h1 class="services-h1">Four pillars.<br>One <em>collective.</em></h1>
+    <div class="gold-bar"></div>
+    <p class="services-sub">INAI brings creativity, systems, digital, and growth together as one integrated practice. Not four separate agencies. One collective that thinks across all of it.</p>
+  </div>
+</section>
+
+<!-- STICKY PILLAR NAV -->
+<div class="pillars-nav">
+  <a href="creative.html" class="pillar-tab active">
+    <span class="tab-icon">✦</span>Creative
+  </a>
+  <a href="systems.html" class="pillar-tab">
+    <span class="tab-icon">⚙</span>Systems
+  </a>
+  <a href="digital.html" class="pillar-tab">
+    <span class="tab-icon">◻</span>Digital
+  </a>
+  <a href="growth.html" class="pillar-tab">
+    <span class="tab-icon">↗</span>Growth
+  </a>
+</div>
+
+<!-- INAI CREATIVE -->
+<section class="pillar" id="creative">
+  <div class="pillar-inner">
+    <div class="reveal">
+      <div class="sec-eyebrow">INAI Creative</div>
+      <h2 class="sec-title">Brand identity that<br><em>means something.</em></h2>
+      <p class="pillar-desc">Most brands look professional. Few feel <strong>true.</strong> INAI Creative exists to close that gap. We build visual identities, content systems, and communication frameworks that reflect who a business actually is, not just how it wants to appear.</p>
+      <p class="pillar-desc">From the first logo conversation to the social media post that goes live on a Tuesday, every creative decision is connected to a strategic one.</p>
+
+      <ul class="service-items">
+        <li>
+          <div>
+            <span>Brand Identity</span>
+            <p>Logo, colour system, typography, brand guidelines. Built to work at every size, in every context.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <span>Social Media Design</span>
+            <p>Templates, campaigns, and content systems that keep your brand consistent and your feed alive.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <span>Content Strategy</span>
+            <p>What to say, when to say it, and how to say it so the right people actually pay attention.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <span>Marketing Collateral</span>
+            <p>Brochures, presentations, proposals, pitch decks. The materials that represent you when you are not in the room.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <span>Corporate Presentations</span>
+            <p>Investor decks, team presentations, client proposals. Designed to persuade, not just inform.</p>
+          </div>
+        </li>
+      </ul>
+
+      <div class="for-box">
+        <div class="for-label">Who this is for</div>
+        <div class="for-tags">
+          <span class="for-tag">Startups building their first brand</span>
+          <span class="for-tag">Businesses rebranding</span>
+          <span class="for-tag">Agencies needing overflow creative</span>
+          <span class="for-tag">Consultants going independent</span>
+        </div>
+      </div>
+
+      <a href="creative.html" class="btn-gold">Learn More → Creative</a>
+    </div>
+    <div class="pillar-visual reveal">
+      <div class="pillar-icon-large">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 19l7-7-7-7M5 12h14"/>
+          <circle cx="5" cy="12" r="2"/>
+          <circle cx="19" cy="5" r="2"/>
+          <circle cx="19" cy="19" r="2"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INAI SYSTEMS -->
+<section class="pillar" id="systems">
+  <div class="pillar-inner reverse">
+    <div class="reveal">
+      <div class="sec-eyebrow">INAI Systems</div>
+      <h2 class="sec-title">Operations that<br><em>run themselves.</em></h2>
+      <p class="pillar-desc">The most expensive thing in any business is a process that nobody has documented and a tool that nobody uses properly. INAI Systems fixes that. We build CRM workflows, AI automations, and business systems that reduce manual effort and increase reliable output.</p>
+      <p class="pillar-desc">This is not software consulting. This is operational architecture built by someone who has done it from scratch, under pressure, with real business outcomes on the line.</p>
+
+      <div class="result-callout">
+        <div class="result-num">15</div>
+        <div class="result-label">Days to build a full CRM from zero for Step4Progress</div>
+      </div>
+
+      <ul class="service-items">
+        <li>
+          <div>
+            <span>AI Automation</span>
+            <p>Workflows that handle repetitive tasks automatically. Lead capture, follow-up, reporting, notifications.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <span>CRM Architecture</span>
+            <p>Custom CRM builds using Supabase, Notion, Airtable, or your existing stack. Role-based access, pipelines, dashboards.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <span>Lead Management Systems</span>
+            <p>From first enquiry to conversion. Structured, trackable, with no leads falling through the gaps.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <span>Business Process Optimization</span>
+            <p>Audit your current processes, identify the waste, redesign the flow. Lean Six Sigma methodology applied practically.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <span>Webhook and Integration Pipelines</span>
+            <p>Connect your tools. Tally, Make.com, Brevo, Twilio, Meta Ads. Everything talking to everything else.</p>
+          </div>
+        </li>
+      </ul>
+
+      <div class="for-box">
+        <div class="for-label">Who this is for</div>
+        <div class="for-tags">
+          <span class="for-tag">Growing teams drowning in manual work</span>
+          <span class="for-tag">Businesses with no CRM</span>
+          <span class="for-tag">Founders who need systems before they hire</span>
+          <span class="for-tag">Operations teams needing automation</span>
+        </div>
+      </div>
+
+      <a href="systems.html" class="btn-gold">Learn More → Systems</a>
+    </div>
+    <div class="pillar-visual reveal">
+      <div class="pillar-icon-large">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INAI DIGITAL -->
+<section class="pillar" id="digital">
+  <div class="pillar-inner">
+    <div class="reveal">
+      <div class="sec-eyebrow">INAI Digital</div>
+      <h2 class="sec-title">Digital experiences<br>that <em>convert.</em></h2>
+      <p class="pillar-desc">A website is not a brochure. It is a system that either works for your business at 2am or sits there looking expensive and doing nothing. INAI Digital builds websites, landing pages, and digital experiences that have a job to do and do it.</p>
+      <p class="pillar-desc">Every page is designed with conversion in mind, built with clean code, and deployed properly. No templates that look like every other website. No handovers that leave you stuck.</p>
+
+      <ul class="service-items">
+        <li>
+          <div>
+            <span>Websites</span>
+            <p>Business websites, portfolio sites, consultancy pages. Designed, built, and deployed. Fully yours.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <span>Landing Pages</span>
+            <p>Single-purpose pages built for one outcome. Lead capture, event registration, product launch, campaign response.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <span>App Prototypes</span>
+            <p>Interactive prototypes for client demos, investor meetings, or internal product testing. Built in code, not just Figma.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <span>Student and Client Portals</span>
+            <p>Custom web portals with role-based access, content delivery, and progress tracking. Built on Supabase.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <span>Digital Experiences</span>
+            <p>Interactive, animated, story-driven web experiences. Like this website. Built when the standard template will not do.</p>
+          </div>
+        </li>
+      </ul>
+
+      <div class="for-box">
+        <div class="for-label">Who this is for</div>
+        <div class="for-tags">
+          <span class="for-tag">Businesses with no website or a bad one</span>
+          <span class="for-tag">Founders launching something new</span>
+          <span class="for-tag">Education and consultancy firms</span>
+          <span class="for-tag">Anyone who needs more than a template</span>
+        </div>
+      </div>
+
+      <a href="digital.html" class="btn-gold">Learn More → Digital</a>
+    </div>
+    <div class="pillar-visual reveal">
+      <div class="pillar-icon-large">
+        <svg viewBox="0 0 24 24">
+          <rect x="2" y="3" width="20" height="14" rx="2"/>
+          <path d="M8 21h8M12 17v4"/>
+          <path d="M6 8h12M6 11h8" opacity="0.5"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INAI GROWTH -->
+<section class="pillar" id="growth">
+  <div class="pillar-inner reverse">
+    <div class="reveal">
+      <div class="sec-eyebrow">INAI Growth</div>
+      <h2 class="sec-title">Strategy that<br><em>moves the number.</em></h2>
+      <p class="pillar-desc">Growth strategy without execution is a document that sits in a folder. INAI Growth connects the thinking to the doing. We build marketing strategies, lead generation systems, and business development frameworks that have measurable outcomes built into them from the start.</p>
+      <p class="pillar-desc">The benchmark is not a beautiful deck. It is a number that moves.</p>
+
+      <div class="result-callout">
+        <div class="result-num">55%</div>
+        <div class="result-label">Campaign conversion achieved, up from 20%, through communication strategy</div>
+      </div>
+
+      <ul class="service-items">
+        <li>
+          <div>
+            <span>Marketing Strategy</span>
+            <p>Channel selection, messaging architecture, campaign planning. Built around your actual business goals, not marketing vanity metrics.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <span>Lead Generation</span>
+            <p>Meta Ads, organic social, referral systems, outreach sequences. The full pipeline from stranger to qualified enquiry.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <span>Business Development Support</span>
+            <p>Prospect research, outreach strategy, partnership identification, pitch preparation. The work that happens before the sale.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <span>Communication Consulting</span>
+            <p>How your business speaks. Internal communication, client communication, brand voice, tone guidelines.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <span>Growth Planning</span>
+            <p>90-day plans, OKR frameworks, quarterly reviews. Structure for businesses that want to grow intentionally.</p>
+          </div>
+        </li>
+      </ul>
+
+      <div class="for-box">
+        <div class="for-label">Who this is for</div>
+        <div class="for-tags">
+          <span class="for-tag">Businesses with a product but no pipeline</span>
+          <span class="for-tag">Teams with budget but no strategy</span>
+          <span class="for-tag">Consultancies expanding their client base</span>
+          <span class="for-tag">Founders who need traction fast</span>
+        </div>
+      </div>
+
+      <a href="growth.html" class="btn-gold">Learn More → Growth</a>
+    </div>
+    <div class="pillar-visual reveal">
+      <div class="pillar-icon-large">
+        <svg viewBox="0 0 24 24">
+          <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+          <polyline points="16 7 22 7 22 13"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="process">
+  <div class="reveal">
+    <div class="hero-eyebrow" style="justify-content:center">How INAI Works</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.8vw,3.4rem);font-weight:300;margin-bottom:0.8rem">The I → N → A → I <em style="color:var(--gold);font-style:italic">journey.</em></h2>
+    <p style="color:var(--muted);font-size:0.9rem;font-weight:300;max-width:480px;margin:0 auto;line-height:1.8">Every project follows the same framework. Every time.</p>
+  </div>
+  <div class="process-steps reveal">
+    <div class="process-step">
+      <div class="step-num">I</div>
+      <div class="step-title">Idea</div>
+      <div class="step-desc">We start by understanding what you are actually trying to achieve, not just what you think you need.</div>
+      <div class="step-arr">→</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">N</div>
+      <div class="step-title">Network</div>
+      <div class="step-desc">We map the connections: people, systems, channels, and opportunities that matter for your goal.</div>
+      <div class="step-arr">→</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">A</div>
+      <div class="step-title">Action</div>
+      <div class="step-desc">We build, design, write, and deploy. Execution that matches the strategy, delivered without unnecessary back and forth.</div>
+      <div class="step-arr">→</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">I</div>
+      <div class="step-title">Impact</div>
+      <div class="step-desc">We measure what moved. And we iterate until it moves further.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<div class="bottom-cta">
+  <h2>Not sure which<br>pillar you need? <em>Good.</em></h2>
+  <p>Most businesses need more than one. Tell us what you are trying to solve and we will tell you which combination makes sense.</p>
+  <a href="contact.html" class="btn-gold">Book a Free Conversation</a>
+</div>
+
+<footer>
+  <div>
+    <div class="footer-brand">INAI</div>
+    <div class="footer-tag">Where Creativity Meets Intelligence</div>
+  </div>
+  <div class="footer-fw">I → N → A → I &nbsp;·&nbsp; IDEA · NETWORK · ACTION · IMPACT</div>
+  <div class="footer-copy">© 2025 INAI. All rights reserved.</div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('on'); }), {threshold:0.1});
+document.querySelectorAll('.reveal,.stagger').forEach(el => io.observe(el));
+
+// Active tab on scroll
+const sections = ['creative','systems','digital','growth'];
+const tabs = document.querySelectorAll('.pillar-tab');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if(el && window.scrollY >= el.offsetTop - 200) current = id;
+  });
+  tabs.forEach(tab => {
+    tab.classList.remove('active');
+    if(tab.getAttribute('href') === '#' + current) tab.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

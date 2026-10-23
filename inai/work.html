@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work — INAI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel+Decorative:wght@400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0F172A;--charcoal:#111827;--gold:#B8860B;--copper:#C47A2C;--ivory:#F8F6F2;--muted:#94A3B8;--gold-light:#D4A843;--black:#06090F}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--ivory);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:1rem 4rem;background:rgba(15,23,42,0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(184,134,11,0.1)}
+.nav-brand{display:flex;align-items:center;gap:0.7rem}
+.nav-kolam{width:36px;height:36px;border-radius:50%;border:1px solid rgba(184,134,11,0.3);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.nav-wordmark{font-family:'Cinzel Decorative',serif;font-size:1.1rem;letter-spacing:0.2em;color:var(--ivory);text-decoration:none}
+.nav-tamil{font-size:0.58rem;color:var(--gold);letter-spacing:0.05em;opacity:0.7;display:block;line-height:1;margin-top:1px}
+.nav-links{display:flex;gap:2.2rem;align-items:center}
+.nav-links a{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.3s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold)!important;color:var(--navy)!important;padding:0.5rem 1.2rem;border-radius:2px;font-weight:500!important}
+
+/* HERO */
+.work-hero{min-height:50vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:9rem 4rem 4rem;text-align:center;position:relative;overflow:hidden}
+.work-hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(184,134,11,0.05) 0%,transparent 70%)}
+.hero-eyebrow{font-size:0.65rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;display:flex;align-items:center;justify-content:center;gap:0.7rem}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:1.8rem;height:1px;background:var(--gold)}
+.work-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,5.5vw,5.5rem);font-weight:300;line-height:1.05;margin-bottom:1rem}
+.work-h1 em{color:var(--gold);font-style:italic}
+.work-sub{font-size:1rem;color:var(--muted);line-height:1.8;max-width:520px;font-weight:300}
+.gold-bar{width:3rem;height:1px;background:var(--gold);margin:1.5rem auto}
+
+/* FILTER TABS */
+.filter-tabs{display:flex;justify-content:center;gap:0.6rem;padding:2rem 4rem;flex-wrap:wrap}
+.filter-tab{padding:0.45rem 1.2rem;border:1px solid rgba(184,134,11,0.2);border-radius:2px;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all 0.3s;background:none}
+.filter-tab:hover,.filter-tab.active{border-color:var(--gold);color:var(--gold);background:rgba(184,134,11,0.06)}
+
+/* CASE STUDIES GRID */
+.work-grid{padding:2rem 4rem 6rem;display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;max-width:1300px;margin:0 auto}
+
+.case-card{
+  background:var(--charcoal);border:1px solid rgba(184,134,11,0.08);
+  position:relative;overflow:hidden;cursor:pointer;
+  transition:border-color 0.4s,transform 0.4s;
+  text-decoration:none;color:inherit;display:block;
+}
+.case-card:hover{border-color:rgba(184,134,11,0.35);transform:translateY(-4px)}
+.case-card-visual{
+  height:220px;position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.case-card:nth-child(1) .case-card-visual{background:linear-gradient(135deg,#0d1520,#1a2540)}
+.case-card:nth-child(2) .case-card-visual{background:linear-gradient(135deg,#0f1a0d,#1a2510)}
+.case-card:nth-child(3) .case-card-visual{background:linear-gradient(135deg,#1a1008,#201508)}
+.case-card:nth-child(4) .case-card-visual{background:linear-gradient(135deg,#100d1a,#1a1028)}
+.case-pattern{opacity:0.08;width:140px;height:140px}
+.case-pill{
+  position:absolute;top:1.2rem;left:1.2rem;
+  padding:0.3rem 0.8rem;background:rgba(184,134,11,0.15);
+  border:1px solid rgba(184,134,11,0.3);border-radius:2px;
+  font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);
+}
+.case-arr{
+  position:absolute;top:1.2rem;right:1.2rem;
+  width:30px;height:30px;border:1px solid rgba(184,134,11,0.25);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold);font-size:0.75rem;
+  opacity:0;transition:opacity 0.3s;
+}
+.case-card:hover .case-arr{opacity:1}
+
+.case-body{padding:2rem}
+.case-client{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--copper);margin-bottom:0.5rem;font-weight:500}
+.case-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;color:var(--ivory);margin-bottom:0.8rem;line-height:1.2}
+.case-desc{font-size:0.82rem;color:var(--muted);line-height:1.7;font-weight:300;margin-bottom:1.2rem}
+.case-tags{display:flex;gap:0.5rem;flex-wrap:wrap}
+.case-tag{padding:0.25rem 0.7rem;border:1px solid rgba(148,163,184,0.15);border-radius:2px;font-size:0.65rem;color:rgba(148,163,184,0.6);letter-spacing:0.06em}
+.case-result{
+  margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,0.05);
+  display:flex;gap:2rem;
+}
+.result-item .r-num{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--gold);font-weight:300;line-height:1}
+.result-item .r-label{font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-top:0.2rem}
+
+/* FEATURED CASE STUDY — full width */
+.case-featured{
+  grid-column:1/-1;
+  background:var(--charcoal);border:1px solid rgba(184,134,11,0.12);
+  display:grid;grid-template-columns:1fr 1fr;
+  overflow:hidden;cursor:pointer;
+  transition:border-color 0.4s;
+  text-decoration:none;color:inherit;
+}
+.case-featured:hover{border-color:rgba(184,134,11,0.35)}
+.case-featured-visual{
+  background:linear-gradient(135deg,#0a1020,#1a2540);
+  display:flex;align-items:center;justify-content:center;
+  min-height:340px;position:relative;
+}
+.case-featured-body{padding:3rem}
+.featured-badge{
+  display:inline-block;padding:0.3rem 0.8rem;
+  background:rgba(184,134,11,0.15);border:1px solid rgba(184,134,11,0.3);
+  border-radius:2px;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1rem;
+}
+.case-featured-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;line-height:1.2;margin-bottom:1rem;color:var(--ivory)}
+.case-featured-title em{color:var(--gold);font-style:italic}
+.case-featured-desc{font-size:0.88rem;color:var(--muted);line-height:1.8;font-weight:300;margin-bottom:1.8rem}
+.case-featured-results{display:flex;gap:2.5rem;margin-bottom:2rem;padding:1.5rem 0;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05)}
+.fr-num{font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:var(--gold);font-weight:300;line-height:1}
+.fr-label{font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-top:0.3rem;max-width:120px;line-height:1.4}
+.btn-gold{background:var(--gold);color:var(--navy);padding:0.82rem 1.8rem;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.74rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;transition:background 0.3s;text-decoration:none;display:inline-block}
+.btn-gold:hover{background:var(--gold-light)}
+
+/* BOTTOM CTA */
+.work-cta{background:var(--black);padding:6rem 4rem;text-align:center}
+.work-cta h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:300;margin-bottom:1rem}
+.work-cta h2 em{color:var(--gold);font-style:italic}
+.work-cta p{font-size:0.9rem;color:var(--muted);max-width:440px;margin:0 auto 2.5rem;line-height:1.8;font-weight:300}
+
+footer{background:#040710;padding:2.2rem 4rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(184,134,11,0.07)}
+.footer-brand{font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--ivory);letter-spacing:0.18em}
+.footer-tag{font-size:0.6rem;color:rgba(148,163,184,0.35);letter-spacing:0.12em;text-transform:uppercase;margin-top:0.2rem}
+.footer-fw{font-size:0.58rem;color:rgba(148,163,184,0.25);letter-spacing:0.18em}
+.footer-copy{font-size:0.62rem;color:rgba(148,163,184,0.25)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.75s ease,transform 0.75s ease}
+.reveal.on{opacity:1;transform:none}
+.stagger>*{opacity:0;transform:translateY(16px);transition:opacity 0.6s ease,transform 0.6s ease}
+.stagger.on>*:nth-child(1){opacity:1;transform:none;transition-delay:0s}
+.stagger.on>*:nth-child(2){opacity:1;transform:none;transition-delay:0.12s}
+.stagger.on>*:nth-child(3){opacity:1;transform:none;transition-delay:0.24s}
+.stagger.on>*:nth-child(4){opacity:1;transform:none;transition-delay:0.36s}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-kolam">
+      <svg viewBox="0 0 100 100" fill="none">
+        <path d="M50 8 C58 22 62 38 50 44 C38 38 42 22 50 8Z" stroke="#B8860B" stroke-width="2" fill="none"/>
+        <path d="M92 50 C78 58 62 62 56 50 C62 38 78 42 92 50Z" stroke="#B8860B" stroke-width="2" fill="none"/>
+        <path d="M50 92 C42 78 38 62 50 56 C62 62 58 78 50 92Z" stroke="#B8860B" stroke-width="2" fill="none"/>
+        <path d="M8 50 C22 42 38 38 44 50 C38 62 22 58 8 50Z" stroke="#B8860B" stroke-width="2" fill="none"/>
+        <circle cx="50" cy="50" r="10" stroke="#C47A2C" stroke-width="1.5" fill="none"/>
+        <circle cx="50" cy="50" r="3" fill="#B8860B"/>
+      </svg>
+    </div>
+    <div>
+      <a href="index.html" class="nav-wordmark">INAI</a>
+      <span class="nav-tamil">இணை</span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="work.html" style="color:var(--gold)">Work</a>
+    <a href="blog.html">Insights</a>
+    <a href="contact.html" class="nav-cta">Book a Consultation</a>
+  </div>
+</nav>
+
+<section class="work-hero">
+  <div style="animation:fadeUp 1s ease 0.1s both">
+    <div class="hero-eyebrow">Featured Work</div>
+    <h1 class="work-h1">Problems solved.<br>Results <em>delivered.</em></h1>
+    <div class="gold-bar"></div>
+    <p class="work-sub">Every project here began with a real business problem and ended with a measurable outcome. No concept work, no hypotheticals.</p>
+  </div>
+</section>
+
+<div class="filter-tabs">
+  <button class="filter-tab active" onclick="filterWork('all',this)">All Work</button>
+  <button class="filter-tab" onclick="filterWork('systems',this)">Systems</button>
+  <button class="filter-tab" onclick="filterWork('creative',this)">Creative</button>
+  <button class="filter-tab" onclick="filterWork('digital',this)">Digital</button>
+  <button class="filter-tab" onclick="filterWork('growth',this)">Growth</button>
+</div>
+
+<div class="work-grid stagger">
+
+  <!-- FEATURED: Step4Progress -->
+  <a href="#step4progress" class="case-featured reveal" data-cat="systems digital growth">
+    <div class="case-featured-visual">
+      <svg class="case-pattern" style="width:200px;height:200px;opacity:0.12" viewBox="0 0 200 200" fill="none">
+        <rect x="10" y="10" width="180" height="180" stroke="white" stroke-width="0.5" rx="4"/>
+        <rect x="30" y="30" width="140" height="140" stroke="white" stroke-width="0.5" rx="2"/>
+        <rect x="50" y="50" width="100" height="100" stroke="white" stroke-width="0.5"/>
+        <circle cx="100" cy="100" r="30" stroke="white" stroke-width="0.5"/>
+        <line x1="100" y1="10" x2="100" y2="190" stroke="white" stroke-width="0.3"/>
+        <line x1="10" y1="100" x2="190" y2="100" stroke="white" stroke-width="0.3"/>
+      </svg>
+    </div>
+    <div class="case-featured-body">
+      <div class="featured-badge">Featured Project</div>
+      <div class="case-client">Step4Progress</div>
+      <h2 class="case-featured-title">Building a full CRM and<br>digital infrastructure from <em>zero.</em></h2>
+      <p class="case-featured-desc">Step4Progress needed a complete operational backbone. No CRM, no structured lead pipeline, no digital presence. In 15 days, INAI built a full-stack CRM on Supabase with role-based access, lead management, call recording, course finders, and a student portal. Simultaneously, Instagram grew from 300 to 1,030 followers in 10 days through content strategy and community engagement.</p>
+      <div class="case-featured-results">
+        <div>
+          <div class="fr-num">15</div>
+          <div class="fr-label">Days to build full CRM from scratch</div>
+        </div>
+        <div>
+          <div class="fr-num">3x</div>
+          <div class="fr-label">Instagram follower growth in 10 days</div>
+        </div>
+        <div>
+          <div class="fr-num">645</div>
+          <div class="fr-label">Partner universities in the course finder</div>
+        </div>
+      </div>
+      <span class="btn-gold">Read Case Study</span>
+    </div>
+  </a>
+
+  <!-- Healthcare Marketing -->
+  <a href="#healthcare" class="case-card reveal" data-cat="growth">
+    <div class="case-card-visual">
+      <svg class="case-pattern" viewBox="0 0 140 140" fill="none">
+        <circle cx="70" cy="70" r="60" stroke="white" stroke-width="0.5"/>
+        <circle cx="70" cy="70" r="40" stroke="white" stroke-width="0.5"/>
+        <path d="M70 10 C80 30 84 52 70 60 C56 52 60 30 70 10Z" stroke="white" stroke-width="0.5" fill="none"/>
+        <path d="M130 70 C110 60 88 56 80 70 C88 84 110 80 130 70Z" stroke="white" stroke-width="0.5" fill="none"/>
+        <path d="M70 130 C60 110 56 88 70 80 C84 88 80 110 70 130Z" stroke="white" stroke-width="0.5" fill="none"/>
+        <path d="M10 70 C30 80 52 84 60 70 C52 56 30 60 10 70Z" stroke="white" stroke-width="0.5" fill="none"/>
+      </svg>
+      <div class="case-pill">Growth</div>
+      <div class="case-arr">↗</div>
+    </div>
+    <div class="case-body">
+      <div class="case-client">Healthcare — BCC Martech</div>
+      <div class="case-title">Campaign conversion from 20% to 55%</div>
+      <p class="case-desc">Rebuilt the communication strategy for a healthcare marketing campaign. Changed the channel mix, rewrote the messaging, and restructured the follow-up sequence.</p>
+      <div class="case-tags">
+        <span class="case-tag">Marketing Strategy</span>
+        <span class="case-tag">Communication</span>
+        <span class="case-tag">Campaign Management</span>
+      </div>
+      <div class="case-result">
+        <div class="result-item">
+          <div class="r-num">55%</div>
+          <div class="r-label">Conversion achieved</div>
+        </div>
+        <div class="result-item">
+          <div class="r-num">20%</div>
+          <div class="r-label">Starting point</div>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <!-- Tanishq -->
+  <a href="#tanishq" class="case-card reveal" data-cat="growth creative">
+    <div class="case-card-visual">
+      <svg class="case-pattern" viewBox="0 0 140 140" fill="none">
+        <polygon points="70,8 132,40 132,100 70,132 8,100 8,40" stroke="white" stroke-width="0.5" fill="none"/>
+        <circle cx="70" cy="70" r="32" stroke="white" stroke-width="0.5"/>
+        <circle cx="70" cy="70" r="12" stroke="white" stroke-width="0.5"/>
+        <line x1="70" y1="38" x2="70" y2="102" stroke="white" stroke-width="0.3"/>
+        <line x1="38" y1="70" x2="102" y2="70" stroke="white" stroke-width="0.3"/>
+      </svg>
+      <div class="case-pill">Growth</div>
+      <div class="case-arr">↗</div>
+    </div>
+    <div class="case-body">
+      <div class="case-client">Tanishq, Titan Company Ltd.</div>
+      <div class="case-title">120% of sales target through relationship-led selling</div>
+      <p class="case-desc">In a premium luxury retail environment, exceeded the sales target by 20% through consultative selling, relationship building, and brand experience design rather than transactional pushing.</p>
+      <div class="case-tags">
+        <span class="case-tag">Retail Strategy</span>
+        <span class="case-tag">Brand Experience</span>
+        <span class="case-tag">Client Relations</span>
+      </div>
+      <div class="case-result">
+        <div class="result-item">
+          <div class="r-num">120%</div>
+          <div class="r-label">Target achieved</div>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <!-- INAI Brand -->
+  <a href="#inai-brand" class="case-card reveal" data-cat="creative digital">
+    <div class="case-card-visual">
+      <svg class="case-pattern" viewBox="0 0 140 140" fill="none">
+        <circle cx="70" cy="70" r="60" stroke="white" stroke-width="0.5"/>
+        <path d="M70 10 L130 70 L70 130 L10 70 Z" stroke="white" stroke-width="0.5" fill="none"/>
+        <circle cx="70" cy="70" r="25" stroke="white" stroke-width="0.5"/>
+        <circle cx="70" cy="70" r="8" stroke="white" stroke-width="0.5"/>
+      </svg>
+      <div class="case-pill">Creative</div>
+      <div class="case-arr">↗</div>
+    </div>
+    <div class="case-body">
+      <div class="case-client">INAI</div>
+      <div class="case-title">Building a brand identity rooted in Tamil philosophy</div>
+      <p class="case-desc">The INAI brand itself. Logo based on the kolam, a Tamil word meaning to connect, visual identity system, website with interactive animations, and the full content framework.</p>
+      <div class="case-tags">
+        <span class="case-tag">Brand Identity</span>
+        <span class="case-tag">Web Design</span>
+        <span class="case-tag">Interactive Animation</span>
+      </div>
+    </div>
+  </a>
+
+</div>
+
+<!-- STEP4PROGRESS DETAILED -->
+<section id="step4progress" style="background:var(--charcoal);padding:6rem 4rem">
+  <div style="max-width:900px;margin:0 auto">
+    <div class="reveal">
+      <div style="font-size:0.63rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;display:flex;align-items:center;gap:0.7rem">Case Study <span style="flex:0 0 2rem;height:1px;background:var(--gold);display:block"></span></div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.8vw,3.2rem);font-weight:300;line-height:1.13;margin-bottom:1rem">Step4Progress: From zero systems<br>to a <em style="color:var(--gold);font-style:italic">functioning operation.</em></h2>
+      <div style="width:3rem;height:1px;background:var(--gold);margin:1rem 0"></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:4rem;margin-top:2rem" class="reveal">
+      <div>
+        <p style="font-size:0.95rem;color:var(--muted);line-height:1.85;font-weight:300;margin-bottom:1.2rem"><strong style="color:var(--ivory);font-weight:400">The situation.</strong> Step4Progress is a UK-affiliated study abroad consultancy with offices across India, UK, Pakistan, and Bangladesh. When INAI began working with them, there was no CRM, no structured lead pipeline, no content strategy, and no digital infrastructure. Everything was manual.</p>
+        <p style="font-size:0.95rem;color:var(--muted);line-height:1.85;font-weight:300;margin-bottom:1.2rem"><strong style="color:var(--ivory);font-weight:400">The build.</strong> A full-stack CRM was built from scratch using Supabase and deployed on GitHub Pages as a single HTML file. Features included role-based access control, India view-only enforcement, a 645-university course finder with AI suggestions via Anthropic API, lead management with bulk upload, Twilio call recording via Edge Functions, a student portal with animated lesson delivery, and Meta and GA4 analytics integration.</p>
+        <p style="font-size:0.95rem;color:var(--muted);line-height:1.85;font-weight:300;margin-bottom:1.2rem"><strong style="color:var(--ivory);font-weight:400">The content.</strong> Simultaneously, Instagram was grown from 300 to 1,030 followers in 10 days through a content strategy built around student success stories, destination education guides, and community engagement.</p>
+        <p style="font-size:0.95rem;color:var(--muted);line-height:1.85;font-weight:300"><strong style="color:var(--ivory);font-weight:400">The result.</strong> A business that had no digital infrastructure now has a complete operational backbone, a growing social presence, and a content library of premium downloadable guides for lead generation.</p>
+      </div>
+      <div>
+        <div style="background:var(--navy);padding:2rem;border-radius:3px;border:1px solid rgba(184,134,11,0.12)">
+          <div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;font-weight:500">Project Scope</div>
+          <div style="font-size:0.8rem;color:var(--muted);line-height:2;font-weight:300">
+            INAI Systems<br>
+            INAI Digital<br>
+            INAI Creative<br>
+            INAI Growth
+          </div>
+          <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.05)">
+            <div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;font-weight:500">Technologies</div>
+            <div style="font-size:0.78rem;color:var(--muted);line-height:2;font-weight:300">Supabase<br>GitHub Pages<br>Anthropic API<br>Twilio<br>Meta Ads API<br>Google Analytics 4</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="work-cta">
+  <h2>Your problem could be<br>the next <em>case study.</em></h2>
+  <p>Every project starts with a conversation about what is not working. Let us have that conversation.</p>
+  <a href="contact.html" class="btn-gold">Book a Consultation</a>
+</div>
+
+<footer>
+  <div><div class="footer-brand">INAI</div><div class="footer-tag">Where Creativity Meets Intelligence</div></div>
+  <div class="footer-fw">I → N → A → I &nbsp;·&nbsp; IDEA · NETWORK · ACTION · IMPACT</div>
+  <div class="footer-copy">© 2025 INAI. All rights reserved.</div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('on'); }), {threshold:0.1});
+document.querySelectorAll('.reveal,.stagger').forEach(el => io.observe(el));
+
+function filterWork(cat, btn) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.case-card, .case-featured').forEach(card => {
+    if(cat === 'all' || card.dataset.cat?.includes(cat)) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+</script>
+</body>
+</html>

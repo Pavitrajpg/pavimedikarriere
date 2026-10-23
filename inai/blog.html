@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insights — INAI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel+Decorative:wght@400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0F172A;--charcoal:#111827;--gold:#B8860B;--copper:#C47A2C;--ivory:#F8F6F2;--muted:#94A3B8;--gold-light:#D4A843;--black:#06090F}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--ivory);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:1rem 4rem;background:rgba(15,23,42,0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(184,134,11,0.1)}
+.nav-brand{display:flex;align-items:center;gap:0.7rem}
+.nav-kolam{width:36px;height:36px;border-radius:50%;border:1px solid rgba(184,134,11,0.3);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.nav-wordmark{font-family:'Cinzel Decorative',serif;font-size:1.1rem;letter-spacing:0.2em;color:var(--ivory);text-decoration:none}
+.nav-tamil{font-size:0.58rem;color:var(--gold);letter-spacing:0.05em;opacity:0.7;display:block;line-height:1;margin-top:1px}
+.nav-links{display:flex;gap:2.2rem;align-items:center}
+.nav-links a{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.3s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold)!important;color:var(--navy)!important;padding:0.5rem 1.2rem;border-radius:2px;font-weight:500!important}
+.blog-hero{min-height:45vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:9rem 4rem 4rem;text-align:center;position:relative;overflow:hidden}
+.blog-hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(184,134,11,0.05) 0%,transparent 70%)}
+.hero-eyebrow{font-size:0.65rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;display:flex;align-items:center;justify-content:center;gap:0.7rem}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:1.8rem;height:1px;background:var(--gold)}
+.blog-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,5.5vw,5rem);font-weight:300;line-height:1.05;margin-bottom:1rem}
+.blog-h1 em{color:var(--gold);font-style:italic}
+.blog-sub{font-size:0.95rem;color:var(--muted);line-height:1.8;max-width:500px;font-weight:300}
+.gold-bar{width:3rem;height:1px;background:var(--gold);margin:1.5rem auto}
+.posts-grid{padding:3rem 4rem 6rem;display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:1300px;margin:0 auto}
+.post-card{background:var(--charcoal);border:1px solid rgba(184,134,11,0.08);text-decoration:none;color:inherit;display:block;transition:border-color 0.4s,transform 0.3s;position:relative;overflow:hidden}
+.post-card:hover{border-color:rgba(184,134,11,0.35);transform:translateY(-3px)}
+.post-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:transform 0.4s;transform-origin:left}
+.post-card:hover::after{transform:scaleX(1)}
+.post-visual{height:180px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.post-card:nth-child(1) .post-visual{background:linear-gradient(135deg,#0d1520,#1a2540)}
+.post-card:nth-child(2) .post-visual{background:linear-gradient(135deg,#0f1a0d,#162010)}
+.post-card:nth-child(3) .post-visual{background:linear-gradient(135deg,#1a1008,#201406)}
+.post-pat{opacity:0.1;width:100px;height:100px}
+.post-cat{position:absolute;bottom:1rem;left:1rem;padding:0.25rem 0.7rem;background:rgba(184,134,11,0.15);border:1px solid rgba(184,134,11,0.3);border-radius:2px;font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold)}
+.post-body{padding:1.8rem}
+.post-meta{font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.7rem;opacity:0.6}
+.post-title{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:300;color:var(--ivory);line-height:1.25;margin-bottom:0.8rem}
+.post-excerpt{font-size:0.8rem;color:var(--muted);line-height:1.7;font-weight:300;margin-bottom:1.2rem}
+.post-read{font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold)}
+.post-card:hover .post-read{text-decoration:underline}
+
+/* Featured post */
+.post-featured{grid-column:1/-1;background:var(--charcoal);border:1px solid rgba(184,134,11,0.12);display:grid;grid-template-columns:1fr 1.2fr;text-decoration:none;color:inherit;transition:border-color 0.4s;overflow:hidden}
+.post-featured:hover{border-color:rgba(184,134,11,0.35)}
+.post-featured-visual{background:linear-gradient(135deg,#0a1020,#1a2540);display:flex;align-items:center;justify-content:center;min-height:280px}
+.post-featured-body{padding:3rem}
+.feat-badge{display:inline-block;padding:0.3rem 0.8rem;background:rgba(184,134,11,0.12);border:1px solid rgba(184,134,11,0.25);border-radius:2px;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.feat-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;line-height:1.2;margin-bottom:1rem;color:var(--ivory)}
+.feat-title em{color:var(--gold);font-style:italic}
+.feat-excerpt{font-size:0.88rem;color:var(--muted);line-height:1.8;font-weight:300;margin-bottom:1.5rem}
+.btn-gold{background:var(--gold);color:var(--navy);padding:0.75rem 1.6rem;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.72rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;transition:background 0.3s;text-decoration:none;display:inline-block}
+.btn-gold:hover{background:var(--gold-light)}
+
+/* INAI services strip */
+.services-strip{background:var(--black);padding:4rem;border-top:1px solid rgba(184,134,11,0.08)}
+.strip-label{font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);text-align:center;margin-bottom:2rem;opacity:0.6}
+.strip-grid{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.strip-card{padding:1rem 1.5rem;border:1px solid rgba(184,134,11,0.12);border-radius:2px;text-align:center;text-decoration:none;transition:border-color 0.3s;flex:1;min-width:160px;max-width:220px}
+.strip-card:hover{border-color:rgba(184,134,11,0.35)}
+.strip-icon{font-size:1.2rem;margin-bottom:0.5rem;display:block}
+.strip-name{font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:0.3rem}
+.strip-desc{font-size:0.72rem;color:var(--muted);font-weight:300}
+
+footer{background:#040710;padding:2.2rem 4rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(184,134,11,0.07)}
+.footer-brand{font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--ivory);letter-spacing:0.18em}
+.footer-tag{font-size:0.6rem;color:rgba(148,163,184,0.35);letter-spacing:0.12em;text-transform:uppercase;margin-top:0.2rem}
+.footer-fw{font-size:0.58rem;color:rgba(148,163,184,0.25);letter-spacing:0.18em}
+.footer-copy{font-size:0.62rem;color:rgba(148,163,184,0.25)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.75s ease,transform 0.75s ease}
+.reveal.on{opacity:1;transform:none}
+.stagger>*{opacity:0;transform:translateY(16px);transition:opacity 0.6s ease,transform 0.6s ease}
+.stagger.on>*:nth-child(1){opacity:1;transform:none;transition-delay:0s}
+.stagger.on>*:nth-child(2){opacity:1;transform:none;transition-delay:0.12s}
+.stagger.on>*:nth-child(3){opacity:1;transform:none;transition-delay:0.24s}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-brand">
+    <div class="nav-kolam">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M50 8 C58 22 62 38 50 44 C38 38 42 22 50 8Z" stroke="#B8860B" stroke-width="2" fill="none"/><path d="M92 50 C78 58 62 62 56 50 C62 38 78 42 92 50Z" stroke="#B8860B" stroke-width="2" fill="none"/><path d="M50 92 C42 78 38 62 50 56 C62 62 58 78 50 92Z" stroke="#B8860B" stroke-width="2" fill="none"/><path d="M8 50 C22 42 38 38 44 50 C38 62 22 58 8 50Z" stroke="#B8860B" stroke-width="2" fill="none"/><circle cx="50" cy="50" r="10" stroke="#C47A2C" stroke-width="1.5" fill="none"/><circle cx="50" cy="50" r="3" fill="#B8860B"/></svg>
+    </div>
+    <div><a href="index.html" class="nav-wordmark">INAI</a><span class="nav-tamil">இணை</span></div>
+  </div>
+  <div class="nav-links">
+    <a href="about.html">About</a><a href="services.html">Services</a><a href="work.html">Work</a>
+    <a href="index.html" style="color:var(--gold)">Insights</a>
+    <a href="contact.html" class="nav-cta">Book a Consultation</a>
+  </div>
+</nav>
+
+<section class="blog-hero">
+  <div style="animation:fadeUp 1s ease 0.1s both">
+    <div class="hero-eyebrow">Insights</div>
+    <h1 class="blog-h1">Ideas worth<br><em>connecting.</em></h1>
+    <div class="gold-bar"></div>
+    <p class="blog-sub">Thinking on creativity, technology, business, and the South Indian philosophy of connection that sits underneath all of it.</p>
+  </div>
+</section>
+
+<div class="posts-grid stagger">
+
+  <!-- Featured post -->
+  <a href="why-i-named-it-inai.html" class="post-featured">
+    <div class="post-featured-visual">
+      <svg style="width:160px;height:160px;opacity:0.15" viewBox="0 0 500 500" fill="none">
+        <path d="M250 30 L460 250 L250 470 L40 250 Z" stroke="white" stroke-width="1.5"/>
+        <circle cx="250" cy="250" r="120" stroke="white" stroke-width="1"/>
+        <circle cx="250" cy="250" r="60" stroke="white" stroke-width="1"/>
+        <circle cx="250" cy="250" r="20" stroke="white" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="post-featured-body">
+      <div class="feat-badge">First Post</div>
+      <div style="font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.8rem;opacity:0.6">Pavitra Muthukrishnan &nbsp;·&nbsp; June 2025</div>
+      <h2 class="feat-title">Why I named it <em>INAI.</em></h2>
+      <p class="feat-excerpt">A Tamil word, a kolam drawn at dawn, and the realisation that everything I had built across ten years of work was actually about one thing: connection. This is the story of how a brand name became a belief system.</p>
+      <a href="why-i-named-it-inai.html" class="btn-gold">Read the Story</a>
+    </div>
+  </a>
+
+  <!-- Post 2 -->
+  <a href="crm-from-scratch.html" class="post-card">
+    <div class="post-visual">
+      <svg class="post-pat" viewBox="0 0 100 100" fill="none"><rect x="5" y="5" width="90" height="90" stroke="white" stroke-width="0.5" rx="2"/><rect x="20" y="20" width="60" height="60" stroke="white" stroke-width="0.5"/><circle cx="50" cy="50" r="15" stroke="white" stroke-width="0.5"/><line x1="50" y1="5" x2="50" y2="95" stroke="white" stroke-width="0.3"/><line x1="5" y1="50" x2="95" y2="50" stroke="white" stroke-width="0.3"/></svg>
+      <div class="post-cat">Systems</div>
+    </div>
+    <div class="post-body">
+      <div class="post-meta">Pavitra Muthukrishnan &nbsp;·&nbsp; June 2025</div>
+      <div class="post-title">What happens when you build a CRM from scratch in 15 days</div>
+      <p class="post-excerpt">No template, no off-the-shelf tool, no budget for enterprise software. Just a business problem, a Supabase account, and fifteen days. Here is what that actually looks like.</p>
+      <span class="post-read">Read the Post →</span>
+    </div>
+  </a>
+
+  <!-- Post 3 -->
+  <a href="ten-years-five-industries.html" class="post-card">
+    <div class="post-visual">
+      <svg class="post-pat" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="45" stroke="white" stroke-width="0.5"/><path d="M50 5 C58 22 62 38 50 44 C38 38 42 22 50 5Z" stroke="white" stroke-width="0.5" fill="none"/><path d="M95 50 C78 42 62 38 56 50 C62 62 78 58 95 50Z" stroke="white" stroke-width="0.5" fill="none"/><path d="M50 95 C42 78 38 62 50 56 C62 62 58 78 50 95Z" stroke="white" stroke-width="0.5" fill="none"/><path d="M5 50 C22 58 38 62 44 50 C38 38 22 42 5 50Z" stroke="white" stroke-width="0.5" fill="none"/></svg>
+      <div class="post-cat">Career</div>
+    </div>
+    <div class="post-body">
+      <div class="post-meta">Pavitra Muthukrishnan &nbsp;·&nbsp; June 2025</div>
+      <div class="post-title">Ten years, five industries, one pattern</div>
+      <p class="post-excerpt">Broadcast media. Healthcare. Luxury retail. Creative production. Education technology. A career that looked scattered from the outside had a single logic running through all of it.</p>
+      <span class="post-read">Read the Post →</span>
+    </div>
+  </a>
+
+</div>
+
+<!-- INAI Services Strip -->
+<div class="services-strip">
+  <div class="strip-label">What INAI does</div>
+  <div class="strip-grid">
+    <a href="../services.html#creative" class="strip-card">
+      <span class="strip-icon">✦</span>
+      <div class="strip-name">Creative</div>
+      <div class="strip-desc">Brand, design, content</div>
+    </a>
+    <a href="../services.html#systems" class="strip-card">
+      <span class="strip-icon">⚙</span>
+      <div class="strip-name">Systems</div>
+      <div class="strip-desc">CRM, AI, automation</div>
+    </a>
+    <a href="../services.html#digital" class="strip-card">
+      <span class="strip-icon">◻</span>
+      <div class="strip-name">Digital</div>
+      <div class="strip-desc">Websites, apps, experiences</div>
+    </a>
+    <a href="../services.html#growth" class="strip-card">
+      <span class="strip-icon">↗</span>
+      <div class="strip-name">Growth</div>
+      <div class="strip-desc">Marketing, leads, strategy</div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div><div class="footer-brand">INAI</div><div class="footer-tag">Where Creativity Meets Intelligence</div></div>
+  <div class="footer-fw">I → N → A → I &nbsp;·&nbsp; IDEA · NETWORK · ACTION · IMPACT</div>
+  <div class="footer-copy">© 2025 INAI. All rights reserved.</div>
+</footer>
+<script>
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('on')}),{threshold:0.1});
+document.querySelectorAll('.reveal,.stagger').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

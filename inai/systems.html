@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INAI Systems — AI, CRM, Business Operations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel+Decorative:wght@400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0F172A;--charcoal:#111827;--gold:#B8860B;--copper:#C47A2C;--ivory:#F8F6F2;--muted:#94A3B8;--gold-light:#D4A843;--black:#06090F}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--ivory);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:1rem 4rem;background:rgba(15,23,42,0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(184,134,11,0.1)}
+.nav-brand{display:flex;align-items:center;gap:0.7rem}
+.nav-kolam{width:36px;height:36px;border-radius:50%;border:1px solid rgba(184,134,11,0.3);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.nav-wordmark{font-family:'Cinzel Decorative',serif;font-size:1.1rem;letter-spacing:0.2em;color:var(--ivory);text-decoration:none}
+.nav-tamil{font-size:0.58rem;color:var(--gold);letter-spacing:0.05em;opacity:0.7;display:block;line-height:1;margin-top:1px}
+.nav-links{display:flex;gap:2.2rem;align-items:center}
+.nav-links a{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.3s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold)!important;color:var(--navy)!important;padding:0.5rem 1.2rem;border-radius:2px;font-weight:500!important}
+.svc-hero{min-height:65vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:5rem;padding:9rem 4rem 5rem;position:relative;overflow:hidden}
+.svc-hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 50% 70% at 20% 50%,rgba(184,134,11,0.06) 0%,transparent 70%)}
+.breadcrumb{font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.5rem}
+.breadcrumb a{color:var(--muted);text-decoration:none}.breadcrumb a:hover{color:var(--gold)}.breadcrumb span{color:var(--gold)}
+.eyebrow{font-size:0.65rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem}
+.eyebrow::before{content:'';width:1.8rem;height:1px;background:var(--gold)}
+.svc-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5vw,5rem);font-weight:300;line-height:1.05;margin-bottom:1.2rem}
+.svc-h1 em{color:var(--gold);font-style:italic}
+.svc-hero-sub{font-size:1rem;color:var(--muted);line-height:1.85;max-width:460px;font-weight:300;margin-bottom:2rem}
+.gold-bar{width:3rem;height:1px;background:var(--gold);margin:1.2rem 0}
+.btn-gold{background:var(--gold);color:var(--navy);padding:0.85rem 2rem;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.76rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;transition:background 0.3s,transform 0.2s;text-decoration:none;display:inline-block}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--ivory);padding:0.85rem 2rem;border:1px solid rgba(248,246,242,0.18);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.76rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;transition:border-color 0.3s,color 0.3s;text-decoration:none;display:inline-block;margin-left:1rem}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.hero-visual{display:flex;align-items:center;justify-content:center}
+.icon-ring{width:300px;height:300px;border-radius:50%;border:1px solid rgba(184,134,11,0.12);display:flex;align-items:center;justify-content:center;position:relative;animation:breathe 4s ease-in-out infinite}
+.icon-ring::before{content:'';position:absolute;inset:-20px;border-radius:50%;border:1px solid rgba(184,134,11,0.06)}
+.icon-ring::after{content:'';position:absolute;inset:-40px;border-radius:50%;border:1px solid rgba(184,134,11,0.03)}
+@keyframes breathe{0%,100%{box-shadow:0 0 0 0 rgba(184,134,11,0)}50%{box-shadow:0 0 40px rgba(184,134,11,0.12)}}
+.icon-ring svg{width:90px;height:90px;stroke:var(--gold);fill:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round}
+section{padding:6rem 4rem}
+.sec-eyebrow{font-size:0.63rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;display:flex;align-items:center;gap:0.7rem}
+.sec-eyebrow::after{content:'';flex:0 0 2rem;height:1px;background:var(--gold)}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.6vw,3.2rem);font-weight:300;line-height:1.13;margin-bottom:1.3rem}
+.sec-title em{color:var(--gold);font-style:italic}
+.result-banner{background:var(--charcoal);padding:3rem 4rem;display:grid;grid-template-columns:repeat(3,1fr);gap:3rem;border-top:1px solid rgba(184,134,11,0.12);border-bottom:1px solid rgba(184,134,11,0.12)}
+.rb-item{text-align:center}
+.rb-num{font-family:'Cormorant Garamond',serif;font-size:3.5rem;color:var(--gold);font-weight:300;line-height:1;margin-bottom:0.4rem}
+.rb-label{font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);line-height:1.5}
+.services-detail{background:var(--navy)}
+.svc-list-full{margin-top:3rem;display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
+.svc-item{background:var(--charcoal);padding:2.5rem;border:1px solid rgba(184,134,11,0.08);position:relative;overflow:hidden;transition:border-color 0.4s}
+.svc-item:hover{border-color:rgba(184,134,11,0.3)}
+.svc-item::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:transform 0.5s;transform-origin:left}
+.svc-item:hover::after{transform:scaleX(1)}
+.svc-item-name{font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:0.6rem}
+.svc-item-desc{font-size:0.88rem;color:var(--muted);line-height:1.75;font-weight:300;margin-bottom:1rem}
+.svc-item-includes{font-size:0.72rem;color:rgba(248,246,242,0.35);font-style:italic}
+.tech-stack{background:var(--charcoal);padding:6rem 4rem}
+.tech-grid{display:flex;flex-wrap:wrap;gap:0.8rem;margin-top:2.5rem}
+.tech-tag{padding:0.6rem 1.2rem;border:1px solid rgba(184,134,11,0.18);border-radius:2px;font-size:0.76rem;color:var(--muted);font-weight:300;transition:all 0.3s}
+.tech-tag:hover{border-color:var(--gold);color:var(--ivory)}
+.process{background:var(--navy)}
+.process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem}
+.process-card{padding:2.5rem;border:1px solid rgba(184,134,11,0.08)}
+.process-num{font-family:'Cormorant Garamond',serif;font-size:3.5rem;color:rgba(184,134,11,0.1);font-weight:300;line-height:1;margin-bottom:0.8rem}
+.process-title{font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:0.6rem}
+.process-desc{font-size:0.85rem;color:var(--muted);line-height:1.75;font-weight:300}
+.other-services{background:var(--black);padding:5rem 4rem}
+.other-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+.other-card{text-decoration:none;color:inherit;padding:2rem;border:1px solid rgba(184,134,11,0.08);display:block;transition:border-color 0.3s}
+.other-card:hover{border-color:rgba(184,134,11,0.3)}
+.other-icon{font-size:1.4rem;margin-bottom:0.8rem;display:block}
+.other-name{font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:0.4rem}
+.other-desc{font-size:0.78rem;color:var(--muted);font-weight:300;line-height:1.5}
+.cta-band{background:var(--charcoal);padding:5rem 4rem;text-align:center}
+.cta-band h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:300;margin-bottom:0.8rem}
+.cta-band h2 em{color:var(--gold);font-style:italic}
+.cta-band p{font-size:0.88rem;color:var(--muted);max-width:400px;margin:0 auto 2.2rem;line-height:1.8;font-weight:300}
+footer{background:#040710;padding:2.2rem 4rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(184,134,11,0.07)}
+.footer-brand{font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--ivory);letter-spacing:0.18em}
+.footer-tag{font-size:0.6rem;color:rgba(148,163,184,0.35);letter-spacing:0.12em;text-transform:uppercase;margin-top:0.2rem}
+.footer-fw{font-size:0.58rem;color:rgba(148,163,184,0.25);letter-spacing:0.18em}
+.footer-copy{font-size:0.62rem;color:rgba(148,163,184,0.25)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.75s ease,transform 0.75s ease}
+.reveal.on{opacity:1;transform:none}
+.stagger>*{opacity:0;transform:translateY(16px);transition:opacity 0.6s ease,transform 0.6s ease}
+.stagger.on>*:nth-child(1){opacity:1;transform:none;transition-delay:0s}
+.stagger.on>*:nth-child(2){opacity:1;transform:none;transition-delay:0.12s}
+.stagger.on>*:nth-child(3){opacity:1;transform:none;transition-delay:0.24s}
+.stagger.on>*:nth-child(4){opacity:1;transform:none;transition-delay:0.36s}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-brand">
+    <div class="nav-kolam">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M50 8 C58 22 62 38 50 44 C38 38 42 22 50 8Z" stroke="#B8860B" stroke-width="2" fill="none"/><path d="M92 50 C78 58 62 62 56 50 C62 38 78 42 92 50Z" stroke="#B8860B" stroke-width="2" fill="none"/><path d="M50 92 C42 78 38 62 50 56 C62 62 58 78 50 92Z" stroke="#B8860B" stroke-width="2" fill="none"/><path d="M8 50 C22 42 38 38 44 50 C38 62 22 58 8 50Z" stroke="#B8860B" stroke-width="2" fill="none"/><circle cx="50" cy="50" r="10" stroke="#C47A2C" stroke-width="1.5" fill="none"/><circle cx="50" cy="50" r="3" fill="#B8860B"/></svg>
+    </div>
+    <div><a href="index.html" class="nav-wordmark">INAI</a><span class="nav-tamil">இணை</span></div>
+  </div>
+  <div class="nav-links">
+    <a href="about.html">About</a><a href="services.html" style="color:var(--gold)">Services</a>
+    <a href="work.html">Work</a><a href="blog.html">Insights</a>
+    <a href="contact.html" class="nav-cta">Book a Consultation</a>
+  </div>
+</nav>
+
+<section class="svc-hero">
+  <div style="animation:fadeUp 1s ease 0.1s both">
+    <div class="breadcrumb"><a href="services.html">Services</a> <span>/</span> <span>INAI Systems</span></div>
+    <div class="eyebrow">INAI Systems</div>
+    <h1 class="svc-h1">Operations that<br><em>run themselves.</em></h1>
+    <div class="gold-bar"></div>
+    <p class="svc-hero-sub">The most expensive thing in any business is a process nobody has documented and a tool nobody uses properly. INAI Systems builds CRM workflows, AI automations, and business infrastructure that reduce manual effort and increase reliable output.</p>
+    <a href="contact.html" class="btn-gold">Build Your System</a>
+    <a href="services.html" class="btn-outline">All Services</a>
+  </div>
+  <div class="hero-visual" style="animation:fadeUp 1s ease 0.3s both">
+    <div class="icon-ring">
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<div class="result-banner reveal">
+  <div class="rb-item"><div class="rb-num">15</div><div class="rb-label">Days to build a full CRM from zero for Step4Progress</div></div>
+  <div class="rb-item"><div class="rb-num">645</div><div class="rb-label">Partner universities in the AI-powered course finder</div></div>
+  <div class="rb-item"><div class="rb-num">4</div><div class="rb-label">Countries using the same system simultaneously</div></div>
+</div>
+
+<!-- SERVICES -->
+<section class="services-detail">
+  <div class="reveal">
+    <div class="sec-eyebrow">What We Build</div>
+    <h2 class="sec-title">Five operational capabilities.<br>One <em>connected infrastructure.</em></h2>
+  </div>
+  <div class="svc-list-full stagger">
+    <div class="svc-item">
+      <div class="svc-item-name">AI Automation</div>
+      <p class="svc-item-desc">Workflows that handle the repetitive work automatically. Lead capture from multiple sources, automated follow-up sequences, reporting triggers, notification systems, and data enrichment. Built using Make.com, Supabase Edge Functions, and the Anthropic API. The goal is that the system does the work, and the team does only what requires a human.</p>
+      <div class="svc-item-includes">Includes: workflow mapping, automation build, testing, documentation, handover training</div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-item-name">CRM Architecture</div>
+      <p class="svc-item-desc">Not a CRM configuration. A CRM built for how your business actually works, not for how the software vendor imagines a generic business works. Role-based access, custom pipeline stages, data structures that match your process, and dashboards that show what you actually need to see. Built from scratch when off-the-shelf tools cannot do the job.</p>
+      <div class="svc-item-includes">Includes: database design, frontend interface, role access control, pipeline setup, admin training</div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-item-name">Lead Management Systems</div>
+      <p class="svc-item-desc">From first enquiry to conversion, with nothing falling through the gaps. Structured intake forms, lead scoring logic, automatic assignment to the right team member, follow-up reminders, and conversion tracking. Built to integrate with your existing channels: WhatsApp, Instagram, email, website.</p>
+      <div class="svc-item-includes">Includes: lead intake setup, pipeline stages, assignment rules, follow-up automation, reporting dashboard</div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-item-name">Business Process Optimization</div>
+      <p class="svc-item-desc">An audit of how your business currently operates, followed by a redesign of the processes that are creating bottlenecks, duplication, or errors. Based on Lean Six Sigma methodology applied practically rather than theoretically. The output is a documented, improved process that the team can actually follow.</p>
+      <div class="svc-item-includes">Includes: process audit, bottleneck mapping, redesign proposal, implementation support, documentation</div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-item-name">Webhook and Integration Pipelines</div>
+      <p class="svc-item-desc">Your tools should talk to each other. Tally forms feeding into Supabase. Meta Ads data syncing to your CRM. Twilio recording calls and linking them to student records. Brevo sending the right email at the right trigger. We design and build the integrations that make your stack function as a single connected system.</p>
+      <div class="svc-item-includes">Includes: integration mapping, webhook setup, data flow testing, error handling, monitoring setup</div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-item-name">Student and Client Portals</div>
+      <p class="svc-item-desc">Custom web portals with login, role-based content access, progress tracking, and resource delivery. Built for education businesses, consultancies, and professional service firms that need to deliver structured content or track client journeys without paying for an enterprise platform.</p>
+      <div class="svc-item-includes">Includes: portal design, authentication, content management, progress tracking, admin dashboard</div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section class="tech-stack">
+  <div class="reveal">
+    <div class="sec-eyebrow">Tools We Work With</div>
+    <h2 class="sec-title">The stack behind<br>the <em>systems.</em></h2>
+  </div>
+  <div class="tech-grid reveal">
+    <span class="tech-tag">Supabase</span><span class="tech-tag">PostgreSQL</span>
+    <span class="tech-tag">Anthropic API</span><span class="tech-tag">Make.com</span>
+    <span class="tech-tag">Twilio</span><span class="tech-tag">Brevo</span>
+    <span class="tech-tag">Tally</span><span class="tech-tag">Airtable</span>
+    <span class="tech-tag">Notion</span><span class="tech-tag">Meta Ads API</span>
+    <span class="tech-tag">Google Analytics 4</span><span class="tech-tag">GitHub Pages</span>
+    <span class="tech-tag">WhatsApp Business API</span><span class="tech-tag">Zapier</span>
+    <span class="tech-tag">Google Sheets API</span>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="reveal">
+    <div class="sec-eyebrow">How We Work</div>
+    <h2 class="sec-title">From process audit<br>to <em>live system.</em></h2>
+  </div>
+  <div class="process-grid stagger">
+    <div class="process-card">
+      <div class="process-num">01</div>
+      <div class="process-title">Audit</div>
+      <p class="process-desc">We map how the business currently operates. What the process is, where the manual effort sits, where things fall through the gaps. The audit produces a clear picture of what needs to be built and in what order.</p>
+    </div>
+    <div class="process-card">
+      <div class="process-num">02</div>
+      <div class="process-title">Architecture</div>
+      <p class="process-desc">We design the system before we build it. Database schema, workflow logic, access controls, integration points. You review and approve the architecture before a single line of code is written.</p>
+    </div>
+    <div class="process-card">
+      <div class="process-num">03</div>
+      <div class="process-title">Build and Handover</div>
+      <p class="process-desc">We build, test, and deploy. Then we document everything and train the team. The system should run without us. If it needs us to function, we have not built it properly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OTHER SERVICES -->
+<div class="other-services">
+  <div class="sec-eyebrow reveal">The Other Pillars</div>
+  <h2 class="sec-title reveal">Systems is one part<br>of the <em>full picture.</em></h2>
+  <div class="other-grid stagger">
+    <a href="creative.html" class="other-card"><span class="other-icon">✦</span><div class="other-name">INAI Creative</div><div class="other-desc">Brand identity, design systems, and content strategy that reflect who your business actually is.</div></a>
+    <a href="digital.html" class="other-card"><span class="other-icon">◻</span><div class="other-name">INAI Digital</div><div class="other-desc">Websites, landing pages, and digital experiences built to convert and built to last.</div></a>
+    <a href="growth.html" class="other-card"><span class="other-icon">↗</span><div class="other-name">INAI Growth</div><div class="other-desc">Marketing strategy, lead generation, and business development for teams that need traction.</div></a>
+  </div>
+</div>
+
+<div class="cta-band">
+  <h2>Still running on<br><em>spreadsheets?</em></h2>
+  <p>The next intake cycle is coming. The conversation to have is now.</p>
+  <a href="contact.html" class="btn-gold">Build Your System</a>
+</div>
+
+<footer>
+  <div><div class="footer-brand">INAI</div><div class="footer-tag">Where Creativity Meets Intelligence</div></div>
+  <div class="footer-fw">I → N → A → I &nbsp;·&nbsp; IDEA · NETWORK · ACTION · IMPACT</div>
+  <div class="footer-copy">© 2025 INAI. All rights reserved.</div>
+</footer>
+<script>
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('on')}),{threshold:0.1});
+document.querySelectorAll('.reveal,.stagger').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

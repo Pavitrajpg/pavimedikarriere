@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INAI Growth — Marketing Strategy, Lead Generation, Business Development</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel+Decorative:wght@400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0F172A;--charcoal:#111827;--gold:#B8860B;--copper:#C47A2C;--ivory:#F8F6F2;--muted:#94A3B8;--gold-light:#D4A843;--black:#06090F}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--ivory);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:1rem 4rem;background:rgba(15,23,42,0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(184,134,11,0.1)}
+.nav-brand{display:flex;align-items:center;gap:0.7rem}
+.nav-kolam{width:36px;height:36px;border-radius:50%;border:1px solid rgba(184,134,11,0.3);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.nav-wordmark{font-family:'Cinzel Decorative',serif;font-size:1.1rem;letter-spacing:0.2em;color:var(--ivory);text-decoration:none}
+.nav-tamil{font-size:0.58rem;color:var(--gold);letter-spacing:0.05em;opacity:0.7;display:block;line-height:1;margin-top:1px}
+.nav-links{display:flex;gap:2.2rem;align-items:center}
+.nav-links a{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.3s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold)!important;color:var(--navy)!important;padding:0.5rem 1.2rem;border-radius:2px;font-weight:500!important}
+.svc-hero{min-height:65vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:5rem;padding:9rem 4rem 5rem;position:relative;overflow:hidden}
+.svc-hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 50% 70% at 20% 50%,rgba(184,134,11,0.06) 0%,transparent 70%)}
+.breadcrumb{font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.5rem}
+.breadcrumb a{color:var(--muted);text-decoration:none}.breadcrumb a:hover{color:var(--gold)}.breadcrumb span{color:var(--gold)}
+.eyebrow{font-size:0.65rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem}
+.eyebrow::before{content:'';width:1.8rem;height:1px;background:var(--gold)}
+.svc-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5vw,5rem);font-weight:300;line-height:1.05;margin-bottom:1.2rem}
+.svc-h1 em{color:var(--gold);font-style:italic}
+.svc-hero-sub{font-size:1rem;color:var(--muted);line-height:1.85;max-width:460px;font-weight:300;margin-bottom:2rem}
+.gold-bar{width:3rem;height:1px;background:var(--gold);margin:1.2rem 0}
+.btn-gold{background:var(--gold);color:var(--navy);padding:0.85rem 2rem;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.76rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;transition:background 0.3s,transform 0.2s;text-decoration:none;display:inline-block}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--ivory);padding:0.85rem 2rem;border:1px solid rgba(248,246,242,0.18);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.76rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;transition:border-color 0.3s,color 0.3s;text-decoration:none;display:inline-block;margin-left:1rem}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.hero-visual{display:flex;align-items:center;justify-content:center}
+.icon-ring{width:300px;height:300px;border-radius:50%;border:1px solid rgba(184,134,11,0.12);display:flex;align-items:center;justify-content:center;position:relative;animation:breathe 4s ease-in-out infinite}
+.icon-ring::before{content:'';position:absolute;inset:-20px;border-radius:50%;border:1px solid rgba(184,134,11,0.06)}
+.icon-ring::after{content:'';position:absolute;inset:-40px;border-radius:50%;border:1px solid rgba(184,134,11,0.03)}
+@keyframes breathe{0%,100%{box-shadow:0 0 0 0 rgba(184,134,11,0)}50%{box-shadow:0 0 40px rgba(184,134,11,0.12)}}
+.icon-ring svg{width:90px;height:90px;stroke:var(--gold);fill:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round}
+section{padding:6rem 4rem}
+.sec-eyebrow{font-size:0.63rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;display:flex;align-items:center;gap:0.7rem}
+.sec-eyebrow::after{content:'';flex:0 0 2rem;height:1px;background:var(--gold)}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.6vw,3.2rem);font-weight:300;line-height:1.13;margin-bottom:1.3rem}
+.sec-title em{color:var(--gold);font-style:italic}
+.result-banner{background:var(--charcoal);padding:3rem 4rem;display:grid;grid-template-columns:repeat(3,1fr);gap:3rem;border-top:1px solid rgba(184,134,11,0.12);border-bottom:1px solid rgba(184,134,11,0.12)}
+.rb-item{text-align:center}
+.rb-num{font-family:'Cormorant Garamond',serif;font-size:3.5rem;color:var(--gold);font-weight:300;line-height:1;margin-bottom:0.4rem}
+.rb-label{font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);line-height:1.5}
+.services-detail{background:var(--charcoal)}
+.svc-list-full{margin-top:3rem;display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
+.svc-item{background:var(--navy);padding:2.5rem;border:1px solid rgba(184,134,11,0.08);position:relative;overflow:hidden;transition:border-color 0.4s}
+.svc-item:hover{border-color:rgba(184,134,11,0.3)}
+.svc-item::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:transform 0.5s;transform-origin:left}
+.svc-item:hover::after{transform:scaleX(1)}
+.svc-item-name{font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:0.6rem}
+.svc-item-desc{font-size:0.88rem;color:var(--muted);line-height:1.75;font-weight:300;margin-bottom:1rem}
+.svc-item-includes{font-size:0.72rem;color:rgba(248,246,242,0.35);font-style:italic}
+.philosophy{background:var(--navy);padding:6rem 4rem}
+.philosophy-inner{max-width:800px;margin:0 auto;text-align:center}
+.philosophy-inner p{font-size:1rem;color:rgba(248,246,242,0.65);line-height:1.9;font-weight:300;margin-bottom:1.5rem}
+.philosophy-quote{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;line-height:1.4;color:var(--ivory);font-style:italic;margin:2.5rem 0;border-left:2px solid var(--gold);padding:1.2rem 2rem;text-align:left}
+.philosophy-quote span{color:var(--gold);font-style:normal}
+.audience{background:var(--charcoal);padding:6rem 4rem}
+.audience-tags{display:flex;flex-wrap:wrap;gap:0.8rem;margin-top:2.5rem}
+.aud-tag{padding:0.8rem 1.4rem;border:1px solid rgba(184,134,11,0.15);border-radius:2px;font-size:0.8rem;color:var(--muted);font-weight:300;transition:all 0.3s;cursor:default}
+.aud-tag:hover{border-color:var(--gold);color:var(--ivory)}
+.other-services{background:var(--black);padding:5rem 4rem}
+.other-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+.other-card{text-decoration:none;color:inherit;padding:2rem;border:1px solid rgba(184,134,11,0.08);display:block;transition:border-color 0.3s}
+.other-card:hover{border-color:rgba(184,134,11,0.3)}
+.other-icon{font-size:1.4rem;margin-bottom:0.8rem;display:block}
+.other-name{font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:0.4rem}
+.other-desc{font-size:0.78rem;color:var(--muted);font-weight:300;line-height:1.5}
+.cta-band{background:var(--charcoal);padding:5rem 4rem;text-align:center}
+.cta-band h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:300;margin-bottom:0.8rem}
+.cta-band h2 em{color:var(--gold);font-style:italic}
+.cta-band p{font-size:0.88rem;color:var(--muted);max-width:400px;margin:0 auto 2.2rem;line-height:1.8;font-weight:300}
+footer{background:#040710;padding:2.2rem 4rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(184,134,11,0.07)}
+.footer-brand{font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--ivory);letter-spacing:0.18em}
+.footer-tag{font-size:0.6rem;color:rgba(148,163,184,0.35);letter-spacing:0.12em;text-transform:uppercase;margin-top:0.2rem}
+.footer-fw{font-size:0.58rem;color:rgba(148,163,184,0.25);letter-spacing:0.18em}
+.footer-copy{font-size:0.62rem;color:rgba(148,163,184,0.25)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.75s ease,transform 0.75s ease}
+.reveal.on{opacity:1;transform:none}
+.stagger>*{opacity:0;transform:translateY(16px);transition:opacity 0.6s ease,transform 0.6s ease}
+.stagger.on>*:nth-child(1){opacity:1;transform:none;transition-delay:0s}
+.stagger.on>*:nth-child(2){opacity:1;transform:none;transition-delay:0.12s}
+.stagger.on>*:nth-child(3){opacity:1;transform:none;transition-delay:0.24s}
+.stagger.on>*:nth-child(4){opacity:1;transform:none;transition-delay:0.36s}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-brand">
+    <div class="nav-kolam">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M50 8 C58 22 62 38 50 44 C38 38 42 22 50 8Z" stroke="#B8860B" stroke-width="2" fill="none"/><path d="M92 50 C78 58 62 62 56 50 C62 38 78 42 92 50Z" stroke="#B8860B" stroke-width="2" fill="none"/><path d="M50 92 C42 78 38 62 50 56 C62 62 58 78 50 92Z" stroke="#B8860B" stroke-width="2" fill="none"/><path d="M8 50 C22 42 38 38 44 50 C38 62 22 58 8 50Z" stroke="#B8860B" stroke-width="2" fill="none"/><circle cx="50" cy="50" r="10" stroke="#C47A2C" stroke-width="1.5" fill="none"/><circle cx="50" cy="50" r="3" fill="#B8860B"/></svg>
+    </div>
+    <div><a href="index.html" class="nav-wordmark">INAI</a><span class="nav-tamil">இணை</span></div>
+  </div>
+  <div class="nav-links">
+    <a href="about.html">About</a><a href="services.html" style="color:var(--gold)">Services</a>
+    <a href="work.html">Work</a><a href="blog.html">Insights</a>
+    <a href="contact.html" class="nav-cta">Book a Consultation</a>
+  </div>
+</nav>
+
+<section class="svc-hero">
+  <div style="animation:fadeUp 1s ease 0.1s both">
+    <div class="breadcrumb"><a href="services.html">Services</a> <span>/</span> <span>INAI Growth</span></div>
+    <div class="eyebrow">INAI Growth</div>
+    <h1 class="svc-h1">Strategy that<br><em>moves the number.</em></h1>
+    <div class="gold-bar"></div>
+    <p class="svc-hero-sub">Growth strategy without execution is a document that sits in a folder. INAI Growth connects the thinking to the doing. We build marketing strategies, lead pipelines, and business development frameworks with measurable outcomes built in from the start.</p>
+    <a href="contact.html" class="btn-gold">Start Growing</a>
+    <a href="services.html" class="btn-outline">All Services</a>
+  </div>
+  <div class="hero-visual" style="animation:fadeUp 1s ease 0.3s both">
+    <div class="icon-ring">
+      <svg viewBox="0 0 24 24">
+        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+        <polyline points="16 7 22 7 22 13"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<div class="result-banner reveal">
+  <div class="rb-item"><div class="rb-num">55%</div><div class="rb-label">Campaign conversion achieved, up from 20%, through communication strategy</div></div>
+  <div class="rb-item"><div class="rb-num">3x</div><div class="rb-label">Instagram growth in 10 days through content strategy, not paid ads</div></div>
+  <div class="rb-item"><div class="rb-num">120%</div><div class="rb-label">Sales target achieved at Tanishq through relationship-led approach</div></div>
+</div>
+
+<!-- SERVICES -->
+<section class="services-detail">
+  <div class="reveal">
+    <div class="sec-eyebrow">What We Do</div>
+    <h2 class="sec-title">Five growth capabilities.<br>One <em>connected strategy.</em></h2>
+  </div>
+  <div class="svc-list-full stagger">
+    <div class="svc-item">
+      <div class="svc-item-name">Marketing Strategy</div>
+      <p class="svc-item-desc">Channel selection, messaging architecture, and campaign planning built around your actual business goals. Not a deck of marketing theory. A 90-day plan with clear actions, responsible owners, measurable outcomes, and a review mechanism that tells you what is working before the budget runs out.</p>
+      <div class="svc-item-includes">Includes: audience mapping, channel strategy, messaging framework, campaign plan, 90-day roadmap, KPI framework</div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-item-name">Lead Generation</div>
+      <p class="svc-item-desc">The full pipeline from stranger to qualified enquiry. Meta Ads campaigns structured for conversion, not just reach. Organic social content built around what your audience needs to see before they trust you. Referral systems that turn existing clients into a consistent source of new ones. WhatsApp follow-up sequences that convert without feeling pushy.</p>
+      <div class="svc-item-includes">Includes: Meta Ads setup and management, organic content system, referral programme design, follow-up sequence</div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-item-name">Business Development Support</div>
+      <p class="svc-item-desc">The work that happens before the sale. Prospect research, target company mapping, outreach strategy, partnership identification, and pitch preparation. Built for businesses that have something strong to offer and need a structured, repeatable approach to getting it in front of the right people.</p>
+      <div class="svc-item-includes">Includes: prospect research, outreach templates, pitch deck support, partnership framework, BD tracking system</div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-item-name">Communication Consulting</div>
+      <p class="svc-item-desc">How your business speaks. The tone of voice that carries across every touchpoint. The way your team writes emails, responds to enquiries, and represents the brand in conversation. Internal communication frameworks that keep teams aligned. Client communication systems that build trust before it is explicitly asked for.</p>
+      <div class="svc-item-includes">Includes: tone of voice guide, email template system, client communication framework, internal comms audit</div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-item-name">Content Strategy</div>
+      <p class="svc-item-desc">A content calendar is not a content strategy. A content strategy is the architecture that decides what you say, who you say it to, on which channel, in what format, and towards which business outcome. The calendar is the execution. The strategy is what makes the calendar worth building.</p>
+      <div class="svc-item-includes">Includes: content pillar framework, audience-channel mapping, content calendar, format guidelines, performance metrics</div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-item-name">Growth Planning</div>
+      <p class="svc-item-desc">90-day plans, OKR frameworks, quarterly business reviews. Structure for businesses that want to grow with intention rather than reaction. Built around your actual constraints: team size, budget, market position. Reviewed monthly and adjusted based on what the numbers say, not what the plan hoped.</p>
+      <div class="svc-item-includes">Includes: 90-day growth plan, OKR framework, monthly review structure, quarterly report template</div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy">
+  <div class="philosophy-inner reveal">
+    <div class="sec-eyebrow" style="justify-content:center">The Difference</div>
+    <h2 class="sec-title" style="text-align:center">Strategy that <em>executes.</em></h2>
+    <p>The gap between most marketing strategies and actual business growth is execution. Strategies are written, presented, approved, and filed. The business continues doing what it was doing before, slightly more confidently.</p>
+    <p>INAI Growth does not produce strategies that get filed. The work is designed from the start to connect directly to what the team does on Monday morning. Every recommendation has a named action, a timeline, and a metric.</p>
+    <div class="philosophy-quote">
+      "Growth is not accidental. It is <span>designed</span> through meaningful connections between ideas, people, systems, and purpose. The benchmark is a number that moves."
+    </div>
+    <p>This comes from ten years of working in environments where the stakes of a campaign were real, where a conversion number meant a business survived or did not, and where the difference between 20% and 55% was not a slide in a deck but an outcome that changed what was possible.</p>
+  </div>
+</section>
+
+<!-- AUDIENCE -->
+<section class="audience">
+  <div class="reveal">
+    <div class="sec-eyebrow">Who This Is For</div>
+    <h2 class="sec-title">The right fit for<br><em>INAI Growth.</em></h2>
+  </div>
+  <div class="audience-tags reveal">
+    <span class="aud-tag">Businesses with a product but no pipeline</span>
+    <span class="aud-tag">Teams with budget but no strategy for it</span>
+    <span class="aud-tag">Consultancies expanding into a new market</span>
+    <span class="aud-tag">Founders who need traction before they can hire</span>
+    <span class="aud-tag">Education businesses needing a lead generation system</span>
+    <span class="aud-tag">Businesses that have tried paid ads without a clear strategy</span>
+    <span class="aud-tag">Brands with an audience but no conversion system</span>
+    <span class="aud-tag">Teams that need a 90-day plan, not a five-year vision</span>
+  </div>
+</section>
+
+<div class="other-services">
+  <div class="sec-eyebrow reveal">The Other Pillars</div>
+  <h2 class="sec-title reveal">Growth is one part<br>of the <em>full picture.</em></h2>
+  <div class="other-grid stagger">
+    <a href="creative.html" class="other-card"><span class="other-icon">✦</span><div class="other-name">INAI Creative</div><div class="other-desc">Brand identity, design systems, and content strategy that reflect who your business actually is.</div></a>
+    <a href="systems.html" class="other-card"><span class="other-icon">⚙</span><div class="other-name">INAI Systems</div><div class="other-desc">CRM architecture, AI automation, and operational infrastructure for businesses ready to scale.</div></a>
+    <a href="digital.html" class="other-card"><span class="other-icon">◻</span><div class="other-name">INAI Digital</div><div class="other-desc">Websites, landing pages, and digital experiences built to convert and built to last.</div></a>
+  </div>
+</div>
+
+<div class="cta-band">
+  <h2>Ready to make the<br><em>number move?</em></h2>
+  <p>Tell us where you are and where you need to be. We will build the path between them.</p>
+  <a href="contact.html" class="btn-gold">Start the Conversation</a>
+</div>
+
+<footer>
+  <div><div class="footer-brand">INAI</div><div class="footer-tag">Where Creativity Meets Intelligence</div></div>
+  <div class="footer-fw">I → N → A → I &nbsp;·&nbsp; IDEA · NETWORK · ACTION · IMPACT</div>
+  <div class="footer-copy">© 2025 INAI. All rights reserved.</div>
+</footer>
+<script>
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('on')}),{threshold:0.1});
+document.querySelectorAll('.reveal,.stagger').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INAI Digital — Websites, Apps, Digital Experiences</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel+Decorative:wght@400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0F172A;--charcoal:#111827;--gold:#B8860B;--copper:#C47A2C;--ivory:#F8F6F2;--muted:#94A3B8;--gold-light:#D4A843;--black:#06090F}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--ivory);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:1rem 4rem;background:rgba(15,23,42,0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(184,134,11,0.1)}
+.nav-brand{display:flex;align-items:center;gap:0.7rem}
+.nav-kolam{width:36px;height:36px;border-radius:50%;border:1px solid rgba(184,134,11,0.3);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.nav-wordmark{font-family:'Cinzel Decorative',serif;font-size:1.1rem;letter-spacing:0.2em;color:var(--ivory);text-decoration:none}
+.nav-tamil{font-size:0.58rem;color:var(--gold);letter-spacing:0.05em;opacity:0.7;display:block;line-height:1;margin-top:1px}
+.nav-links{display:flex;gap:2.2rem;align-items:center}
+.nav-links a{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.3s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold)!important;color:var(--navy)!important;padding:0.5rem 1.2rem;border-radius:2px;font-weight:500!important}
+.svc-hero{min-height:65vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:5rem;padding:9rem 4rem 5rem;position:relative;overflow:hidden}
+.svc-hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 50% 70% at 20% 50%,rgba(184,134,11,0.06) 0%,transparent 70%)}
+.breadcrumb{font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.5rem}
+.breadcrumb a{color:var(--muted);text-decoration:none}.breadcrumb a:hover{color:var(--gold)}.breadcrumb span{color:var(--gold)}
+.eyebrow{font-size:0.65rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem}
+.eyebrow::before{content:'';width:1.8rem;height:1px;background:var(--gold)}
+.svc-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5vw,5rem);font-weight:300;line-height:1.05;margin-bottom:1.2rem}
+.svc-h1 em{color:var(--gold);font-style:italic}
+.svc-hero-sub{font-size:1rem;color:var(--muted);line-height:1.85;max-width:460px;font-weight:300;margin-bottom:2rem}
+.gold-bar{width:3rem;height:1px;background:var(--gold);margin:1.2rem 0}
+.btn-gold{background:var(--gold);color:var(--navy);padding:0.85rem 2rem;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.76rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;transition:background 0.3s,transform 0.2s;text-decoration:none;display:inline-block}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--ivory);padding:0.85rem 2rem;border:1px solid rgba(248,246,242,0.18);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.76rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;transition:border-color 0.3s,color 0.3s;text-decoration:none;display:inline-block;margin-left:1rem}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.hero-visual{display:flex;align-items:center;justify-content:center}
+.icon-ring{width:300px;height:300px;border-radius:50%;border:1px solid rgba(184,134,11,0.12);display:flex;align-items:center;justify-content:center;position:relative;animation:breathe 4s ease-in-out infinite}
+.icon-ring::before{content:'';position:absolute;inset:-20px;border-radius:50%;border:1px solid rgba(184,134,11,0.06)}
+.icon-ring::after{content:'';position:absolute;inset:-40px;border-radius:50%;border:1px solid rgba(184,134,11,0.03)}
+@keyframes breathe{0%,100%{box-shadow:0 0 0 0 rgba(184,134,11,0)}50%{box-shadow:0 0 40px rgba(184,134,11,0.12)}}
+.icon-ring svg{width:90px;height:90px;stroke:var(--gold);fill:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round}
+section{padding:6rem 4rem}
+.sec-eyebrow{font-size:0.63rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;display:flex;align-items:center;gap:0.7rem}
+.sec-eyebrow::after{content:'';flex:0 0 2rem;height:1px;background:var(--gold)}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.6vw,3.2rem);font-weight:300;line-height:1.13;margin-bottom:1.3rem}
+.sec-title em{color:var(--gold);font-style:italic}
+.services-detail{background:var(--charcoal)}
+.svc-list-full{margin-top:3rem;display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
+.svc-item{background:var(--navy);padding:2.5rem;border:1px solid rgba(184,134,11,0.08);position:relative;overflow:hidden;transition:border-color 0.4s}
+.svc-item:hover{border-color:rgba(184,134,11,0.3)}
+.svc-item::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:transform 0.5s;transform-origin:left}
+.svc-item:hover::after{transform:scaleX(1)}
+.svc-item-name{font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:0.6rem}
+.svc-item-desc{font-size:0.88rem;color:var(--muted);line-height:1.75;font-weight:300;margin-bottom:1rem}
+.svc-item-includes{font-size:0.72rem;color:rgba(248,246,242,0.35);font-style:italic}
+.what-not{background:var(--navy);padding:6rem 4rem}
+.not-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3rem;align-items:start}
+.not-col h3{font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;margin-bottom:1.5rem}
+.not-col.no h3{color:var(--muted)}
+.not-col.yes h3{color:var(--gold)}
+.not-list{list-style:none}
+.not-list li{font-size:0.85rem;color:var(--muted);padding:0.55rem 0;border-bottom:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;gap:0.8rem;font-weight:300}
+.not-list li:last-child{border:none}
+.not-list li.no-item::before{content:'✕';color:rgba(148,163,184,0.3);font-size:0.75rem}
+.not-list li.yes-item::before{content:'→';color:var(--gold);font-size:0.75rem}
+.not-list li.yes-item{color:var(--ivory)}
+.process{background:var(--charcoal)}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem}
+.process-card{padding:2rem;border:1px solid rgba(184,134,11,0.08)}
+.process-num{font-family:'Cormorant Garamond',serif;font-size:3rem;color:rgba(184,134,11,0.1);font-weight:300;line-height:1;margin-bottom:0.8rem}
+.process-title{font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:0.5rem}
+.process-desc{font-size:0.82rem;color:var(--muted);line-height:1.7;font-weight:300}
+.other-services{background:var(--black);padding:5rem 4rem}
+.other-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+.other-card{text-decoration:none;color:inherit;padding:2rem;border:1px solid rgba(184,134,11,0.08);display:block;transition:border-color 0.3s}
+.other-card:hover{border-color:rgba(184,134,11,0.3)}
+.other-icon{font-size:1.4rem;margin-bottom:0.8rem;display:block}
+.other-name{font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:0.4rem}
+.other-desc{font-size:0.78rem;color:var(--muted);font-weight:300;line-height:1.5}
+.cta-band{background:var(--navy);padding:5rem 4rem;text-align:center}
+.cta-band h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:300;margin-bottom:0.8rem}
+.cta-band h2 em{color:var(--gold);font-style:italic}
+.cta-band p{font-size:0.88rem;color:var(--muted);max-width:400px;margin:0 auto 2.2rem;line-height:1.8;font-weight:300}
+footer{background:#040710;padding:2.2rem 4rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(184,134,11,0.07)}
+.footer-brand{font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--ivory);letter-spacing:0.18em}
+.footer-tag{font-size:0.6rem;color:rgba(148,163,184,0.35);letter-spacing:0.12em;text-transform:uppercase;margin-top:0.2rem}
+.footer-fw{font-size:0.58rem;color:rgba(148,163,184,0.25);letter-spacing:0.18em}
+.footer-copy{font-size:0.62rem;color:rgba(148,163,184,0.25)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.75s ease,transform 0.75s ease}
+.reveal.on{opacity:1;transform:none}
+.stagger>*{opacity:0;transform:translateY(16px);transition:opacity 0.6s ease,transform 0.6s ease}
+.stagger.on>*:nth-child(1){opacity:1;transform:none;transition-delay:0s}
+.stagger.on>*:nth-child(2){opacity:1;transform:none;transition-delay:0.12s}
+.stagger.on>*:nth-child(3){opacity:1;transform:none;transition-delay:0.24s}
+.stagger.on>*:nth-child(4){opacity:1;transform:none;transition-delay:0.36s}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-brand">
+    <div class="nav-kolam">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M50 8 C58 22 62 38 50 44 C38 38 42 22 50 8Z" stroke="#B8860B" stroke-width="2" fill="none"/><path d="M92 50 C78 58 62 62 56 50 C62 38 78 42 92 50Z" stroke="#B8860B" stroke-width="2" fill="none"/><path d="M50 92 C42 78 38 62 50 56 C62 62 58 78 50 92Z" stroke="#B8860B" stroke-width="2" fill="none"/><path d="M8 50 C22 42 38 38 44 50 C38 62 22 58 8 50Z" stroke="#B8860B" stroke-width="2" fill="none"/><circle cx="50" cy="50" r="10" stroke="#C47A2C" stroke-width="1.5" fill="none"/><circle cx="50" cy="50" r="3" fill="#B8860B"/></svg>
+    </div>
+    <div><a href="index.html" class="nav-wordmark">INAI</a><span class="nav-tamil">இணை</span></div>
+  </div>
+  <div class="nav-links">
+    <a href="about.html">About</a><a href="services.html" style="color:var(--gold)">Services</a>
+    <a href="work.html">Work</a><a href="blog.html">Insights</a>
+    <a href="contact.html" class="nav-cta">Book a Consultation</a>
+  </div>
+</nav>
+
+<section class="svc-hero">
+  <div style="animation:fadeUp 1s ease 0.1s both">
+    <div class="breadcrumb"><a href="services.html">Services</a> <span>/</span> <span>INAI Digital</span></div>
+    <div class="eyebrow">INAI Digital</div>
+    <h1 class="svc-h1">Digital experiences<br>that <em>convert.</em></h1>
+    <div class="gold-bar"></div>
+    <p class="svc-hero-sub">A website is not a brochure. It is a system that either works for your business at 2am or sits there looking expensive and doing nothing. INAI Digital builds websites, portals, and digital experiences that have a job to do and do it.</p>
+    <a href="contact.html" class="btn-gold">Start a Digital Project</a>
+    <a href="services.html" class="btn-outline">All Services</a>
+  </div>
+  <div class="hero-visual" style="animation:fadeUp 1s ease 0.3s both">
+    <div class="icon-ring">
+      <svg viewBox="0 0 24 24">
+        <rect x="2" y="3" width="20" height="14" rx="2"/>
+        <path d="M8 21h8M12 17v4"/>
+        <path d="M6 8h12M6 11h8" opacity="0.4"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-detail">
+  <div class="reveal">
+    <div class="sec-eyebrow">What We Build</div>
+    <h2 class="sec-title">Five digital capabilities.<br>All <em>built to perform.</em></h2>
+  </div>
+  <div class="svc-list-full stagger">
+    <div class="svc-item">
+      <div class="svc-item-name">Business Websites</div>
+      <p class="svc-item-desc">A website that represents the quality of your business. Not a template adjusted to fit. A site designed around your specific audience, your specific offer, and the specific action you need visitors to take. Built with clean code, fast load times, and full ownership. No monthly platform fees. No vendor lock-in.</p>
+      <div class="svc-item-includes">Includes: design, copywriting guidance, development, domain setup, analytics, 30-day post-launch support</div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-item-name">Landing Pages</div>
+      <p class="svc-item-desc">Single-purpose pages built for one outcome. A lead capture page for a webinar. A registration page for an event. A product launch page. A campaign response page. Designed and built fast, because the campaign is already running and every day without the page is a day of wasted spend.</p>
+      <div class="svc-item-includes">Includes: design, copy, form setup, analytics tracking, A/B test variant option</div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-item-name">Student and Client Portals</div>
+      <p class="svc-item-desc">Custom login portals with role-based access, content delivery, progress tracking, and resource libraries. Built for education businesses that need to deliver structured learning without paying for an LMS platform, and for professional service firms that need a client-facing dashboard without a six-figure software budget.</p>
+      <div class="svc-item-includes">Includes: authentication, role access, content system, progress tracking, admin panel, mobile-responsive</div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-item-name">App Prototypes</div>
+      <p class="svc-item-desc">A working, interactive prototype built in code rather than a design tool. Used for investor demos, client pitches, internal product testing, and grant applications. The difference between a Figma mockup and a prototype that actually works is the difference between telling someone what it could do and showing them.</p>
+      <div class="svc-item-includes">Includes: functional prototype, core user flows, presentation mode, handover documentation for development team</div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-item-name">Interactive Digital Experiences</div>
+      <p class="svc-item-desc">When a standard website will not differentiate you, and the brand requires something that makes a visitor feel something. Animated, story-driven, interactive web experiences built for businesses whose brand philosophy is strong enough to carry it. This website is an example of the work.</p>
+      <div class="svc-item-includes">Includes: concept, animation, interaction design, development, performance optimisation</div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-item-name">SEO and Performance</div>
+      <p class="svc-item-desc">A website nobody finds is not a digital presence. Technical SEO setup, schema markup, image optimisation, Core Web Vitals compliance, and Google Search Console configuration. Done properly at launch so you are not fixing it six months later when the traffic numbers are disappointing.</p>
+      <div class="svc-item-includes">Includes: technical SEO audit, on-page optimisation, schema markup, sitemap, analytics configuration</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO NOT DO -->
+<section class="what-not">
+  <div class="reveal">
+    <div class="sec-eyebrow">Honest About Scope</div>
+    <h2 class="sec-title">What INAI Digital<br><em>is and is not.</em></h2>
+  </div>
+  <div class="not-grid reveal">
+    <div class="not-col no">
+      <h3>What this is not</h3>
+      <ul class="not-list">
+        <li class="no-item">A Wix or Squarespace site at agency prices</li>
+        <li class="no-item">Templates with your logo dropped in</li>
+        <li class="no-item">A handover that leaves you dependent on us for every change</li>
+        <li class="no-item">WordPress sites that require monthly maintenance contracts</li>
+        <li class="no-item">Design that ignores what the site needs to do commercially</li>
+        <li class="no-item">A site that looks good on desktop and breaks on mobile</li>
+      </ul>
+    </div>
+    <div class="not-col yes">
+      <h3>What this is</h3>
+      <ul class="not-list">
+        <li class="yes-item">Websites built around a specific conversion goal</li>
+        <li class="yes-item">Clean code you own outright with no platform dependency</li>
+        <li class="yes-item">Handover with documentation so you can manage it yourself</li>
+        <li class="yes-item">Fast-loading, mobile-first, SEO-ready at launch</li>
+        <li class="yes-item">Design decisions connected to brand and audience strategy</li>
+        <li class="yes-item">A digital presence that works as hard as you do</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="reveal">
+    <div class="sec-eyebrow">How We Work</div>
+    <h2 class="sec-title">From brief to<br><em>live and performing.</em></h2>
+  </div>
+  <div class="process-grid stagger">
+    <div class="process-card">
+      <div class="process-num">01</div>
+      <div class="process-title">Brief</div>
+      <p class="process-desc">What does this site need to do? Who visits it, what do they need to understand, and what do we need them to do next? The brief shapes everything.</p>
+    </div>
+    <div class="process-card">
+      <div class="process-num">02</div>
+      <div class="process-title">Design</div>
+      <p class="process-desc">Structure, layout, visual design. Reviewed and approved before development begins. Changes to structure at the design stage take minutes. Changes during development take hours.</p>
+    </div>
+    <div class="process-card">
+      <div class="process-num">03</div>
+      <div class="process-title">Build</div>
+      <p class="process-desc">Clean code, fast load, mobile-first, SEO-ready. Tested across browsers and devices before handover. No surprises on launch day.</p>
+    </div>
+    <div class="process-card">
+      <div class="process-num">04</div>
+      <div class="process-title">Launch</div>
+      <p class="process-desc">Domain setup, analytics, Search Console, sitemap submission. 30 days of post-launch support for anything that surfaces after going live.</p>
+    </div>
+  </div>
+</section>
+
+<div class="other-services">
+  <div class="sec-eyebrow reveal">The Other Pillars</div>
+  <h2 class="sec-title reveal">Digital is one part<br>of the <em>full picture.</em></h2>
+  <div class="other-grid stagger">
+    <a href="creative.html" class="other-card"><span class="other-icon">✦</span><div class="other-name">INAI Creative</div><div class="other-desc">Brand identity, design systems, and content strategy that reflect who your business actually is.</div></a>
+    <a href="systems.html" class="other-card"><span class="other-icon">⚙</span><div class="other-name">INAI Systems</div><div class="other-desc">CRM architecture, AI automation, and operational infrastructure for businesses ready to scale.</div></a>
+    <a href="growth.html" class="other-card"><span class="other-icon">↗</span><div class="other-name">INAI Growth</div><div class="other-desc">Marketing strategy, lead generation, and business development for teams that need traction.</div></a>
+  </div>
+</div>
+
+<div class="cta-band">
+  <h2>Ready for a website<br>that <em>actually works?</em></h2>
+  <p>Tell us what you need it to do. We will tell you what it needs to look like.</p>
+  <a href="contact.html" class="btn-gold">Start the Conversation</a>
+</div>
+
+<footer>
+  <div><div class="footer-brand">INAI</div><div class="footer-tag">Where Creativity Meets Intelligence</div></div>
+  <div class="footer-fw">I → N → A → I &nbsp;·&nbsp; IDEA · NETWORK · ACTION · IMPACT</div>
+  <div class="footer-copy">© 2025 INAI. All rights reserved.</div>
+</footer>
+<script>
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('on')}),{threshold:0.1});
+document.querySelectorAll('.reveal,.stagger').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GlobalPath CRM — Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,600;1,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#1F3D33; --forest-dark:#173029; --cream:#F6F3EC; --card:#FFFFFF;
+    --teal:#2F6F5E; --amber:#C1502E; --charcoal:#23262B; --muted:#8A8577; --line:#E4DFD3;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'IBM Plex Sans', sans-serif; background:var(--cream); color:var(--charcoal);
+    display:flex; flex-direction:column; align-items:center; padding:30px 14px 60px; min-height:100vh;
+  }
+  .eyebrow{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--forest); margin-bottom:8px;}
+  h1{ font-family:'Newsreader',serif; font-weight:600; font-size:27px; margin-bottom:6px; text-align:center;}
+  .sub{ font-size:13.5px; color:var(--muted); text-align:center; max-width:420px; margin-bottom:22px; line-height:1.5;}
+
+  .stage-btn{
+    background:var(--forest); color:#fff; border:none; padding:11px 22px; border-radius:9px;
+    font-size:13.5px; font-weight:600; cursor:pointer; margin-bottom:24px; font-family:'IBM Plex Sans',sans-serif;
+    transition:.15s;
+  }
+  .stage-btn:hover{ background:var(--forest-dark); }
+  .stage-btn:disabled{ opacity:.45; cursor:default; }
+
+  .stats{ display:flex; gap:12px; margin-bottom:20px; flex-wrap:wrap; justify-content:center; }
+  .stat{ background:var(--card); border-radius:10px; padding:12px 18px; text-align:center; min-width:120px; box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .stat .n{ font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:21px; color:var(--teal); }
+  .stat .l{ font-size:10px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); margin-top:2px;}
+  .stat.hours .n{ color:var(--amber); }
+
+  .board-wrap{ display:flex; gap:16px; width:100%; max-width:980px; align-items:flex-start; flex-wrap:wrap; justify-content:center;}
+
+  .incoming{
+    width:220px; background:var(--forest); border-radius:14px; padding:14px; flex-shrink:0;
+    min-height:420px;
+  }
+  .incoming h4{ color:#DCEAE4; font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; margin-bottom:12px; }
+  .msg{
+    background:rgba(255,255,255,.08); border-radius:9px; padding:10px 12px; margin-bottom:9px;
+    font-size:12px; color:#DCEAE4; opacity:0; transform:translateY(8px); transition:.35s;
+  }
+  .msg.show{ opacity:1; transform:translateY(0); }
+  .msg .src{ font-size:9.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--amber); margin-bottom:3px; font-weight:600;}
+  .msg.taken{ opacity:.25; }
+
+  .kanban{ display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; flex:1; min-width:600px; }
+  .col{ background:var(--card); border-radius:12px; padding:10px; min-height:420px; box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .col h5{ font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); padding:6px 4px 10px; border-bottom:1px solid var(--line); margin-bottom:8px; display:flex; justify-content:space-between;}
+  .col h5 b{ color:var(--charcoal); font-family:'IBM Plex Mono',monospace; }
+  .lead-card{
+    background:var(--cream); border-radius:8px; padding:9px 10px; margin-bottom:8px; font-size:11.5px;
+    opacity:0; transform:scale(.85); transition:.4s cubic-bezier(.2,.8,.2,1);
+    border-left:3px solid var(--teal);
+  }
+  .lead-card.show{ opacity:1; transform:scale(1); }
+  .lead-card .name{ font-weight:600; }
+  .lead-card .fu{ color:var(--amber); font-size:10px; margin-top:3px; font-family:'IBM Plex Mono',monospace;}
+
+  .note{ max-width:420px; font-size:12px; color:var(--muted); text-align:center; margin-top:24px; line-height:1.6;}
+  .note b{ color:var(--charcoal); }
+</style>
+</head>
+<body>
+
+  <div class="eyebrow">INAI — Client Demo</div>
+  <h1>GlobalPath CRM</h1>
+  <p class="sub">Enquiries land from WhatsApp, your website, and missed calls — all at once. Nothing gets sorted by hand.</p>
+
+  <button class="stage-btn" id="run">▶ Simulate this morning's enquiries</button>
+
+  <div class="stats">
+    <div class="stat"><div class="n" id="statTotal">0</div><div class="l">Leads Captured</div></div>
+    <div class="stat"><div class="n" id="statFu">0</div><div class="l">Follow-ups Auto-Set</div></div>
+    <div class="stat hours"><div class="n" id="statHours">0.0</div><div class="l">Hrs Saved vs Manual</div></div>
+  </div>
+
+  <div class="board-wrap">
+    <div class="incoming">
+      <h4>📥 Incoming — raw &amp; unsorted</h4>
+      <div id="incomingList"></div>
+    </div>
+
+    <div class="kanban">
+      <div class="col"><h5>New Enquiry <b id="cNew">0</b></h5><div id="colNew"></div></div>
+      <div class="col"><h5>Counselling <b id="cCounsel">0</b></h5><div id="colCounsel"></div></div>
+      <div class="col"><h5>Visa in Progress <b id="cVisa">0</b></h5><div id="colVisa"></div></div>
+      <div class="col"><h5>Enrolled <b id="cEnrolled">0</b></h5><div id="colEnrolled"></div></div>
+    </div>
+  </div>
+
+  <p class="note">Every one of these would otherwise sit in a WhatsApp chat or an email inbox until someone remembered to act on it. <b>Here, each one lands staged, dated, and owned — the moment it arrives.</b></p>
+
+<script>
+const queue = [
+  {src:'WhatsApp', text:'"Hi, want to know about MS in Canada intake"', name:'Ananya R.', col:'colNew', fu:'Follow-up: Tomorrow, 10 AM'},
+  {src:'Website Form', text:'Downloaded: Scholarship Handbook', name:'Rohit M.', col:'colNew', fu:'Follow-up: Today, 4 PM'},
+  {src:'Missed Call', text:'2 missed calls, 11:42 AM', name:'Sneha K.', col:'colCounsel', fu:'Call back: Today, 2 PM'},
+  {src:'WhatsApp', text:'"Sent my documents for visa"', name:'Vikram S.', col:'colVisa', fu:'Document check: Fri'},
+  {src:'Website Form', text:'Booked a counselling slot', name:'Farah I.', col:'colCounsel', fu:'Session: Wed, 11 AM'},
+  {src:'WhatsApp', text:'"Deposit paid, confirming seat"', name:'Karan D.', col:'colEnrolled', fu:'Welcome kit: Today'},
+];
+
+const incomingList = document.getElementById('incomingList');
+const counts = {colNew:0, colCounsel:0, colVisa:0, colEnrolled:0};
+const countEl = {colNew:'cNew', colCounsel:'cCounsel', colVisa:'cVisa', colEnrolled:'cEnrolled'};
+let total=0, fu=0;
+
+function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
+
+async function run(){
+  document.getElementById('run').disabled = true;
+  document.getElementById('run').textContent = '↻ Replay';
+  incomingList.innerHTML='';
+  Object.keys(counts).forEach(k=>{ counts[k]=0; document.getElementById(countEl[k]).textContent='0'; document.getElementById(k).innerHTML=''; });
+  total=0; fu=0;
+  document.getElementById('statTotal').textContent='0';
+  document.getElementById('statFu').textContent='0';
+  document.getElementById('statHours').textContent='0.0';
+
+  for(const item of queue){
+    const msgEl = document.createElement('div');
+    msgEl.className='msg';
+    msgEl.innerHTML = `<div class="src">${item.src}</div>${item.text}`;
+    incomingList.appendChild(msgEl);
+    await sleep(60);
+    msgEl.classList.add('show');
+    await sleep(650);
+
+    msgEl.classList.add('taken');
+
+    const card = document.createElement('div');
+    card.className='lead-card';
+    card.innerHTML = `<div class="name">${item.name}</div><div class="fu">${item.fu}</div>`;
+    document.getElementById(item.col).appendChild(card);
+    await sleep(30);
+    card.classList.add('show');
+
+    counts[item.col]++;
+    document.getElementById(countEl[item.col]).textContent = counts[item.col];
+    total++; fu++;
+    document.getElementById('statTotal').textContent = total;
+    document.getElementById('statFu').textContent = fu;
+    document.getElementById('statHours').textContent = (total*0.28).toFixed(1);
+
+    await sleep(350);
+  }
+  document.getElementById('run').disabled = false;
+}
+
+document.getElementById('run').addEventListener('click', run);
+</script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atlas — Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#15131C;
+    --void2:#1E1B29;
+    --card:#FDFCFA;
+    --accent:#E8B04B;
+    --indigo:#6C6FD1;
+    --text-light:#ECE8F5;
+    --muted:#8B87A0;
+    --line:#2C2839;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background: var(--void);
+    background-image: radial-gradient(circle at 50% -10%, #262138 0%, var(--void) 60%);
+    min-height:100vh;
+    display:flex; flex-direction:column; align-items:center;
+    font-family:'IBM Plex Sans', sans-serif;
+    color:var(--text-light);
+    padding:36px 16px 60px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--accent); margin-bottom:8px; text-align:center;
+  }
+  h1{
+    font-family:'Space Grotesk', sans-serif; font-weight:700;
+    font-size:30px; text-align:center; margin-bottom:6px;
+  }
+  .sub{
+    font-size:14px; color:var(--muted); text-align:center; max-width:360px; margin-bottom:8px; line-height:1.5;
+  }
+  .thesis{
+    font-family:'Space Grotesk', sans-serif; font-style:normal; font-weight:600; font-size:15px;
+    color:var(--text-light); text-align:center; margin-bottom:26px;
+  }
+  .thesis span{ color:var(--accent); }
+
+  .phone{
+    width:360px; max-width:92vw; height:680px;
+    background:var(--void2);
+    border-radius:34px;
+    border:6px solid #0A0910;
+    box-shadow:0 30px 70px rgba(0,0,0,.55);
+    overflow:hidden;
+    display:flex; flex-direction:column;
+  }
+  .statusbar{
+    height:26px; display:flex; align-items:center; justify-content:space-between;
+    padding:0 18px; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); flex-shrink:0;
+  }
+
+  .searchbar-wrap{ padding:6px 16px 14px; flex-shrink:0; }
+  .searchbar{
+    background:#28243A; border:1px solid var(--line); border-radius:14px;
+    display:flex; align-items:center; gap:10px; padding:12px 14px;
+  }
+  .searchbar input{
+    background:none; border:none; outline:none; color:var(--text-light);
+    font-family:'IBM Plex Sans',sans-serif; font-size:14.5px; width:100%;
+  }
+  .searchbar input::placeholder{ color:var(--muted); }
+  .searchbar .icon{ color:var(--accent); font-size:15px; }
+
+  .chips{ display:flex; gap:7px; padding:0 16px 14px; flex-wrap:wrap; flex-shrink:0; }
+  .chip{
+    background:#28243A; border:1px solid var(--line); color:var(--text-light);
+    font-size:11.5px; padding:6px 12px; border-radius:20px; cursor:pointer; white-space:nowrap;
+    transition:.15s;
+  }
+  .chip:hover{ border-color:var(--accent); color:var(--accent); }
+
+  .status-line{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted);
+    padding:0 18px 10px; flex-shrink:0; min-height:16px;
+  }
+  .status-line b{ color:var(--accent); font-weight:600; }
+
+  .grid{
+    flex:1; overflow-y:auto; padding:4px 14px 24px;
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; align-content:start;
+  }
+  .shot{
+    background:var(--card); border-radius:10px; padding:10px 8px 8px; aspect-ratio:9/15.5;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+    box-shadow:0 4px 14px rgba(0,0,0,.35);
+    transition: transform .35s cubic-bezier(.2,.8,.2,1), opacity .35s ease, filter .35s ease;
+    cursor:default;
+  }
+  .shot .glyph{ font-size:26px; margin-bottom:6px; }
+  .shot .label{ font-size:9.5px; color:#3A3648; font-weight:600; line-height:1.3; }
+  .shot.dim{ opacity:.16; filter:grayscale(60%); transform:scale(.88); }
+  .shot.match{
+    transform:scale(1.08) rotate(0deg) !important;
+    box-shadow:0 0 0 2.5px var(--accent), 0 8px 24px rgba(232,176,74,.35);
+    opacity:1 !important; filter:none !important;
+  }
+
+  .note{
+    max-width:360px; font-size:12px; color:var(--muted); text-align:center; margin-top:22px; line-height:1.6;
+  }
+  .note b{ color:var(--text-light); }
+</style>
+</head>
+<body>
+
+  <div class="eyebrow">INAI — Client Demo</div>
+  <h1>Atlas</h1>
+  <p class="sub">You don't scroll for a screenshot. You ask for it.</p>
+  <p class="thesis">Screenshots are <span>memory</span>, not photos.</p>
+
+  <div class="phone">
+    <div class="statusbar"><span>9:41</span><span>Atlas</span></div>
+
+    <div class="searchbar-wrap">
+      <div class="searchbar">
+        <span class="icon">◎</span>
+        <input id="q" type="text" placeholder="Ask Atlas anything…" autocomplete="off">
+      </div>
+    </div>
+
+    <div class="chips" id="chips"></div>
+    <div class="status-line" id="status">3,842 screenshots on this phone. None of them sorted. Try a chip above, or type your own.</div>
+
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <p class="note">This is the whole product. <b>No folders, no albums, no manual tagging.</b> On-device OCR reads the text, the meaning gets indexed, and typing what you remember finds what you saved — even months later.</p>
+
+<script>
+const shots = [
+  {id:1, glyph:'💧', label:'WiFi Password — Home Router', tags:'wifi password router network internet'},
+  {id:2, glyph:'🧾', label:'UPI Receipt — Grocery, ₹1,240', tags:'receipt payment upi grocery bill shop paid money'},
+  {id:3, glyph:'✈️', label:'Flight Boarding Pass — DEL→BLR', tags:'flight boarding pass ticket travel airport'},
+  {id:4, glyph:'💊', label:'Prescription — Dr. Mehta', tags:'medicine prescription doctor medical health pharmacy'},
+  {id:5, glyph:'🎟️', label:'Movie Ticket — Sat 7:30 PM', tags:'movie ticket cinema show'},
+  {id:6, glyph:'📇', label:'Business Card — Ravi, Contractor', tags:'business card contact phone number contractor'},
+  {id:7, glyph:'🍲', label:'Recipe — Grandma\'s Dal', tags:'recipe cooking food dal ingredients'},
+  {id:8, glyph:'📐', label:'Warranty Card — Fridge', tags:'warranty card fridge appliance receipt purchase'},
+  {id:9, glyph:'🎉', label:'Event Poster — Diwali Mela', tags:'event poster diwali mela festival invite'},
+  {id:10, glyph:'👗', label:'Outfit Inspo — Pinterest', tags:'outfit fashion inspo clothes style pinterest'},
+  {id:11, glyph:'📍', label:'Address — Aunt\'s New Flat', tags:'address location map directions flat house'},
+  {id:12, glyph:'💬', label:'Chat — Landlord, Rent Due', tags:'chat message landlord rent whatsapp payment due'},
+  {id:13, glyph:'🏦', label:'Bank Statement — March', tags:'bank statement account balance money finance'},
+  {id:14, glyph:'📝', label:'Meeting Notes — Client Call', tags:'notes meeting client call work office'},
+  {id:15, glyph:'🎫', label:'Concert Ticket — Nov 14', tags:'concert ticket event show music'},
+];
+
+const chipsData = [
+  {text:'wifi password', q:'wifi password'},
+  {text:'my flight ticket', q:'flight'},
+  {text:'that grocery receipt', q:'receipt'},
+  {text:'the doctor\'s prescription', q:'prescription'},
+];
+
+const grid = document.getElementById('grid');
+const status = document.getElementById('status');
+const chipsEl = document.getElementById('chips');
+const input = document.getElementById('q');
+
+const rotations = shots.map(()=> (Math.random()*10-5).toFixed(1));
+
+function renderGrid(){
+  grid.innerHTML = '';
+  shots.forEach((s,i)=>{
+    const el = document.createElement('div');
+    el.className = 'shot';
+    el.style.transform = `rotate(${rotations[i]}deg)`;
+    el.dataset.id = s.id;
+    el.innerHTML = `<div class="glyph">${s.glyph}</div><div class="label">${s.label}</div>`;
+    grid.appendChild(el);
+  });
+}
+renderGrid();
+
+chipsData.forEach(c=>{
+  const chip = document.createElement('div');
+  chip.className = 'chip';
+  chip.textContent = c.text;
+  chip.addEventListener('click', ()=>{ input.value = c.text; runSearch(c.q); });
+  chipsEl.appendChild(chip);
+});
+
+function runSearch(query){
+  const q = query.trim().toLowerCase();
+  const cards = Array.from(grid.children);
+  if(q === ''){
+    cards.forEach(c=>{ c.classList.remove('dim','match'); });
+    status.innerHTML = '3,842 screenshots on this phone. None of them sorted. Try a chip above, or type your own.';
+    return;
+  }
+  let matchCount = 0;
+  cards.forEach(c=>{
+    const shot = shots.find(s=>s.id == c.dataset.id);
+    const isMatch = shot.tags.includes(q) || q.split(' ').some(w=>w.length>2 && shot.tags.includes(w));
+    if(isMatch){ c.classList.add('match'); c.classList.remove('dim'); matchCount++; }
+    else{ c.classList.add('dim'); c.classList.remove('match'); }
+  });
+  status.innerHTML = matchCount
+    ? `Found <b>${matchCount} match${matchCount>1?'es':''}</b> in 0.2s — searched all 3,842 screenshots.`
+    : `No matches yet — try a chip above.`;
+}
+
+let debounce;
+input.addEventListener('input', (e)=>{
+  clearTimeout(debounce);
+  debounce = setTimeout(()=> runSearch(e.target.value), 180);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Demos — INAI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel+Decorative:wght@400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0F172A;--charcoal:#111827;--gold:#B8860B;--copper:#C47A2C;--ivory:#F8F6F2;--muted:#94A3B8;--gold-light:#D4A843;--black:#06090F}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--ivory);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:1rem 4rem;background:rgba(15,23,42,0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(184,134,11,0.1)}
+.nav-brand{display:flex;align-items:center;gap:0.7rem}
+.nav-kolam{width:36px;height:36px;border-radius:50%;border:1px solid rgba(184,134,11,0.3);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.nav-wordmark{font-family:'Cinzel Decorative',serif;font-size:1.1rem;letter-spacing:0.2em;color:var(--ivory);text-decoration:none}
+.nav-tamil{font-size:0.58rem;color:var(--gold);letter-spacing:0.05em;opacity:0.7;display:block;line-height:1;margin-top:1px}
+.nav-links{display:flex;gap:2.2rem;align-items:center}
+.nav-links a{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.3s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold)!important;color:var(--navy)!important;padding:0.5rem 1.2rem;border-radius:2px;font-weight:500!important}
+
+/* HERO */
+.work-hero{min-height:50vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:9rem 4rem 4rem;text-align:center;position:relative;overflow:hidden}
+.work-hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(184,134,11,0.05) 0%,transparent 70%)}
+.hero-eyebrow{font-size:0.65rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;display:flex;align-items:center;justify-content:center;gap:0.7rem}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:1.8rem;height:1px;background:var(--gold)}
+.work-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,5.5vw,5.5rem);font-weight:300;line-height:1.05;margin-bottom:1rem}
+.work-h1 em{color:var(--gold);font-style:italic}
+.work-sub{font-size:1rem;color:var(--muted);line-height:1.8;max-width:520px;font-weight:300}
+.gold-bar{width:3rem;height:1px;background:var(--gold);margin:1.5rem auto}
+
+/* FILTER TABS */
+.filter-tabs{display:flex;justify-content:center;gap:0.6rem;padding:2rem 4rem;flex-wrap:wrap}
+.filter-tab{padding:0.45rem 1.2rem;border:1px solid rgba(184,134,11,0.2);border-radius:2px;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all 0.3s;background:none}
+.filter-tab:hover,.filter-tab.active{border-color:var(--gold);color:var(--gold);background:rgba(184,134,11,0.06)}
+
+/* CASE STUDIES GRID */
+.work-grid{padding:2rem 4rem 6rem;display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;max-width:1300px;margin:0 auto}
+
+.case-card{
+  background:var(--charcoal);border:1px solid rgba(184,134,11,0.08);
+  position:relative;overflow:hidden;cursor:pointer;
+  transition:border-color 0.4s,transform 0.4s;
+  text-decoration:none;color:inherit;display:block;
+}
+.case-card:hover{border-color:rgba(184,134,11,0.35);transform:translateY(-4px)}
+.case-card-visual{
+  height:220px;position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.case-card:nth-child(1) .case-card-visual{background:linear-gradient(135deg,#0d1520,#1a2540)}
+.case-card:nth-child(2) .case-card-visual{background:linear-gradient(135deg,#0f1a0d,#1a2510)}
+.case-card:nth-child(3) .case-card-visual{background:linear-gradient(135deg,#1a1008,#201508)}
+.case-card:nth-child(4) .case-card-visual{background:linear-gradient(135deg,#100d1a,#1a1028)}
+.case-pattern{opacity:0.08;width:140px;height:140px}
+.case-pill{
+  position:absolute;top:1.2rem;left:1.2rem;
+  padding:0.3rem 0.8rem;background:rgba(184,134,11,0.15);
+  border:1px solid rgba(184,134,11,0.3);border-radius:2px;
+  font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);
+}
+.case-arr{
+  position:absolute;top:1.2rem;right:1.2rem;
+  width:30px;height:30px;border:1px solid rgba(184,134,11,0.25);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold);font-size:0.75rem;
+  opacity:0;transition:opacity 0.3s;
+}
+.case-card:hover .case-arr{opacity:1}
+
+.case-body{padding:2rem}
+.case-client{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--copper);margin-bottom:0.5rem;font-weight:500}
+.case-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;color:var(--ivory);margin-bottom:0.8rem;line-height:1.2}
+.case-desc{font-size:0.82rem;color:var(--muted);line-height:1.7;font-weight:300;margin-bottom:1.2rem}
+.case-tags{display:flex;gap:0.5rem;flex-wrap:wrap}
+.case-tag{padding:0.25rem 0.7rem;border:1px solid rgba(148,163,184,0.15);border-radius:2px;font-size:0.65rem;color:rgba(148,163,184,0.6);letter-spacing:0.06em}
+.case-result{
+  margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,0.05);
+  display:flex;gap:2rem;
+}
+.result-item .r-num{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--gold);font-weight:300;line-height:1}
+.result-item .r-label{font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-top:0.2rem}
+
+/* FEATURED CASE STUDY — full width */
+.case-featured{
+  grid-column:1/-1;
+  background:var(--charcoal);border:1px solid rgba(184,134,11,0.12);
+  display:grid;grid-template-columns:1fr 1fr;
+  overflow:hidden;cursor:pointer;
+  transition:border-color 0.4s;
+  text-decoration:none;color:inherit;
+}
+.case-featured:hover{border-color:rgba(184,134,11,0.35)}
+.case-featured-visual{
+  background:linear-gradient(135deg,#0a1020,#1a2540);
+  display:flex;align-items:center;justify-content:center;
+  min-height:340px;position:relative;
+}
+.case-featured-body{padding:3rem}
+.featured-badge{
+  display:inline-block;padding:0.3rem 0.8rem;
+  background:rgba(184,134,11,0.15);border:1px solid rgba(184,134,11,0.3);
+  border-radius:2px;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1rem;
+}
+.case-featured-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;line-height:1.2;margin-bottom:1rem;color:var(--ivory)}
+.case-featured-title em{color:var(--gold);font-style:italic}
+.case-featured-desc{font-size:0.88rem;color:var(--muted);line-height:1.8;font-weight:300;margin-bottom:1.8rem}
+.case-featured-results{display:flex;gap:2.5rem;margin-bottom:2rem;padding:1.5rem 0;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05)}
+.fr-num{font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:var(--gold);font-weight:300;line-height:1}
+.fr-label{font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-top:0.3rem;max-width:120px;line-height:1.4}
+.btn-gold{background:var(--gold);color:var(--navy);padding:0.82rem 1.8rem;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.74rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;transition:background 0.3s;text-decoration:none;display:inline-block}
+.btn-gold:hover{background:var(--gold-light)}
+
+/* BOTTOM CTA */
+.work-cta{background:var(--black);padding:6rem 4rem;text-align:center}
+.work-cta h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:300;margin-bottom:1rem}
+.work-cta h2 em{color:var(--gold);font-style:italic}
+.work-cta p{font-size:0.9rem;color:var(--muted);max-width:440px;margin:0 auto 2.5rem;line-height:1.8;font-weight:300}
+
+footer{background:#040710;padding:2.2rem 4rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(184,134,11,0.07)}
+.footer-brand{font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--ivory);letter-spacing:0.18em}
+.footer-tag{font-size:0.6rem;color:rgba(148,163,184,0.35);letter-spacing:0.12em;text-transform:uppercase;margin-top:0.2rem}
+.footer-fw{font-size:0.58rem;color:rgba(148,163,184,0.25);letter-spacing:0.18em}
+.footer-copy{font-size:0.62rem;color:rgba(148,163,184,0.25)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.75s ease,transform 0.75s ease}
+.reveal.on{opacity:1;transform:none}
+.stagger>*{opacity:0;transform:translateY(16px);transition:opacity 0.6s ease,transform 0.6s ease}
+.stagger.on>*:nth-child(1){opacity:1;transform:none;transition-delay:0s}
+.stagger.on>*:nth-child(2){opacity:1;transform:none;transition-delay:0.12s}
+.stagger.on>*:nth-child(3){opacity:1;transform:none;transition-delay:0.24s}
+.stagger.on>*:nth-child(4){opacity:1;transform:none;transition-delay:0.36s}
+</style>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/inai-responsive.css">
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html" aria-label="INAI home"><svg class="logo-mark" viewBox="70 0 870 180" role="img" aria-label="INAI"><rect x="90" y="10" width="20" height="160" fill="currentColor"/><polygon points="245,10 270,10 425,170 400,170" fill="currentColor"/><rect x="245" y="10" width="20" height="160" fill="currentColor"/><rect x="405" y="10" width="20" height="160" fill="currentColor"/><polyline points="556,170 640,22 724,170" fill="none" stroke="currentColor" stroke-width="22" stroke-linejoin="miter"/><circle class="dot" cx="643" cy="148" r="22"/><rect x="860" y="10" width="20" height="160" fill="currentColor"/></svg></a>
+  <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="work.html">Work</a>
+    <a href="demos.html" class="active">Demos</a>
+    <a href="blog.html">Insights</a>
+    <a href="contact.html" class="nav-cta">Book a Consultation</a>
+  </div>
+</nav>
+
+<section class="work-hero">
+  <div class="sec-eyebrow" style="justify-content:center">Live demos</div>
+  <h1 class="work-h1">Try it, <em style="color:var(--gold)">don't just read about it</em></h1>
+  <p class="work-sub">Interactive prototypes built by INAI. Click through each one in your browser. These are demonstrations with sample data, not live client systems.</p>
+</section>
+
+<div class="work-grid">
+  <a href="demos/atlas.html" class="case-card reveal" data-cat="demo">
+    <div class="case-card-visual"><svg class="case-pattern" viewBox="0 0 140 140" fill="none"><circle cx="70" cy="70" r="60" stroke="white" stroke-width="0.5"/><circle cx="70" cy="70" r="36" stroke="white" stroke-width="0.5"/><circle cx="70" cy="70" r="6" stroke="white" stroke-width="0.5"/></svg><div class="case-pill">Product concept</div><div class="case-arr">↗</div></div>
+    <div class="case-body"><div class="case-client">INAI Product</div><div class="case-title">Atlas: search your screenshots by memory</div><p class="case-desc">Ask for "wifi password" or "my flight ticket" and the right screenshot lights up. A concept for on-device screenshot search.</p>
+      <div class="case-tags"><span class="case-tag">Product design</span><span class="case-tag">Search</span><span class="case-tag">Mobile</span></div></div>
+  </a>
+  <a href="demos/globalpath-crm.html" class="case-card reveal" data-cat="demo">
+    <div class="case-card-visual"><svg class="case-pattern" viewBox="0 0 140 140" fill="none"><circle cx="70" cy="70" r="60" stroke="white" stroke-width="0.5"/><circle cx="70" cy="70" r="36" stroke="white" stroke-width="0.5"/><circle cx="70" cy="70" r="6" stroke="white" stroke-width="0.5"/></svg><div class="case-pill">CRM automation</div><div class="case-arr">↗</div></div>
+    <div class="case-body"><div class="case-client">Client demo</div><div class="case-title">GlobalPath CRM: enquiries sorted on arrival</div><p class="case-desc">Watch WhatsApp messages, web forms and missed calls land as staged leads with follow-ups set automatically.</p>
+      <div class="case-tags"><span class="case-tag">CRM</span><span class="case-tag">Automation</span><span class="case-tag">Lead pipeline</span></div></div>
+  </a>
+  <a href="demos/cost-calculator.html" class="case-card reveal" data-cat="demo">
+    <div class="case-card-visual"><svg class="case-pattern" viewBox="0 0 140 140" fill="none"><circle cx="70" cy="70" r="60" stroke="white" stroke-width="0.5"/><circle cx="70" cy="70" r="36" stroke="white" stroke-width="0.5"/><circle cx="70" cy="70" r="6" stroke="white" stroke-width="0.5"/></svg><div class="case-pill">Study abroad tool</div><div class="case-arr">↗</div></div>
+    <div class="case-body"><div class="case-client">Step4Progress</div><div class="case-title">Study abroad cost calculator</div><p class="case-desc">Estimate tuition and living costs by country so families can plan with real numbers.</p>
+      <div class="case-tags"><span class="case-tag">Calculator</span><span class="case-tag">Lead generation</span></div></div>
+  </a>
+  <a href="demos/country-quiz.html" class="case-card reveal" data-cat="demo">
+    <div class="case-card-visual"><svg class="case-pattern" viewBox="0 0 140 140" fill="none"><circle cx="70" cy="70" r="60" stroke="white" stroke-width="0.5"/><circle cx="70" cy="70" r="36" stroke="white" stroke-width="0.5"/><circle cx="70" cy="70" r="6" stroke="white" stroke-width="0.5"/></svg><div class="case-pill">Study abroad tool</div><div class="case-arr">↗</div></div>
+    <div class="case-body"><div class="case-client">Step4Progress</div><div class="case-title">Find your country quiz</div><p class="case-desc">A short guided quiz that points students to the countries and courses that fit them.</p>
+      <div class="case-tags"><span class="case-tag">Quiz</span><span class="case-tag">Guided journey</span></div></div>
+  </a>
+  <a href="demos/visa-checker.html" class="case-card reveal" data-cat="demo">
+    <div class="case-card-visual"><svg class="case-pattern" viewBox="0 0 140 140" fill="none"><circle cx="70" cy="70" r="60" stroke="white" stroke-width="0.5"/><circle cx="70" cy="70" r="36" stroke="white" stroke-width="0.5"/><circle cx="70" cy="70" r="6" stroke="white" stroke-width="0.5"/></svg><div class="case-pill">Study abroad tool</div><div class="case-arr">↗</div></div>
+    <div class="case-body"><div class="case-client">Step4Progress</div><div class="case-title">Visa eligibility checker</div><p class="case-desc">Answer a few questions and see how ready you are for a study visa, and what to fix first.</p>
+      <div class="case-tags"><span class="case-tag">Eligibility</span><span class="case-tag">Guided journey</span></div></div>
+  </a>
+</div>
+
+<section class="work-cta">
+  <h2>Want something like this <em style="color:var(--gold)">for your business</em>?</h2>
+  <p>Tell us what slows your team down. We will show you how to build it.</p>
+  <a href="contact.html" class="btn-gold" style="text-decoration:none;display:inline-block">Book a Consultation</a>
+</section>
+
+<footer>
+  <div><div class="footer-brand"><svg class="logo-mark" viewBox="70 0 870 180" role="img" aria-label="INAI"><rect x="90" y="10" width="20" height="160" fill="currentColor"/><polygon points="245,10 270,10 425,170 400,170" fill="currentColor"/><rect x="245" y="10" width="20" height="160" fill="currentColor"/><rect x="405" y="10" width="20" height="160" fill="currentColor"/><polyline points="556,170 640,22 724,170" fill="none" stroke="currentColor" stroke-width="22" stroke-linejoin="miter"/><circle class="dot" cx="643" cy="148" r="22"/><rect x="860" y="10" width="20" height="160" fill="currentColor"/></svg></div><div class="footer-tag">Where Creativity Meets Intelligence</div></div>
+  <div class="footer-fw">I → N → A → I &nbsp;·&nbsp; IDEA · NETWORK · ACTION · IMPACT</div>
+  <div class="footer-copy">© 2025 INAI. All rights reserved.</div>
+</footer>
+
+
+<script>
+const io = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('on'); }), {threshold:0.1});
+document.querySelectorAll('.reveal,.stagger').forEach(el => io.observe(el));
+
+function filterWork(cat, btn) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.case-card, .case-featured').forEach(card => {
+    if(cat === 'all' || card.dataset.cat?.includes(cat)) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+</script>
+<script src="assets/inai-nav.js"></script>
+</body>
+</html>

@@ -157,6 +157,22 @@ footer{background:#040710;padding:2.2rem 4rem;display:flex;justify-content:space
 .stagger.on>*:nth-child(2){opacity:1;transform:none;transition-delay:0.12s}
 .stagger.on>*:nth-child(3){opacity:1;transform:none;transition-delay:0.24s}
 .stagger.on>*:nth-child(4){opacity:1;transform:none;transition-delay:0.36s}
+
+.more{background:var(--charcoal);padding:6rem 4rem}
+.more-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:3rem;max-width:1200px}
+.more-card{background:var(--navy);border:1px solid rgba(184,134,11,0.12);padding:2.4rem;position:relative;transition:border-color .4s,transform .4s}
+.more-card:hover{border-color:rgba(184,134,11,0.4);transform:translateY(-4px)}
+.more-top{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1.1rem}
+.more-num{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--gold);font-style:italic}
+.more-badge{font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;padding:.28rem .7rem;border-radius:2px;border:1px solid rgba(184,134,11,.3);color:var(--gold);background:rgba(184,134,11,.08)}
+.more-badge.build{color:#c4b5fd;border-color:rgba(167,139,250,.4);background:rgba(124,58,237,.1)}
+.more-card h3{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.7rem;margin-bottom:.6rem;color:var(--ivory)}
+.more-card p{font-size:.85rem;color:var(--muted);line-height:1.8;font-weight:300;margin-bottom:1rem}
+.more-card ul{list-style:none;margin:0 0 1rem}
+.more-card li{font-size:.8rem;color:var(--muted);padding:.35rem 0;border-bottom:1px solid rgba(255,255,255,.05);font-weight:300}
+.more-card li::before{content:'· ';color:var(--gold)}
+.more-note{font-size:.72rem;color:rgba(148,163,184,.55);font-style:italic}
+@media(max-width:860px){.more{padding:4rem 1.25rem !important}.more-grid{grid-template-columns:1fr}.more-card{padding:1.8rem 1.4rem}}
 </style>
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/inai-responsive.css">
@@ -472,6 +488,41 @@ footer{background:#040710;padding:2.2rem 4rem;display:flex;justify-content:space
           <polyline points="16 7 22 7 22 13"/>
         </svg>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- MORE FROM INAI -->
+<section class="more">
+  <div class="sec-eyebrow">Beyond the four pillars</div>
+  <h2 class="sec-title">And what we are <em style="color:var(--gold)">building next.</em></h2>
+  <p style="max-width:560px;color:var(--muted);font-size:.9rem;line-height:1.8;font-weight:300">INAI grows by building. Some of this is available today as a service; some is in development, and we say so plainly.</p>
+  <div class="more-grid">
+    <div class="more-card reveal">
+      <div class="more-top"><span class="more-num">05</span><span class="more-badge build">Building now</span></div>
+      <h3>Interactive Products</h3>
+      <p>Reusable digital experiences for engagement and lead generation.</p>
+      <ul><li>Quizzes, assessments and guided finders</li><li>Personalised recommendation journeys</li><li>Lead capture with CRM and analytics integrations</li></ul>
+      <a href="demos.html" style="color:var(--gold);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none">Try the demos &rarr;</a>
+    </div>
+    <div class="more-card reveal">
+      <div class="more-top"><span class="more-num">06</span><span class="more-badge build">Workspace in development</span></div>
+      <h3>Product Intelligence</h3>
+      <p>Product data and retail technology for digital commerce.</p>
+      <ul><li>Catalogue cleanup, SKU and pack-size standardisation</li><li>Category mapping, attribute enrichment, duplicate detection</li><li>Product-image organisation and quality checks</li><li>Source tracking and change history</li></ul>
+      <span class="more-note">Catalogue and product-data services are available now. A searchable product intelligence workspace is being built.</span>
+    </div>
+    <div class="more-card reveal">
+      <div class="more-top"><span class="more-num">07</span><span class="more-badge">Available</span></div>
+      <h3>Industry Solutions</h3>
+      <p>Reusable capabilities adapted to your industry.</p>
+      <ul><li>Commerce and retail: catalogues, product workflows, e-commerce</li><li>Education and consulting: lead management, portals, follow-ups</li><li>Healthcare and professional services: websites, appointments, dashboards</li><li>Small and growing businesses: presence, CRM, automation, reporting</li></ul>
+    </div>
+    <div class="more-card reveal">
+      <div class="more-top"><span class="more-num">08</span><span class="more-badge">Available</span></div>
+      <h3>Advisory &amp; Implementation</h3>
+      <p>From business problem to practical solution.</p>
+      <ul><li>Discovery and problem definition</li><li>Feasibility, requirements and solution design</li><li>MVP or pilot delivery, testing and feedback</li><li>Ongoing support and optimisation where contracted</li></ul>
     </div>
   </div>
 </section>

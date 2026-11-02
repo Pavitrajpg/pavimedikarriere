@@ -134,6 +134,40 @@ footer{background:#040710;padding:2.2rem 4rem;display:flex;justify-content:space
 .stagger.on>*:nth-child(2){opacity:1;transform:none;transition-delay:0.12s}
 .stagger.on>*:nth-child(3){opacity:1;transform:none;transition-delay:0.24s}
 .stagger.on>*:nth-child(4){opacity:1;transform:none;transition-delay:0.36s}
+
+/* BUILD GALLERY */
+.gallery{background:var(--navy);padding:6rem 4rem}
+.gallery .wrap{max-width:1200px;margin:0 auto}
+.g-eyebrow{font-size:.63rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;display:flex;align-items:center;gap:.7rem}
+.g-eyebrow::after{content:'';flex:0 0 2rem;height:1px;background:var(--gold)}
+.g-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(2rem,3.6vw,3rem);line-height:1.12;margin-bottom:.8rem}
+.g-title em{color:var(--gold)}
+.g-sub{font-size:.9rem;color:var(--muted);line-height:1.8;max-width:620px;font-weight:300;margin-bottom:2.6rem}
+.g-label{font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-light);margin:2.4rem 0 1.1rem}
+.g-phones{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem}
+.g-phone{margin:0}
+.g-phone .frame{border:5px solid #070b14;border-radius:22px;overflow:hidden;background:#000;box-shadow:0 18px 40px rgba(0,0,0,.45);transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
+.g-phone:hover .frame{transform:translateY(-6px);box-shadow:0 26px 50px rgba(0,0,0,.55)}
+.g-phone img{display:block;width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;object-position:top}
+.g-phone figcaption,.g-desk figcaption{font-size:.72rem;color:var(--muted);line-height:1.5;margin-top:.8rem}
+.g-phone figcaption b,.g-desk figcaption b{display:block;color:var(--ivory);font-weight:500;font-size:.78rem;margin-bottom:.1rem}
+.g-desks{display:grid;grid-template-columns:repeat(2,1fr);gap:1.6rem}
+.g-desk{margin:0}
+.g-desk .bar{height:26px;background:#0a1020;border:1px solid rgba(184,134,11,.18);border-bottom:none;border-radius:8px 8px 0 0;display:flex;align-items:center;gap:6px;padding:0 12px}
+.g-desk .bar i{width:8px;height:8px;border-radius:50%;background:rgba(148,163,184,.35)}
+.g-desk .shot{height:420px;overflow:hidden;border:1px solid rgba(184,134,11,.18);border-radius:0 0 8px 8px;background:#fff}
+.g-desk img{display:block;width:100%;height:auto}
+.g-note{font-size:.72rem;color:rgba(148,163,184,.6);font-style:italic;margin-top:1.6rem}
+@media(max-width:1100px){
+ .gallery{padding:4rem 2rem}
+ .g-phones{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:1rem;padding-bottom:1rem;margin:0 -2rem;padding-left:2rem;padding-right:2rem}
+ .g-phone{flex:0 0 46%;scroll-snap-align:start;max-width:240px}
+}
+@media(max-width:860px){
+ .gallery{padding:4rem 1.25rem !important}
+ .g-phones{margin:0 -1.25rem;padding-left:1.25rem;padding-right:1.25rem}
+ .g-desks{grid-template-columns:1fr}.g-desk .shot{height:340px}
+}
 </style>
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/inai-responsive.css">
@@ -330,6 +364,19 @@ footer{background:#040710;padding:2.2rem 4rem;display:flex;justify-content:space
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- BUILD GALLERY -->
+<section class="gallery" id="inside-the-build">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="g-eyebrow">Inside the build</div>
+      <h2 class="g-title">Step4Progress, <em>on screen.</em></h2>
+      <p class="g-sub">Screens from the Step4Progress website, built to bring students in and give each one a clear next step.</p>
+    </div>
+    <div class="g-label reveal">On a phone</div>
+    <div class="g-phones reveal"><figure class="g-phone"><div class="frame"><img src="assets/work/uk-hero.jpg" alt="Step4Progress UK landing page on a phone" loading="lazy"></div><figcaption><b>Landing page</b>UK-focused hero with a clear first action.</figcaption></figure><figure class="g-phone"><div class="frame"><img src="assets/work/start-here.jpg" alt="Step4Progress start here page on a phone" loading="lazy"></div><figcaption><b>Start here</b>Seven routes, so a student picks their own path.</figcaption></figure><figure class="g-phone"><div class="frame"><img src="assets/work/journey-map.jpg" alt="Step4Progress interactive destination map on a phone" loading="lazy"></div><figcaption><b>Journey map</b>An interactive map of destinations.</figcaption></figure><figure class="g-phone"><div class="frame"><img src="assets/work/callback-form.jpg" alt="Step4Progress free callback form on a phone" loading="lazy"></div><figcaption><b>Callback form</b>Four fields, a promise of a reply in 24 hours.</figcaption></figure><figure class="g-phone"><div class="frame"><img src="assets/work/course-finder.jpg" alt="Step4Progress course and career finder on a phone" loading="lazy"></div><figcaption><b>Course finder</b>Field and country, or upload a resume.</figcaption></figure><figure class="g-phone"><div class="frame"><img src="assets/work/services.jpg" alt="Step4Progress services page on a phone" loading="lazy"></div><figcaption><b>Services</b>Every stage, from shortlist to first job.</figcaption></figure></div>
   </div>
 </section>
 

@@ -1,0 +1,520 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Marketing Expense Desk — Demo</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap"><style>
+/* Layout: one working screen. Header with role switch, tab row, then a single panel. Utilitarian ledger feel, steel-blue accent. */
+:root{
+  --bg:#F1F4F7; --surface:#FFFFFF; --ink:#17212B; --muted:#5B6875; --line:#D8DEE4;
+  --accent:#1F5F8B; --accent-ink:#FFFFFF; --accent-soft:#E3EEF6;
+  --ok:#1E7A4C; --ok-soft:#E1F2E8; --warn:#8A5A00; --warn-soft:#FBEFD2; --bad:#B3261E; --bad-soft:#FBE3E1;
+  --sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F161D; --surface:#17212B; --ink:#E8EDF2; --muted:#9AA7B4; --line:#2A3745;
+  --accent:#6FB3E0; --accent-ink:#0B1620; --accent-soft:#1B3446;
+  --ok:#5CC592; --ok-soft:#153427; --warn:#E6B450; --warn-soft:#3A2E12; --bad:#F28B82; --bad-soft:#3E1B19; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F161D; --surface:#17212B; --ink:#E8EDF2; --muted:#9AA7B4; --line:#2A3745;
+  --accent:#6FB3E0; --accent-ink:#0B1620; --accent-soft:#1B3446;
+  --ok:#5CC592; --ok-soft:#153427; --warn:#E6B450; --warn-soft:#3A2E12; --bad:#F28B82; --bad-soft:#3E1B19; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;
+  padding-block:0 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1040px;margin:0 auto}
+header{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;padding:20px 0 14px}
+h1{font-size:20px;font-weight:600;margin:0;letter-spacing:-.01em}
+.sub{color:var(--muted);font-size:13px;margin:2px 0 0}
+.sample{font-family:var(--mono);font-size:12px;background:var(--warn-soft);color:var(--warn);padding:3px 8px;border-radius:4px;white-space:nowrap}
+.who{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg button{border:0;background:transparent;color:var(--muted);font:inherit;font-weight:500;padding:8px 14px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+select,input,textarea{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:9px 10px;width:100%;min-width:0}
+select.pick{width:auto}
+input:focus,select:focus,textarea:focus,button:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+label{display:block;font-size:13px;font-weight:500;color:var(--muted);margin-bottom:4px}
+nav.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);overflow-x:auto;margin-bottom:20px}
+nav.tabs button{border:0;background:transparent;font:inherit;font-weight:500;color:var(--muted);padding:10px 16px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:20px;min-width:0}
+h2{font-size:16px;font-weight:600;margin:0 0 14px}
+.sec{font-size:14px;font-weight:600;margin:20px 0 10px;padding-top:16px;border-top:1px solid var(--line)}
+.grid{display:grid;gap:20px;grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+.row{display:grid;gap:14px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.row3{display:grid;gap:14px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.row4{display:grid;gap:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.field{margin-bottom:14px}
+.btn{border:0;border-radius:6px;font:inherit;font-weight:600;padding:10px 18px;cursor:pointer;background:var(--accent);color:var(--accent-ink)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn.ok{background:var(--ok);color:var(--surface)}
+.btn.sm{padding:6px 12px;font-size:14px}
+.btn.link{background:transparent;color:var(--muted);font-weight:500;padding:2px 6px;font-size:13px;text-decoration:underline}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.list{display:flex;flex-direction:column}
+.item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 16px;padding:12px 0;border-top:1px solid var(--line)}
+.item:first-child{border-top:0;padding-top:0}
+.item .top{font-weight:500;min-width:0;overflow-wrap:anywhere}
+.item .meta{color:var(--muted);font-size:13px;grid-column:1;overflow-wrap:anywhere}
+.item .amt{font-family:var(--mono);font-weight:500;text-align:right;grid-row:1;grid-column:2}
+.item .act{grid-column:2;grid-row:2;text-align:right}
+.chip{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;margin-left:8px;vertical-align:1px;white-space:nowrap}
+.chip.filed,.chip.half{background:var(--warn-soft);color:var(--warn)}
+.chip.approved,.chip.present{background:var(--ok-soft);color:var(--ok)}
+.chip.checked,.chip.photo{background:var(--accent-soft);color:var(--accent)}
+.chip.query,.chip.leave{background:var(--bad-soft);color:var(--bad)}
+.chip.open{background:var(--bg);color:var(--muted);border:1px solid var(--line)}
+.tiles{display:grid;gap:14px;grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:20px}
+.tiles.t3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px}
+.tile .k{font-size:13px;color:var(--muted)}
+.tile .v{font-family:var(--mono);font-size:22px;font-weight:500;margin-top:2px;overflow-wrap:anywhere}
+.tile.attn{border-color:var(--warn)}
+.stmt{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:12px}
+.stmt .k{font-size:13px;color:var(--muted)}
+.stmt .v{font-family:var(--mono);font-size:20px;font-weight:500}
+.stmt .v.over{color:var(--warn)}
+.stmt .v.left{color:var(--ok)}
+.meter{height:10px;background:var(--accent-soft);border-radius:2px;overflow:hidden;margin-bottom:8px}
+.meter .fill{height:100%;background:var(--accent)}
+.meter .fill.over{background:var(--warn)}
+.bars{display:flex;flex-direction:column;gap:12px}
+.bar .lab{display:flex;justify-content:space-between;gap:12px;font-size:14px;margin-bottom:4px}
+.bar .track{height:10px;background:var(--accent-soft);border-radius:2px;overflow:hidden}
+.bar .fill{height:100%;background:var(--accent)}
+.note{color:var(--muted);font-size:13px;margin:8px 0 0}
+.empty{color:var(--muted);padding:16px 0;text-align:center}
+.claim{margin-bottom:16px}
+.claim .head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:baseline;margin-bottom:12px}
+.claim .name{font-size:16px;font-weight:600}
+details{margin:6px 0 12px}
+summary{cursor:pointer;color:var(--accent);font-weight:500;font-size:14px}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ask{display:flex;flex-wrap:wrap;gap:8px;width:100%}
+.ask input{flex:1 1 240px}
+.qbox{background:var(--accent-soft);border-radius:6px;padding:10px 12px;font-size:14px;margin-bottom:12px}
+.paynote{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.paynote:first-of-type{border-top:0}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.cal .dow{font-size:12px;color:var(--muted);text-align:center;padding:2px 0}
+.cal button{min-height:46px;border:1px solid var(--line);background:var(--surface);border-radius:6px;font:inherit;font-size:14px;color:var(--ink);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:2px}
+.cal button.today{box-shadow:inset 0 0 0 2px var(--accent)}
+.cal button.sel{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.cal button:disabled{opacity:.4;cursor:default}
+.dots{display:flex;gap:3px;height:6px}
+.dot{width:6px;height:6px;border-radius:50%}
+.dot.p{background:var(--ok)}.dot.h{background:var(--warn)}.dot.l{background:var(--bad)}.dot.v{background:var(--accent)}.dot.e{background:var(--muted)}
+.cal button.sel .dot{box-shadow:0 0 0 1px var(--accent-ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted);margin-top:12px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+.toolbar input{flex:1 1 220px}
+.toolbar select{width:auto}
+.tag{font-family:var(--mono);font-size:11px;background:var(--accent-soft);color:var(--accent);padding:2px 6px;border-radius:4px;margin-left:8px;vertical-align:2px}
+.paper{border:1px solid var(--line);border-radius:6px;padding:16px;background:var(--surface);min-width:0}
+.phead{display:flex;flex-wrap:wrap;gap:6px 24px;margin-bottom:6px;font-size:14px}
+.k{color:var(--muted);font-size:12px}
+.ptitle{font-size:13px;font-weight:600;margin:18px 0 6px}
+.scroll{overflow-x:auto}
+.tbl{width:100%;border-collapse:collapse;font-size:13px;min-width:480px}
+.tbl th{font-weight:600;text-align:left;color:var(--muted);border-bottom:1px solid var(--line);padding:6px 8px;white-space:nowrap;font-size:12px}
+.tbl td{padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl .n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.tbl th.n{text-align:right;font-family:var(--sans)}
+.tbl tfoot td{font-weight:600;border-bottom:0}
+.two{display:grid;gap:16px;grid-template-columns:minmax(0,1fr) minmax(0,2fr)}
+.sums{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.sums .mono{font-weight:500}
+.sign{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px;padding-top:12px;border-top:1px solid var(--line);font-size:13px}
+.vouch{margin-top:16px}
+.vtop{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:baseline;margin-bottom:8px}
+.vtop h3{margin:0;font-size:15px}
+.vrow{display:grid;grid-template-columns:110px minmax(0,1fr);gap:8px;padding:8px 0;border-top:1px solid var(--line);font-size:14px}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:max(20px,env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:6px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;max-width:calc(100% - 32px);z-index:5}
+#toast.on{opacity:1}
+@media (max-width:760px){
+  .grid,.two{grid-template-columns:minmax(0,1fr)}
+  .tiles,.tiles.t3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .row,.row3{grid-template-columns:minmax(0,1fr)}
+  .row4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stmt,.sign{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){#toast{transition:none}}
+</style></head><body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Marketing Expense Desk</h1>
+      <p class="sub">Daily field log, expense report, cash voucher and office funds. October 2026 shown.</p>
+    </div>
+    <div class="who">
+      <span class="sample">Sample data</span>
+      <div class="seg" role="group" aria-label="View as">
+        <button id="roleStaff" aria-pressed="true" type="button">Staff</button>
+        <button id="roleCheck" aria-pressed="false" type="button">Checker</button>
+        <button id="roleBoss" aria-pressed="false" type="button">Boss</button>
+      </div>
+      <select class="pick" id="staffPick" aria-label="Logged in as"></select>
+    </div>
+  </header>
+  <nav class="tabs" id="tabs" role="tablist"></nav>
+  <main id="panel"></main>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  var TODAY='2026-10-15',DESIG='Marketing Executive';
+  var staff=['Arun','Meena','Karthik','Divya'];
+  var BRANCH={Arun:'Madurai',Meena:'Madurai',Karthik:'Trichy',Divya:'Trichy'};
+  var HEADS=['Sales','Service income','Salaries','Rent','Marketing spend','Staff allowances','Utilities','Other'];
+  var STATUS={open:'Logging',filed:'Filed, with checker',query:'Returned with a question',checked:'Checked, with boss',approved:'Approved'};
+  var claims={
+    Arun:{opening:0,from:'2026-10-01',to:'2026-10-15',status:'filed',filedOn:'15 Oct'},
+    Meena:{opening:0,from:'2026-10-01',to:'2026-10-15',status:'checked',filedOn:'14 Oct',checkedBy:'Accounts',checkedOn:'15 Oct'},
+    Karthik:{opening:400,from:'2026-10-01',to:'2026-10-15',status:'open'},
+    Divya:{opening:0,from:'2026-10-01',to:'2026-10-15',status:'query',filedOn:'14 Oct',question:'Please attach the bill for the vehicle stickers on 14 Oct.',by:'Checker'}
+  };
+  var advances=[
+    {id:1,to:'Arun',date:'2026-10-01',label:'Monthly allowance',amt:2000},
+    {id:2,to:'Meena',date:'2026-10-01',label:'Monthly allowance',amt:3000},
+    {id:3,to:'Meena',date:'2026-10-04',label:'Theni marketing trip',amt:1500},
+    {id:4,to:'Karthik',date:'2026-10-01',label:'Monthly allowance',amt:3000},
+    {id:5,to:'Divya',date:'2026-10-01',label:'Monthly allowance',amt:3500}];
+  function R(id,by,date,from,to,fare,meals,conv,misc,note,proof){return {id:id,by:by,date:date,from:from,to:to,fare:fare,meals:meals,conv:conv,misc:misc,note:note||'',proof:!!proof}}
+  var entries=[
+    R(1,'Arun','2026-10-06','Madurai','Usilampatti',120,250,0,0,'',true),
+    R(2,'Arun','2026-10-07','Madurai','Madurai',0,0,0,800,'Helpers for pamphlet distribution',false),
+    R(3,'Arun','2026-10-09','Madurai','Dindigul',220,150,0,0,'',true),
+    R(4,'Arun','2026-10-12','Madurai','Theni',180,100,150,0,'',true),
+    R(5,'Arun','2026-10-13','Madurai','Madurai',0,200,300,0,'',false),
+    R(6,'Arun','2026-10-14','Madurai','Madurai',0,0,0,400,'Banner hanging charges',false),
+    R(7,'Meena','2026-10-05','Madurai','Sivakasi',300,250,0,0,'',true),
+    R(8,'Meena','2026-10-08','Madurai','Madurai',0,300,200,1800,'Flex banners, 6 pcs, Sri Murugan Flex Printers',true),
+    R(9,'Meena','2026-10-11','Madurai','Madurai',0,0,200,0,'',false),
+    R(10,'Meena','2026-10-14','Madurai','Coimbatore',350,200,0,700,'Sample pamphlets, Kovai Offset Prints',true),
+    R(11,'Karthik','2026-10-06','Trichy','Trichy',0,0,0,1000,'Standees advance, Sri Murugan Flex Printers',true),
+    R(12,'Karthik','2026-10-10','Trichy','Srirangam',100,100,55,0,'',false),
+    R(13,'Karthik','2026-10-13','Trichy','Trichy',95,450,0,0,'',true),
+    R(14,'Divya','2026-10-09','Trichy','Lalgudi',140,260,0,0,'',true),
+    R(15,'Divya','2026-10-10','Trichy','Trichy',0,0,0,1500,'Newspaper classified, City Classifieds Desk',true),
+    R(16,'Divya','2026-10-14','Trichy','Trichy',0,0,0,1000,'Vehicle branding stickers, Pandian Auto Works',false),
+    R(17,'Divya','2026-10-15','Trichy','Trichy',140,160,0,0,'',true)];
+  function V(id,by,date,area,shop,jc,remarks,bill,addr,phone,card){return {id:id,by:by,date:date,area:area,shop:shop,jc:jc,remarks:remarks,bill:bill,addr:addr,phone:phone,card:card}}
+  var visits=[
+    V(1,'Arun','2026-10-12','Theni','Annapoorani Hardware','','Canvassing, brochure left',0,'12 Main Bazaar','98400 10001',true),
+    V(2,'Arun','2026-10-13','Madurai','KVR Electricals','','Quote requested',0,'45 West Masi St','98400 10002',true),
+    V(3,'Arun','2026-10-09','Dindigul','Sri Lakshmi Traders','','Canvassing',0,'Palani Road','98400 10003',false),
+    V(4,'Meena','2026-10-08','Madurai','Ganesh Security Mart','JC-4471','Locker display demo',0,'Anna Nagar','98400 10004',true),
+    V(5,'Meena','2026-10-05','Sivakasi','Raja Steels','','Canvassing',0,'Car Street','98400 10005',true),
+    V(6,'Meena','2026-10-14','Madurai','Sakthi Furniture','','Follow-up visit',0,'Goripalayam','98400 10006',false),
+    V(7,'Karthik','2026-10-13','Trichy','Vel Jewellers','JC-4480','Locker order booked',18500,'Town Hall Road','98400 10007',true),
+    V(8,'Karthik','2026-10-10','Srirangam','Bharath Stores','','Canvassing',0,'Bus Stand Road','98400 10008',false),
+    V(9,'Divya','2026-10-15','Trichy','Hotel Annapurna','','Demo and quote',0,'Alagar Koil Road','98400 10009',true),
+    V(10,'Divya','2026-10-09','Lalgudi','Kumar Agencies','','Canvassing',0,'Market Street','98400 10010',true)];
+  function F(id,date,kind,head,branch,note,amt){return {id:id,date:date,kind:kind,head:head,branch:branch,note:note,amt:amt}}
+  var funds=[
+    F(1,'2026-10-01','in','Sales','Madurai','Locker sales, week 1',150000),
+    F(2,'2026-10-02','in','Sales','Trichy','Locker sales, week 1',90000),
+    F(3,'2026-10-08','in','Service income','Madurai','Installation and service',35000),
+    F(4,'2026-10-01','out','Rent','Madurai','Office rent',25000),
+    F(5,'2026-10-01','out','Rent','Trichy','Office rent',18000),
+    F(6,'2026-10-05','out','Salaries','Madurai','September salaries',70000),
+    F(7,'2026-10-05','out','Salaries','Trichy','September salaries',50000),
+    F(8,'2026-10-05','out','Staff allowances','Madurai','October allowances given',6500),
+    F(9,'2026-10-05','out','Staff allowances','Trichy','October allowances given',6500),
+    F(10,'2026-10-08','out','Marketing spend','Madurai','Newspaper and flex printing',38000),
+    F(11,'2026-10-10','out','Utilities','Madurai','Electricity and internet',4800),
+    F(12,'2026-10-10','out','Utilities','Trichy','Electricity and internet',3900)];
+  var nextId={e:30,v:20,a:6,f:13,vch:3152};
+  var S={role:'staff',user:'Arun',tab:'month',day:TODAY,asking:null,ff:'all',fb:'all',branch:'all'};
+
+  var $=function(id){return document.getElementById(id)};
+  function pad(n){return String(n).padStart(2,'0')}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function inr(n){return '₹'+Number(n).toLocaleString('en-IN')}
+  var MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function fdate(d){var p=d.split('-');return +p[2]+' '+MN[+p[1]-1]}
+  function toast(t){var e=$('toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(function(){e.classList.remove('on')},2800)}
+  function nowHM(){var d=new Date();return pad(d.getHours())+':'+pad(d.getMinutes())}
+  function words(n){
+    n=Math.round(n);if(!n)return 'Zero';
+    var a=['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];
+    var b=['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];
+    function two(x){return x<20?a[x]:b[Math.floor(x/10)]+(x%10?' '+a[x%10]:'')}
+    function three(x){var h=Math.floor(x/100),r=x%100;return (h?a[h]+' Hundred'+(r?' ':''):'')+(r?two(r):'')}
+    var cr=Math.floor(n/1e7),lk=Math.floor(n/1e5)%100,th=Math.floor(n/1e3)%100,rest=n%1000,p=[];
+    if(cr)p.push(three(cr)+' Crore');if(lk)p.push(two(lk)+' Lakh');if(th)p.push(two(th)+' Thousand');if(rest)p.push(three(rest));
+    return p.join(' ');
+  }
+  function inRange(d,c){return d>=c.from&&d<=c.to}
+  function rowTotal(e){return e.fare+e.meals+e.conv+e.misc}
+  function rows(u){return entries.filter(function(e){return e.by===u&&inRange(e.date,claims[u])}).sort(function(a,b){return a.date<b.date?-1:1})}
+  function vis(u){return visits.filter(function(v){return v.by===u&&inRange(v.date,claims[u])}).sort(function(a,b){return a.date<b.date?-1:1})}
+  function advs(u){return advances.filter(function(a){return a.to===u&&inRange(a.date,claims[u])})}
+  function sum(l,f){return l.reduce(function(s,x){return s+f(x)},0)}
+  function given(u){return (claims[u].opening||0)+sum(advs(u),function(a){return a.amt})}
+  function spent(u){return sum(rows(u),rowTotal)}
+  function payable(u){return Math.max(0,spent(u)-given(u))}
+  function locked(u){var s=claims[u].status;return s==='filed'||s==='checked'||s==='approved'}
+
+  function tabsFor(){
+    if(S.role==='boss') return [['dash','Dashboard'],['visits','Field visits'],['allow','Allowances'],['funds','Office funds']];
+    if(S.role==='check') return [['check','To check']];
+    return [['month','My day log'],['report','My report'],['visits','My shops']];
+  }
+  function renderTabs(){
+    var t=tabsFor();
+    if(!t.some(function(x){return x[0]===S.tab})) S.tab=t[0][0];
+    var nb=staff.filter(function(u){return claims[u].status==='checked'}).length,nc=staff.filter(function(u){return claims[u].status==='filed'}).length;
+    $('tabs').innerHTML=t.map(function(x){var n=x[0]==='dash'?nb:x[0]==='check'?nc:0;return '<button type="button" role="tab" data-tab="'+x[0]+'" aria-selected="'+(S.tab===x[0])+'">'+x[1]+(n?' <span class="chip filed">'+n+'</span>':'')+'</button>'}).join('');
+  }
+
+  /* ---------- paper-style report and voucher ---------- */
+  function reportHTML(u){
+    var c=claims[u],R_=rows(u),V_=vis(u),A=advs(u);
+    var tf=sum(R_,function(e){return e.fare}),tm=sum(R_,function(e){return e.meals}),tc=sum(R_,function(e){return e.conv}),tx=sum(R_,function(e){return e.misc});
+    var bf=c.opening||0,tot=tf+tm+tc+tx,g=given(u),bal=g-tot,M=R_.filter(function(e){return e.misc>0});
+    var h='<div class="paper"><div class="phead"><span><span class="k">Name</span> <strong>'+esc(u)+'</strong></span><span><span class="k">Designation</span> <strong>'+DESIG+'</strong></span><span><span class="k">Branch</span> <strong>'+BRANCH[u]+'</strong></span><span><span class="k">Date from</span> <strong>'+fdate(c.from)+'</strong> <span class="k">to</span> <strong>'+fdate(c.to)+'</strong></span></div>';
+    h+='<div class="ptitle">Weekly job / field work report</div><div class="scroll"><table class="tbl"><thead><tr><th>Date</th><th>Job card no.</th><th>Name of the customer</th><th>Service / remarks</th><th class="n">Bill amount</th></tr></thead><tbody>'+
+      (V_.length?V_.map(function(v){return '<tr><td>'+fdate(v.date)+'</td><td>'+esc(v.jc||'-')+'</td><td>'+esc(v.shop)+', '+esc(v.area)+'</td><td>'+esc(v.remarks)+'</td><td class="n">'+(v.bill?inr(v.bill):'-')+'</td></tr>'}).join(''):'<tr><td colspan="5" class="note">No visits in this period.</td></tr>')+'</tbody></table></div>';
+    h+='<div class="ptitle">Travel expenses report</div><div class="scroll"><table class="tbl"><thead><tr><th>Date</th><th>From</th><th>To</th><th class="n">Fare</th><th class="n">Meals</th><th class="n">Conv.</th><th class="n">Misc</th><th class="n">Total</th></tr></thead><tbody>'+
+      (R_.length?R_.map(function(e){return '<tr><td>'+fdate(e.date)+'</td><td>'+esc(e.from)+'</td><td>'+esc(e.to)+'</td><td class="n">'+(e.fare||'-')+'</td><td class="n">'+(e.meals||'-')+'</td><td class="n">'+(e.conv||'-')+'</td><td class="n">'+(e.misc||'-')+'</td><td class="n">'+rowTotal(e)+'</td></tr>'}).join(''):'<tr><td colspan="8" class="note">No expenses in this period.</td></tr>')+
+      '</tbody><tfoot><tr><td colspan="3">Total</td><td class="n">'+tf+'</td><td class="n">'+tm+'</td><td class="n">'+tc+'</td><td class="n">'+tx+'</td><td class="n">'+tot+'</td></tr></tfoot></table></div>';
+    h+='<div class="two"><div><div class="ptitle">Advance details</div><div class="scroll"><table class="tbl" style="min-width:0"><thead><tr><th>Date</th><th class="n">Amount</th></tr></thead><tbody>'+
+      (bf?'<tr><td>Brought forward</td><td class="n">'+bf+'</td></tr>':'')+(A.length?A.map(function(a){return '<tr><td>'+fdate(a.date)+'</td><td class="n">'+a.amt+'</td></tr>'}).join(''):'<tr><td colspan="2" class="note">None</td></tr>')+'</tbody><tfoot><tr><td>Total</td><td class="n">'+g+'</td></tr></tfoot></table></div></div>'+
+      '<div><div class="ptitle">Details of miscellaneous</div><div class="scroll"><table class="tbl" style="min-width:0"><thead><tr><th>Date</th><th>Particulars</th><th class="n">Amount</th></tr></thead><tbody>'+
+      (M.length?M.map(function(e){return '<tr><td>'+fdate(e.date)+'</td><td>'+esc(e.note||'-')+'</td><td class="n">'+e.misc+'</td></tr>'}).join(''):'<tr><td colspan="3" class="note">None</td></tr>')+'</tbody><tfoot><tr><td colspan="2">Total miscellaneous</td><td class="n">'+tx+'</td></tr></tfoot></table></div></div></div>';
+    h+='<div class="sums"><span><span class="k">Total</span> <span class="mono">'+inr(g)+'</span> given</span><span><span class="k">Less exp.</span> <span class="mono">'+inr(tot)+'</span></span><span><span class="k">Balance</span> <span class="mono">'+inr(Math.abs(bal))+'</span> '+(bal<0?'payable to '+esc(u):bal>0?'left, carried forward to the next report':'nil')+'</span></div>';
+    var st=c.status;
+    h+='<div class="sign"><div><span class="k">Filed by</span><br>'+(st==='open'||st==='query'&&!c.filedOn?'Not filed yet':esc(u)+(c.filedOn?', '+c.filedOn:''))+'</div>'+
+      '<div><span class="k">Checked by</span><br>'+(c.checkedBy?esc(c.checkedBy)+', '+c.checkedOn:'Not checked yet')+'</div>'+
+      '<div><span class="k">Approved by</span><br>'+(st==='approved'?'Boss, '+c.approvedOn:'Not approved yet')+'</div></div></div>';
+    return h;
+  }
+  function voucherHTML(u,canConfirm){
+    var c=claims[u],v=c.voucher;if(!v)return '';
+    return '<div class="paper vouch"><div class="vtop"><h3>Cash voucher</h3><span class="mono">Ref. No. '+v.ref+'</span><span>Date '+v.date+'</span></div>'+
+      '<div class="vrow"><span class="k">Pay</span><span>'+esc(u)+'</span></div>'+
+      '<div class="vrow"><span class="k">Debit A/c</span><span>Staff travel and marketing expenses</span></div>'+
+      '<div class="vrow"><span class="k">Being</span><span>Expenses '+fdate(c.from)+' to '+fdate(c.to)+', balance payable</span></div>'+
+      '<div class="vrow"><span class="k">Total</span><span class="mono">'+inr(v.amt)+'</span></div>'+
+      '<div class="vrow"><span class="k">Rupees</span><span>'+words(v.amt)+' only</span></div>'+
+      '<div class="sign"><div><span class="k">Checked</span><br>'+esc(c.checkedBy||'Boss')+'</div><div><span class="k">Approved</span><br>Boss, '+c.approvedOn+'</div>'+
+      '<div><span class="k">Received payment</span><br>'+(v.received?esc(u)+' confirmed, '+v.receivedOn:canConfirm?'<button class="btn sm" type="button" data-rcv="'+u+'" style="margin-top:4px">Confirm I received it</button>':'Waiting for '+esc(u)+' to confirm')+'</div></div></div>';
+  }
+  function statement(u){
+    var a=given(u),s=spent(u),over=s>a,pct=a?Math.min(100,Math.round(s/a*100)):100;
+    return '<div class="stmt"><div><div class="k">Given</div><div class="v">'+inr(a)+'</div></div>'+
+      '<div><div class="k">Spent</div><div class="v">'+inr(s)+'</div></div>'+
+      '<div><div class="k">'+(over?'Payable to staff':'Left, carries forward')+'</div><div class="v '+(over?'over':'left')+'">'+inr(over?s-a:a-s)+'</div></div></div>'+
+      '<div class="meter" aria-hidden="true"><div class="fill '+(over?'over':'')+'" style="width:'+pct+'%"></div></div>';
+  }
+  function qbox(u){var c=claims[u];return c.status==='query'?'<div class="qbox"><strong>'+esc(c.by||'Boss')+' asks:</strong> '+esc(c.question)+'</div>':''}
+
+  /* ---------- staff: calendar day log ---------- */
+  function visitRow(v,showBy,canEdit){
+    return '<div class="item"><div class="top">'+esc(v.shop)+(v.jc?' · '+esc(v.jc):'')+'</div><div class="amt" style="font-size:14px">'+esc(v.phone||'No number')+'</div>'+
+      '<div class="meta">'+(showBy?esc(v.by)+' ('+BRANCH[v.by]+') · ':'')+fdate(v.date)+' · '+esc(v.area)+(v.addr?' · '+esc(v.addr):'')+(v.remarks?' · '+esc(v.remarks):'')+(v.bill?' · Bill '+inr(v.bill):'')+(v.card?'<span class="chip photo">Card photo</span>':'')+'</div>'+
+      (canEdit?'<div class="act"><button class="btn link" type="button" data-delvis="'+v.id+'">Remove</button></div>':'')+'</div>';
+  }
+  function rowItem(e,canEdit){
+    var parts=[];if(e.fare)parts.push('Fare '+e.fare);if(e.meals)parts.push('Meals '+e.meals);if(e.conv)parts.push('Conv. '+e.conv);if(e.misc)parts.push('Misc '+e.misc);
+    return '<div class="item"><div class="top">'+esc(e.from)+' to '+esc(e.to)+'</div><div class="amt">'+inr(rowTotal(e))+'</div>'+
+      '<div class="meta">'+parts.join(' · ')+(e.note?' · '+esc(e.note):'')+' · '+(e.proof?'Proof attached':'No proof')+'</div>'+
+      (canEdit?'<div class="act"><button class="btn link" type="button" data-del="'+e.id+'">Remove</button></div>':'')+'</div>';
+  }
+  function calHTML(u){
+    var off=(new Date(2026,9,1).getDay()+6)%7,h='';
+    ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].forEach(function(d){h+='<div class="dow">'+d+'</div>'});
+    for(var i=0;i<off;i++) h+='<div></div>';
+    for(var d=1;d<=31;d++){
+      var ds='2026-10-'+pad(d);
+      var hasV=visits.some(function(v){return v.by===u&&v.date===ds}),hasE=entries.some(function(e){return e.by===u&&e.date===ds});
+      var dots=(hasV?'<span class="dot v"></span>':'')+(hasE?'<span class="dot e"></span>':'');
+      h+='<button type="button" data-day="'+ds+'" class="'+(ds===S.day?'sel ':'')+(ds===TODAY?'today':'')+'"'+(ds>TODAY?' disabled':'')+' aria-label="'+d+' October"><span>'+d+'</span><span class="dots">'+dots+'</span></button>';
+    }
+    return '<div class="cal">'+h+'</div><div class="legend"><span><i class="dot v"></i>Visits</span><span><i class="dot e"></i>Expenses</span></div>';
+  }
+  function dayHTML(u){
+    var lk=locked(u),ds=S.day,p=ds.split('-'),dt=new Date(+p[0],+p[1]-1,+p[2]);
+    var vs=visits.filter(function(v){return v.by===u&&v.date===ds}),es=entries.filter(function(e){return e.by===u&&e.date===ds});
+    var h='<h2>'+dt.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long'})+'</h2>';
+    h+='<div class="sec" style="border-top:0;padding-top:0;margin-top:0">Jobs and shop visits</div><div class="list">'+(vs.length?vs.map(function(v){return visitRow(v,false,!lk)}).join(''):'<div class="empty">Nothing added for this day.</div>')+'</div>';
+    if(!lk) h+='<form id="visForm" style="margin-top:12px"><div class="row"><div class="field"><label for="vShop">Customer or shop name</label><input id="vShop" type="text" required></div><div class="field"><label for="vArea">Area or location</label><input id="vArea" type="text" required></div></div>'+
+      '<div class="row"><div class="field"><label for="vAddr">Address</label><input id="vAddr" type="text"></div><div class="field"><label for="vPhone">Phone number</label><input id="vPhone" type="text" inputmode="tel"></div></div>'+
+      '<div class="row3"><div class="field"><label for="vJc">Job card no. (if any)</label><input id="vJc" type="text"></div><div class="field"><label for="vRem">Service / remarks</label><input id="vRem" type="text"></div><div class="field"><label for="vBill">Bill amount (₹)</label><input id="vBill" type="number" min="0" inputmode="numeric"></div></div>'+
+      '<div class="field"><label for="vCard">Business card photo (optional)</label><input id="vCard" type="file" accept="image/*"></div><button class="btn sm" type="submit">Add</button></form>';
+    h+='<div class="sec">Travel and expenses</div><div class="list">'+(es.length?es.map(function(e){return rowItem(e,!lk)}).join(''):'<div class="empty">Nothing added for this day.</div>')+'</div>';
+    h+=lk?'<p class="note">The report is with the checker or boss, so this is locked.</p>':
+      '<form id="expForm" style="margin-top:12px"><div class="row"><div class="field"><label for="fFrom">From</label><input id="fFrom" type="text" value="'+BRANCH[u]+'" required></div><div class="field"><label for="fTo">To</label><input id="fTo" type="text" required></div></div>'+
+      '<div class="row4"><div class="field"><label for="fFare">Fare (₹)</label><input id="fFare" type="number" min="0" inputmode="numeric"></div><div class="field"><label for="fMeals">Meals (₹)</label><input id="fMeals" type="number" min="0" inputmode="numeric"></div><div class="field"><label for="fConv">Conv. (₹)</label><input id="fConv" type="number" min="0" inputmode="numeric"></div><div class="field"><label for="fMisc">Misc (₹)</label><input id="fMisc" type="number" min="0" inputmode="numeric"></div></div>'+
+      '<div class="field"><label for="fNote">Miscellaneous particulars (needed if Misc is filled)</label><input id="fNote" type="text" placeholder="e.g. Flex banners, 6 pcs"></div>'+
+      '<div class="field"><label for="fBill">Ticket or bill photo</label><input id="fBill" type="file" accept="image/*,application/pdf"></div><button class="btn sm" type="submit">Add expenses</button></form>';
+    return h;
+  }
+  function viewMonth(){
+    var u=S.user,c=claims[u];
+    var top='<section class="card" style="margin-bottom:20px"><h2>'+esc(u)+', '+fdate(c.from)+' to '+fdate(c.to)+'<span class="chip '+c.status+'">'+STATUS[c.status]+'</span></h2>'+qbox(u)+statement(u)+
+      '<p class="note" style="margin:0">'+vis(u).length+' visits \u00B7 '+rows(u).length+' expense rows. The report is filled in from these entries.</p></section>';
+    return top+'<div class="grid"><section class="card"><h2>Pick a date</h2>'+calHTML(u)+'</section><section class="card">'+dayHTML(u)+'</section></div>';
+  }
+  function viewReport(){
+    var u=S.user,c=claims[u],lk=locked(u),n=rows(u).length;
+    var period=lk?'':'<div class="row" style="max-width:420px;margin-bottom:14px"><div class="field" style="margin:0"><label for="rFrom">Report from</label><input id="rFrom" type="date" value="'+c.from+'"></div><div class="field" style="margin:0"><label for="rTo">Report to</label><input id="rTo" type="date" value="'+c.to+'"></div></div>';
+    return '<section class="card"><h2>My report<span class="chip '+c.status+'">'+STATUS[c.status]+'</span></h2>'+qbox(u)+period+reportHTML(u)+
+      '<div style="margin-top:16px"><button class="btn" type="button" data-file="1"'+(lk||!n?' disabled':'')+'>'+(c.status==='query'?'File again':lk?'Filed':'File this report')+'</button></div>'+
+      '<p class="note">This is the monthly report. It goes to the checker, then the boss.</p></section>'+voucherHTML(u,true)+(c.status==='approved'&&(!c.voucher||c.voucher.received)?'<div style="margin-top:16px"><button class="btn" type="button" data-next="1">Start next report'+(c.carry?', carrying forward '+inr(c.carry):'')+'</button></div>':'');
+  }
+
+  /* ---------- directory ---------- */
+  function visitList(){
+    var q=($('vSearch')?$('vSearch').value:'').trim().toLowerCase(),who=$('vStaff')?$('vStaff').value:'all';
+    var l=visits.filter(function(v){
+      if(S.role==='staff'&&v.by!==S.user) return false;
+      if(S.role==='boss'&&who!=='all'&&v.by!==who) return false;
+      return !q||(v.shop+' '+v.area+' '+v.addr+' '+v.phone+' '+v.jc).toLowerCase().indexOf(q)>-1;
+    }).sort(function(a,b){return a.date<b.date?1:-1});
+    return l.length?l.map(function(v){return visitRow(v,S.role==='boss',false)}).join(''):'<div class="empty">No matches.</div>';
+  }
+  function viewVisits(){
+    return '<section class="card"><h2>'+(S.role==='boss'?'Customers and shops visited by the team':'Customers and shops I have visited')+'</h2><div class="toolbar"><input id="vSearch" type="search" placeholder="Search name, area, phone or job card" aria-label="Search">'+
+      (S.role==='boss'?'<select id="vStaff" aria-label="Staff"><option value="all">Everyone</option>'+staff.map(function(s){return '<option>'+s+'</option>'}).join('')+'</select>':'')+
+      '</div><div class="list" id="visList">'+visitList()+'</div></section>';
+  }
+
+  /* ---------- checker and boss ---------- */
+  function viewCheck(){
+    var l=staff.filter(function(u){return claims[u].status==='filed'});
+    if(!l.length) return '<section class="card"><div class="empty">Nothing waiting for a check.</div></section>';
+    return l.map(function(u){
+      var h='<section class="card claim"><div class="head"><span class="name">'+esc(u)+'<span class="chip filed">'+STATUS.filed+'</span></span><span class="note" style="margin:0">'+fdate(claims[u].from)+' to '+fdate(claims[u].to)+'</span></div>'+statement(u)+
+        '<details open><summary>Report and proof</summary><div style="margin-top:10px">'+reportHTML(u)+'</div></details>';
+      if(S.asking===u) h+='<div class="ask"><input type="text" id="askText" placeholder="Your question" aria-label="Your question"><button class="btn sm" type="button" data-sendask="'+u+'">Send back</button><button class="btn ghost sm" type="button" data-cancelask="1">Cancel</button></div>';
+      else h+='<div class="acts"><button class="btn ok sm" type="button" data-check="'+u+'">Mark checked</button><button class="btn ghost sm" type="button" data-ask="'+u+'">Return with a question</button></div>';
+      return h+'</section>';
+    }).join('');
+  }
+  function bl(){return staff.filter(function(u){return S.branch==='all'||BRANCH[u]===S.branch})}
+  function chips(attr,cur){return '<div class="toolbar">'+[['all','Both branches'],['Madurai','Madurai'],['Trichy','Trichy']].map(function(x){return '<button class="btn sm '+(cur===x[0]?'':'ghost')+'" type="button" '+attr+'="'+x[0]+'">'+x[1]+'</button>'}).join('')+'</div>'}
+  function viewDash(){
+    var gv=0,sp=0,pay=0,rd=0,wc=0;
+    bl().forEach(function(u){gv+=given(u);sp+=spent(u);if(claims[u].status==='approved'&&claims[u].voucher)pay+=claims[u].voucher.amt;if(claims[u].status==='checked')rd++;if(claims[u].status==='filed')wc++});
+    var order={checked:0,filed:1,query:2,open:3,approved:4};
+    var sorted=bl().slice().sort(function(a,b){return order[claims[a].status]-order[claims[b].status]});
+    var h=chips('data-br',S.branch)+'<div class="tiles"><div class="tile attn"><div class="k">Ready for your approval</div><div class="v">'+rd+'</div></div>'+
+      '<div class="tile"><div class="k">With the checker</div><div class="v">'+wc+'</div></div>'+
+      '<div class="tile"><div class="k">Given / spent</div><div class="v" style="font-size:18px">'+inr(gv)+' / '+inr(sp)+'</div></div>'+
+      '<div class="tile"><div class="k">Approved, payable to staff</div><div class="v">'+inr(pay)+'</div></div></div>';
+    h+='<section class="card" style="margin-bottom:20px"><h2>Today, '+fdate(TODAY)+'</h2><div class="list">'+bl().map(function(u){
+      var nv=visits.filter(function(v){return v.by===u&&v.date===TODAY}).length,ts=sum(entries.filter(function(e){return e.by===u&&e.date===TODAY}),rowTotal);
+      return '<div class="item"><div class="top">'+esc(u)+''+'</div><div class="amt">'+inr(ts)+'</div><div class="meta">'+nv+' visits today</div></div>'}).join('')+'</div></section>';
+    sorted.forEach(function(u){
+      var c=claims[u];
+      h+='<section class="card claim"><div class="head"><span class="name">'+esc(u)+'<span class="chip '+c.status+'">'+STATUS[c.status]+'</span></span><span class="note" style="margin:0">'+fdate(c.from)+' to '+fdate(c.to)+' · '+vis(u).length+' visits</span></div>'+statement(u)+qbox(u)+
+        '<details><summary>Open report and proof</summary><div style="margin-top:10px">'+reportHTML(u)+'</div></details>';
+      if(c.status==='approved'){
+        h+=c.voucher?voucherHTML(u,false):'<p class="note" style="margin:0">Approved. Nothing to pay'+(spent(u)<given(u)?'. '+inr(given(u)-spent(u))+' carries forward to '+esc(u)+"\u2019s next report.":'.')+'</p>';
+      }else if(c.status==='checked'||c.status==='filed'){
+        if(S.asking===u) h+='<div class="ask"><input type="text" id="askText" placeholder="Your question" aria-label="Your question"><button class="btn sm" type="button" data-sendask="'+u+'">Send back</button><button class="btn ghost sm" type="button" data-cancelask="1">Cancel</button></div>';
+        else h+='<div class="acts"><button class="btn ok sm" type="button" data-approve="'+u+'">Approve'+(payable(u)?' and issue voucher for '+inr(payable(u)):'')+'</button><button class="btn ghost sm" type="button" data-ask="'+u+'">Ask a question</button>'+(c.status==='filed'?'<span class="note" style="margin:0">Not checked yet</span>':'')+'</div>';
+      }
+      h+='</section>';
+    });
+    return h;
+  }
+  function viewAllow(){
+    var rowsH=staff.map(function(u){
+      var l=advances.filter(function(a){return a.to===u});
+      return '<div class="paynote" style="flex-direction:column;gap:4px"><div style="display:flex;justify-content:space-between;gap:12px"><strong>'+esc(u)+' <span class="note">'+BRANCH[u]+'</span></strong><span class="mono">'+inr(sum(l,function(a){return a.amt}))+'</span></div>'+
+        (l.length?l.map(function(a){return '<div style="display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:13px"><span>'+fdate(a.date)+' · '+esc(a.label)+' · '+inr(a.amt)+'</span><button class="btn link" type="button" data-deladv="'+a.id+'">Remove</button></div>'}).join(''):'<div style="color:var(--muted);font-size:13px">Nothing given yet</div>')+'</div>';
+    }).join('');
+    return '<div class="grid"><section class="card"><h2>Give an allowance or trip advance</h2><form id="advForm">'+
+      '<div class="field"><label for="aTo">Staff</label><select id="aTo">'+staff.map(function(s){return '<option>'+s+'</option>'}).join('')+'</select></div>'+
+      '<div class="row"><div class="field"><label for="aDate">Date</label><input id="aDate" type="date" value="'+TODAY+'" required></div><div class="field"><label for="aAmt">Amount (₹)</label><input id="aAmt" type="number" min="1" inputmode="numeric" required></div></div>'+
+      '<div class="field"><label for="aLabel">What is it for</label><input id="aLabel" type="text" value="Monthly allowance" required></div>'+
+      '<button class="btn" type="submit">Add</button><p class="note">These fill the Advance details on each report. Amounts can differ every month and per person. A trip advance is just another line.</p></form></section>'+
+      '<section class="card"><h2>Given so far</h2>'+rowsH+'</section></div>';
+  }
+  function viewFunds(){
+    var f=S.ff,fb=S.fb;
+    var base=funds.filter(function(x){return fb==='all'||x.branch===fb});
+    var l=base.filter(function(x){return f==='all'||x.kind===f}).sort(function(a,b){return a.date<b.date?1:-1});
+    var inn=0,out=0,byHead={};
+    base.forEach(function(x){if(x.kind==='in')inn+=x.amt;else{out+=x.amt;byHead[x.head]=(byHead[x.head]||0)+x.amt}});
+    var bars=Object.keys(byHead).sort(function(a,b){return byHead[b]-byHead[a]}).map(function(k){return '<div class="bar"><div class="lab"><span>'+esc(k)+'</span><span class="mono">'+inr(byHead[k])+'</span></div><div class="track"><div class="fill" style="width:'+Math.round(byHead[k]/(out||1)*100)+'%"></div></div></div>'}).join('');
+    var fl=[['all','All'],['in','Income'],['out','Expenses']];
+    return '<p class="note" style="margin:0 0 14px">Visible to the owner only. Staff and the checker never see this screen.</p>'+chips('data-fb',fb)+
+      '<div class="tiles t3"><div class="tile"><div class="k">Money in</div><div class="v">'+inr(inn)+'</div></div><div class="tile"><div class="k">Money out</div><div class="v">'+inr(out)+'</div></div><div class="tile"><div class="k">Balance for the month</div><div class="v">'+inr(inn-out)+'</div></div></div>'+
+      '<div class="grid"><section class="card"><h2>Add income or expense<span class="tag">Phase 2</span></h2><form id="fundForm">'+
+      '<div class="row3"><div class="field"><label for="uKind">Type</label><select id="uKind"><option value="in">Income</option><option value="out">Expense</option></select></div><div class="field"><label for="uHead">Head</label><select id="uHead">'+HEADS.map(function(x){return '<option>'+x+'</option>'}).join('')+'</select></div><div class="field"><label for="uBr">Branch</label><select id="uBr"><option>Madurai</option><option>Trichy</option></select></div></div>'+
+      '<div class="row"><div class="field"><label for="uDate">Date</label><input id="uDate" type="date" value="'+TODAY+'" required></div><div class="field"><label for="uAmt">Amount (\u20B9)</label><input id="uAmt" type="number" min="1" inputmode="numeric" required></div></div>'+
+      '<div class="field"><label for="uNote">Note</label><input id="uNote" type="text" required></div><button class="btn" type="submit">Save</button><p class="note">When a staff member confirms a cash voucher, it is posted here automatically under their branch.</p></form>'+
+      '<div class="sec">Money out by head</div><div class="bars">'+bars+'</div></section>'+
+      '<section class="card"><h2>Office ledger, October</h2><div class="toolbar">'+fl.map(function(x){return '<button class="btn sm '+(f===x[0]?'':'ghost')+'" type="button" data-ff="'+x[0]+'">'+x[1]+'</button>'}).join('')+'</div><div class="list">'+
+      l.map(function(x){return '<div class="item"><div class="top">'+esc(x.head)+'</div><div class="amt" style="color:'+(x.kind==='in'?'var(--ok)':'var(--ink)')+'">'+(x.kind==='in'?'+':'\u2212')+inr(x.amt)+'</div><div class="meta">'+fdate(x.date)+' \u00B7 '+esc(x.branch)+' \u00B7 '+esc(x.note)+'</div></div>'}).join('')+'</div></section></div>';
+  }
+
+  function render(){
+    renderTabs();
+    $('panel').innerHTML={month:viewMonth,report:viewReport,visits:viewVisits,check:viewCheck,dash:viewDash,allow:viewAllow,funds:viewFunds}[S.tab]();
+    $('roleStaff').setAttribute('aria-pressed',S.role==='staff');
+    $('roleCheck').setAttribute('aria-pressed',S.role==='check');
+    $('roleBoss').setAttribute('aria-pressed',S.role==='boss');
+    $('staffPick').hidden=S.role!=='staff';
+  }
+  function setRole(r,tab){S.role=r;S.tab=tab;S.asking=null;render()}
+  $('staffPick').innerHTML=staff.map(function(s){return '<option value="'+s+'">'+s+', '+BRANCH[s]+'</option>'}).join('');
+  $('staffPick').onchange=function(){S.user=this.value;S.tab='month';S.day=TODAY;render()};
+  $('roleStaff').onclick=function(){setRole('staff','month')};
+  $('roleCheck').onclick=function(){setRole('check','check')};
+  $('roleBoss').onclick=function(){setRole('boss','dash')};
+
+  document.addEventListener('change',function(ev){
+    var id=ev.target.id;
+    if(id==='vStaff')$('visList').innerHTML=visitList();
+    if(id==='rFrom'||id==='rTo'){var c=claims[S.user],f=$('rFrom').value,t=$('rTo').value;if(f&&t&&f<=t){c.from=f;c.to=t;render()}else toast('Start date must be before the end date')}
+  });
+  document.addEventListener('input',function(ev){if(ev.target.id==='vSearch')$('visList').innerHTML=visitList()});
+  document.addEventListener('click',function(ev){
+    var b=ev.target.closest('button');if(!b)return;var d=b.dataset,c;
+    if(d.tab){S.tab=d.tab;S.asking=null;render()}
+    else if(d.day){S.day=d.day;render()}
+    else if(d.del){entries=entries.filter(function(x){return x.id!=d.del});render()}
+    else if(d.delvis){visits=visits.filter(function(x){return x.id!=d.delvis});render()}
+    else if(d.deladv){advances=advances.filter(function(x){return x.id!=d.deladv});render()}
+    else if(d.ff){S.ff=d.ff;render()}
+    else if(d.fb){S.fb=d.fb;render()}
+    else if(d.br){S.branch=d.br;render()}
+    else if(d.file){c=claims[S.user];c.status='filed';c.filedOn=fdate(TODAY);c.checkedBy=null;delete c.question;toast('Report filed. It goes to the checker.');render()}
+    else if(d.check){c=claims[d.check];c.status='checked';c.checkedBy='Accounts';c.checkedOn=fdate(TODAY);toast('Marked checked. It is now with the boss.');render()}
+    else if(d.approve){c=claims[d.approve];c.status='approved';c.approvedOn=fdate(TODAY);if(!c.checkedBy){c.checkedBy='Boss';c.checkedOn=fdate(TODAY)}
+      var pv=payable(d.approve);c.carry=Math.max(0,given(d.approve)-spent(d.approve));if(pv>0){c.voucher={ref:nextId.vch++,date:fdate(TODAY),amt:pv,received:false};toast('Approved. Cash voucher '+c.voucher.ref+' issued for '+inr(pv))}else toast('Approved. '+(c.carry?inr(c.carry)+' carries forward.':'Nothing to pay.'));render()}
+    else if(d.next){c=claims[S.user];var nf=new Date(c.to+'T00:00:00');nf.setDate(nf.getDate()+1);claims[S.user]={opening:c.carry||0,from:nf.getFullYear()+'-'+pad(nf.getMonth()+1)+'-'+pad(nf.getDate()),to:'2026-10-31',status:'open'};S.tab='month';toast('New report started');render()}
+    else if(d.rcv){c=claims[d.rcv];c.voucher.received=true;c.voucher.receivedOn=fdate(TODAY);
+      funds.push({id:nextId.f++,date:TODAY,kind:'out',head:'Staff allowances',branch:BRANCH[d.rcv],note:'Voucher '+c.voucher.ref+', '+d.rcv+', '+fdate(c.from)+' to '+fdate(c.to),amt:c.voucher.amt});toast('Confirmed. Posted to office funds.');render()}
+    else if(d.ask){S.asking=d.ask;render();var t=$('askText');if(t)t.focus()}
+    else if(d.cancelask){S.asking=null;render()}
+    else if(d.sendask){var q=$('askText').value.trim();if(!q){$('askText').focus();toast('Type your question first');return}
+      c=claims[d.sendask];c.status='query';c.question=q;c.by=S.role==='boss'?'Boss':'Checker';c.checkedBy=null;S.asking=null;toast('Sent back to '+d.sendask);render()}
+  });
+  document.addEventListener('submit',function(ev){
+    ev.preventDefault();var id=ev.target.id;
+    function n(x){return +$(x).value||0}
+    if(id==='expForm'){
+      var fare=n('fFare'),meals=n('fMeals'),conv=n('fConv'),misc=n('fMisc'),note=$('fNote').value.trim();
+      if(!(fare+meals+conv+misc)){toast('Add at least one amount');return}
+      if(misc&&!note){$('fNote').focus();toast('Say what the miscellaneous amount was for');return}
+      entries.push(R(nextId.e++,S.user,S.day,$('fFrom').value.trim(),$('fTo').value.trim(),fare,meals,conv,misc,note,$('fBill').files.length>0));toast('Added');render();
+    }else if(id==='visForm'){
+      visits.push(V(nextId.v++,S.user,S.day,$('vArea').value.trim(),$('vShop').value.trim(),$('vJc').value.trim(),$('vRem').value.trim(),n('vBill'),$('vAddr').value.trim(),$('vPhone').value.trim(),$('vCard').files.length>0));toast('Added');render();
+    }else if(id==='advForm'){
+      advances.push({id:nextId.a++,to:$('aTo').value,date:$('aDate').value,label:$('aLabel').value.trim(),amt:n('aAmt')});toast('Added for '+$('aTo').value);render();
+    }else if(id==='fundForm'){
+      funds.push({id:nextId.f++,date:$('uDate').value,kind:$('uKind').value,head:$('uHead').value,branch:$('uBr').value,note:$('uNote').value.trim(),amt:n('uAmt')});toast('Saved');render();
+    }
+  });
+  render();
+})();
+</script>
+
+</body></html>

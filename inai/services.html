@@ -151,6 +151,26 @@ section.s.alt{background:var(--charcoal)}
 .hstep h4{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:1.4rem;margin-bottom:.3rem}
 .hstep p{font-size:.85rem;color:var(--muted);line-height:1.7;font-weight:300}
 
+/* ways to work */
+.ways-intro{max-width:640px;margin-top:1.2rem}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;align-items:end;margin-top:3.5rem}
+.tier{border-top:2px solid var(--gold);padding:1.8rem 1.8rem 2rem;background:linear-gradient(180deg,rgba(184,134,11,.07),transparent 75%);display:flex;flex-direction:column}
+.tier:nth-child(1){min-height:23rem}.tier:nth-child(2){min-height:27rem}.tier:nth-child(3){min-height:31rem}
+.tier .k{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem}
+.tier h3{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:1.8rem;line-height:1.15;margin-bottom:.4rem}
+.tier .say{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--gold-light);margin-bottom:1.2rem}
+.tier .for{font-size:.84rem;line-height:1.7;color:rgba(248,246,242,.72);font-weight:300;margin-bottom:1.1rem}
+.tier ul{list-style:none}
+.tier li{font-size:.82rem;color:var(--muted);padding:.42rem 0;font-weight:300;display:flex;gap:.6rem}
+.tier li::before{content:'';width:.35rem;height:1px;background:var(--gold);margin-top:.8em;flex-shrink:0}
+.tier .eng{margin-top:auto;padding-top:1.4rem;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(148,163,184,.7)}
+/* stance */
+.stance{margin-top:3rem;border-top:1px solid var(--line)}
+.pr{display:grid;grid-template-columns:.85fr 1.15fr;gap:3rem;padding:1.7rem 0;border-bottom:1px solid var(--line)}
+.pr h3{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:1.55rem;line-height:1.25}
+.pr h3 em{color:var(--gold)}
+.pr p{font-size:.88rem;line-height:1.8;color:rgba(248,246,242,.64);font-weight:300}
+
 /* who */
 .who{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.3rem,2.2vw,1.9rem);line-height:1.8;color:rgba(248,246,242,.85);max-width:980px}
 .who i{color:var(--gold);font-style:normal;padding:0 .5rem}
@@ -167,6 +187,7 @@ section.s.alt{background:var(--charcoal)}
 @media(max-width:1100px){
  .hero,section.s,.cta{padding-left:2rem !important;padding-right:2rem !important}
  .engines{grid-template-columns:1fr}.engine{border-right:none;border-bottom:1px solid var(--line)}.engine:last-child{border-bottom:none}
+ .tiers{grid-template-columns:1fr;align-items:stretch}.tier:nth-child(n){min-height:0}
  .inds{grid-template-columns:repeat(2,1fr);row-gap:2.5rem}.ind:nth-child(3){padding-left:0;border-left:none}
  .area{grid-template-columns:70px 1fr}.area ul{grid-column:2}
  .method{grid-template-columns:1fr;gap:0;padding-left:2.2rem}
@@ -184,6 +205,7 @@ section.s.alt{background:var(--charcoal)}
  .connect{columns:1}
  .engine{padding:2rem 1.2rem}
  .area{grid-template-columns:1fr;gap:1rem;padding:2rem 0}.area ul{grid-column:auto;columns:1}.area .ai-note{grid-column:auto;margin-top:0}
+ .pr{grid-template-columns:1fr;gap:.6rem}
  .inds{grid-template-columns:1fr}.ind,.ind:nth-child(3){padding:0 0 1.8rem;border-left:none}.ind h3{min-height:0}
  .btn-row>a{flex:1 1 100%;text-align:center}
  html{scroll-padding-top:116px}
@@ -235,7 +257,7 @@ section.s.alt{background:var(--charcoal)}
 </header>
 
 <nav class="subnav" aria-label="On this page">
-  <a href="#what">What we do</a><a href="#engines">Three engines</a><a href="#areas">Practice areas</a><a href="#industries">Industries</a><a href="#method">Method</a><a href="#how">How we work</a>
+  <a href="#what">What we do</a><a href="#engines">Three engines</a><a href="#areas">Practice areas</a><a href="#industries">Industries</a><a href="#method">Method</a><a href="#how">How we work</a><a href="#ways">Ways to work</a><a href="#stance">Our approach</a>
 </nav>
 
 <section class="s" id="what"><div class="wrap what">
@@ -285,6 +307,30 @@ section.s.alt{background:var(--charcoal)}
     <p class="lede" style="margin-top:1rem">INAI is a founder-led studio. Where a project calls for specialist skills, we collaborate with trusted professionals.</p>
   </div>
   <div class="steps"><div class="hstep reveal"><div class="i">1</div><div><h4>Discover</h4><p>Understand the organisation and its objectives.</p></div></div><div class="hstep reveal"><div class="i">2</div><div><h4>Diagnose</h4><p>Identify underlying problems and opportunities.</p></div></div><div class="hstep reveal"><div class="i">3</div><div><h4>Define</h4><p>Establish priorities and direction.</p></div></div><div class="hstep reveal"><div class="i">4</div><div><h4>Design &amp; Build</h4><p>Develop the strategy, experience, system or solution.</p></div></div><div class="hstep reveal"><div class="i">5</div><div><h4>Implement &amp; Evolve</h4><p>Support adoption, evaluate outcomes and improve.</p></div></div></div>
+</div></section>
+
+<section class="s" id="ways"><div class="wrap">
+  <div class="reveal"><div class="eyebrow">Ways to work with us</div>
+  <h2 class="h2">Start small. <em>Go as far as it makes sense.</em></h2>
+  <p class="lede ways-intro">There is no fixed menu and no rate card. Most engagements take one of three shapes, and we shape the scope around your problem, not the other way round.</p></div>
+  <div class="tiers stagger">
+    <article class="tier"><div class="k">Shape 01</div><h3>Starting Point</h3><p class="say">A focused look.</p><p class="for">For when something is not working and you are not sure what, or you want a second view before committing to anything.</p><ul><li>A conversation and review of how things work today</li><li>A written summary of what we found</li><li>A clear recommendation on what to do next, including when the answer is not yet</li></ul><div class="eng">Mostly Advisory</div></article>
+    <article class="tier"><div class="k">Shape 02</div><h3>Focused Build</h3><p class="say">One thing, built properly.</p><p class="for">For a defined need, such as a website, a CRM, a portal, a workflow, a brand system or a working prototype.</p><ul><li>Scoping and design with you and your team</li><li>Build and testing in the open, with regular check-ins</li><li>Documentation and handover, so it is yours to run</li></ul><div class="eng">Advisory + Innovation</div></article>
+    <article class="tier"><div class="k">Shape 03</div><h3>Ongoing Partnership</h3><p class="say">Someone alongside you as things evolve.</p><p class="for">For organisations that want continued thinking and building as priorities change, not a one-off project.</p><ul><li>Regular reviews of what is working and what is not</li><li>Improvements and new builds as needs shift</li><li>Training and enablement for your team</li></ul><div class="eng">Advisory + Innovation</div></article>
+  </div>
+  <p class="note">Scope and investment are agreed together, in advance, for each engagement. Not every project fits neatly into one of these shapes, and that is fine.</p>
+</div></section>
+
+<section class="s alt" id="stance"><div class="wrap">
+  <div class="reveal"><div class="eyebrow">How we are different</div>
+  <h2 class="h2">Not another AI startup. <em>Something more useful.</em></h2></div>
+  <div class="stance">
+    <div class="pr reveal"><h3>Problem first, <em>technology second.</em></h3><p>If the right answer is a better process, a clearer message or a simple spreadsheet, that is what we will recommend. We will tell you when you do not need AI.</p></div>
+    <div class="pr reveal"><h3>AI only where it <em>earns its place.</em></h3><p>Automation that helps your people, with a human checking the work. No chatbot bolted on for the sake of having one.</p></div>
+    <div class="pr reveal"><h3>Built around how you <em>actually work.</em></h3><p>WhatsApp threads, Excel sheets, handwritten ledgers, decisions made over chai. We start from the way your business really runs, then make it better.</p></div>
+    <div class="pr reveal"><h3>You deal with the person <em>doing the work.</em></h3><p>INAI is founder-led. When a project needs a specialist, we bring one in and say so openly.</p></div>
+    <div class="pr reveal"><h3>Yours to <em>run.</em></h3><p>What we build is documented and handed over, so you are not dependent on us to keep it going.</p></div>
+  </div>
 </div></section>
 
 <section class="s" id="who"><div class="wrap">

@@ -164,10 +164,9 @@ footer{background:#040710;padding:2.2rem 4rem;display:flex;justify-content:space
 
 <div class="filter-tabs">
   <button class="filter-tab active" onclick="filterWork('all',this)">All Work</button>
-  <button class="filter-tab" onclick="filterWork('systems',this)">Systems</button>
-  <button class="filter-tab" onclick="filterWork('creative',this)">Creative</button>
-  <button class="filter-tab" onclick="filterWork('digital',this)">Digital</button>
-  <button class="filter-tab" onclick="filterWork('growth',this)">Growth</button>
+  <button class="filter-tab" onclick="filterWork('systems digital',this)">Digital &amp; Systems</button>
+  <button class="filter-tab" onclick="filterWork('creative',this)">Experience &amp; Communication</button>
+  <button class="filter-tab" onclick="filterWork('growth',this)">Strategy &amp; Growth</button>
 </div>
 
 <div class="work-grid stagger">
@@ -320,10 +319,9 @@ footer{background:#040710;padding:2.2rem 4rem;display:flex;justify-content:space
         <div style="background:var(--navy);padding:2rem;border-radius:3px;border:1px solid rgba(184,134,11,0.12)">
           <div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;font-weight:500">Project Scope</div>
           <div style="font-size:0.8rem;color:var(--muted);line-height:2;font-weight:300">
-            INAI Systems<br>
-            INAI Digital<br>
-            INAI Creative<br>
-            INAI Growth
+            Digital &amp; Systems Transformation<br>
+            Experience &amp; Communication Design<br>
+            Business &amp; Strategic Intelligence
           </div>
           <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.05)">
             <div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;font-weight:500">Technologies</div>
@@ -342,8 +340,8 @@ footer{background:#040710;padding:2.2rem 4rem;display:flex;justify-content:space
 </div>
 
 <footer>
-  <div><div class="footer-brand"><svg class="logo-mark" viewBox="70 0 870 180" role="img" aria-label="INAI"><rect x="90" y="10" width="20" height="160" fill="currentColor"/><polygon points="245,10 270,10 425,170 400,170" fill="currentColor"/><rect x="245" y="10" width="20" height="160" fill="currentColor"/><rect x="405" y="10" width="20" height="160" fill="currentColor"/><polyline points="556,170 640,22 724,170" fill="none" stroke="currentColor" stroke-width="22" stroke-linejoin="miter"/><circle class="dot" cx="643" cy="148" r="22"/><rect x="860" y="10" width="20" height="160" fill="currentColor"/></svg></div><div class="footer-tag">Where Creativity Meets Intelligence</div></div>
-  <div class="footer-fw">I → N → A → I &nbsp;·&nbsp; IDEA · NETWORK · ACTION · IMPACT</div>
+  <div><div class="footer-brand"><svg class="logo-mark" viewBox="70 0 870 180" role="img" aria-label="INAI"><rect x="90" y="10" width="20" height="160" fill="currentColor"/><polygon points="245,10 270,10 425,170 400,170" fill="currentColor"/><rect x="245" y="10" width="20" height="160" fill="currentColor"/><rect x="405" y="10" width="20" height="160" fill="currentColor"/><polyline points="556,170 640,22 724,170" fill="none" stroke="currentColor" stroke-width="22" stroke-linejoin="miter"/><circle class="dot" cx="643" cy="148" r="22"/><rect x="860" y="10" width="20" height="160" fill="currentColor"/></svg></div><div class="footer-tag">Ideas Made Intelligent</div></div>
+  <div class="footer-fw">THINK · RETHINK · BUILD · EVOLVE</div>
   <div class="footer-copy">© 2026 INAI. All rights reserved.</div>
 </footer>
 
@@ -355,7 +353,7 @@ function filterWork(cat, btn) {
   document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
   document.querySelectorAll('.case-card, .case-featured').forEach(card => {
-    if(cat === 'all' || card.dataset.cat?.includes(cat)) {
+    if(cat === 'all' || cat.split(' ').some(c => card.dataset.cat?.includes(c))) {
       card.style.display = '';
     } else {
       card.style.display = 'none';

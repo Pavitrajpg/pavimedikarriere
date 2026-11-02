@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>INAI — Where Creativity Meets Intelligence</title>
+<title>INAI — Ideas Made Intelligent</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel+Decorative:wght@400&display=swap" rel="stylesheet">
 <style>
@@ -140,7 +140,6 @@ nav{
 .kr-fw{font-size:0.55rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);margin-top:0.4rem}
 
 
-.kolam-stage:hover 
 
 /* ══ SECTIONS ══ */
 section{padding:6rem 4rem}
@@ -187,6 +186,13 @@ section{padding:6rem 4rem}
   background:var(--navy);position:relative;overflow:hidden;transition:background 0.4s;
 }
 .svc-cell:nth-child(2),.svc-cell:nth-child(4){border-right:none}
+.services-2x2.svc-3{grid-template-columns:repeat(3,1fr)}
+.services .svc-tagline-footer{margin-bottom:2.5rem}
+.svc-3 .svc-cell{border-bottom:none;border-right:1px solid rgba(184,134,11,0.1)}
+.svc-3 .svc-cell:nth-child(2){border-right:1px solid rgba(184,134,11,0.1)}
+.svc-3 .svc-cell:last-child{border-right:none}
+.svc-3 .svc-sub{font-size:.82rem;color:rgba(248,246,242,.55);line-height:1.6}
+@media(max-width:1100px){.services-2x2.svc-3{grid-template-columns:1fr !important}.svc-3 .svc-cell{border-right:none !important;border-bottom:1px solid rgba(184,134,11,0.1) !important}.svc-3 .svc-cell:last-child{border-bottom:none !important}}
 .svc-cell:nth-child(3),.svc-cell:nth-child(4){border-bottom:none}
 .svc-cell:hover{background:#0a1020}
 .svc-cell::after{
@@ -441,6 +447,8 @@ footer{
 .stagger.on>*:nth-child(2){opacity:1;transform:none;transition-delay:0.12s}
 .stagger.on>*:nth-child(3){opacity:1;transform:none;transition-delay:0.24s}
 .stagger.on>*:nth-child(4){opacity:1;transform:none;transition-delay:0.36s}
+.stagger.on>*:nth-child(5){opacity:1;transform:none;transition-delay:0.48s}
+.stagger.on>*:nth-child(6){opacity:1;transform:none;transition-delay:0.6s}
 
 /* ══ ILLUSTRATION WRAP ══ */
 .illustration-wrap {
@@ -544,19 +552,15 @@ footer{
 <!-- ══ HERO ══ -->
 <section class="hero" id="home">
   <div class="hero-text">
-    <div class="hero-eyebrow">Where Creativity Meets Intelligence</div>
-    <h1 class="hero-h1">Connecting Ideas,<br>Technology &amp;<br><em>Growth</em></h1>
-    <p class="hero-sub">We help businesses build stronger brands, smarter systems, and meaningful growth through creativity, automation, and digital innovation.</p>
-    <p class="hero-brand-stmt">Inspired by the Tamil word <span>"Inai" (இணை)</span>, meaning to connect — we bring together creativity, technology, and growth to help businesses scale with purpose.</p>
+    <div class="hero-eyebrow">Independent Strategy, Innovation &amp; Technology Studio</div>
+    <h1 class="hero-h1">We make sense of complexity.<br><em>We turn it into possibility.</em></h1>
+    <p class="hero-sub">INAI works with businesses and organisations to understand complex challenges, rethink existing approaches and develop practical solutions.</p>
+    <p class="hero-brand-stmt">Inspired by the Tamil word <span>"Inai" (இணை)</span>, meaning to connect — we bring together strategic thinking, human-centred design and applied technology.</p>
     <div class="hero-btns">
       <button class="btn-gold" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a Consultation</button>
       <button class="btn-outline" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Explore Services</button>
     </div>
-    <div class="hero-fw">
-      <span class="fw-hi">I</span><span class="fw-arr">→</span><span class="fw-lo">N</span><span class="fw-arr">→</span><span class="fw-lo">A</span><span class="fw-arr">→</span><span class="fw-hi">I</span>
-      <span class="fw-sep">|</span>
-      <span class="fw-lo">IDEA</span><span class="fw-arr">→</span><span class="fw-lo">NETWORK</span><span class="fw-arr">→</span><span class="fw-lo">ACTION</span><span class="fw-arr">→</span><span class="fw-lo">IMPACT</span>
-    </div>
+    <div class="hero-fw"><span class="fw-hi">Think</span><span class="fw-arr">·</span><span class="fw-lo">Rethink</span><span class="fw-arr">·</span><span class="fw-hi">Build</span><span class="fw-arr">·</span><span class="fw-lo">Evolve</span></div>
   </div>
 
   <div class="hero-visual">
@@ -581,7 +585,7 @@ footer{
     <h2 class="sec-title">Growth is <em>designed,</em><br>not accidental.</h2>
     <div class="gold-bar"></div>
     <p class="about-body">Inspired by the timeless kolam — a South Indian art of intentional, interconnected patterns — INAI was built on a single belief: the strongest businesses are born from meaningful connections between creativity, technology, and people.</p>
-    <p class="about-body">We are a modern collective that bridges tradition and innovation, blending human imagination with intelligent systems to create impact that lasts.</p>
+    <p class="about-body">We are an independent studio that bridges tradition and innovation, blending human-centred design with applied technology to create practical solutions that last.</p>
     <button class="btn-gold" style="background:var(--copper)">Learn More</button>
   </div>
   <div class="reveal" style="display:flex;align-items:center;justify-content:center">
@@ -594,60 +598,26 @@ footer{
 <!-- ══ SERVICES ══ -->
 <section class="services" id="services">
   <div class="reveal">
-    <div class="sec-eyebrow">Our Services</div>
-    <h2 class="sec-title">End-to-end solutions for<br><em>modern businesses.</em></h2>
+    <div class="sec-eyebrow">What We Do</div>
+    <h2 class="sec-title">Three engines.<br><em>One connected approach.</em></h2>
   </div>
-  <div class="services-2x2 stagger">
-    <div class="svc-cell">
-      <div class="svc-icon-wrap">
-        <svg viewBox="0 0 24 24"><path d="M12 19l7-7-7-7"/><path d="M5 12h14"/><circle cx="12" cy="20" r="1"/></svg>
-      </div>
-      <div class="svc-name">INAI Creative</div>
-      <div class="svc-sub">Branding · Design · Content</div>
-      <ul class="svc-list"><li>Brand Identity</li><li>Social Media Design</li><li>Content Strategy</li><li>Marketing Collateral</li><li>Corporate Presentations</li></ul>
-    </div>
-    <div class="svc-cell">
-      <div class="svc-icon-wrap">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/></svg>
-      </div>
-      <div class="svc-name">INAI Systems</div>
-      <div class="svc-sub">AI Automation · CRM · Systems</div>
-      <ul class="svc-list"><li>AI Automation</li><li>CRM Workflows</li><li>Lead Management Systems</li><li>Business Process Optimization</li></ul>
-    </div>
-    <div class="svc-cell">
-      <div class="svc-icon-wrap">
-        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-      </div>
-      <div class="svc-name">INAI Digital</div>
-      <div class="svc-sub">Websites · Apps · Experiences</div>
-      <ul class="svc-list"><li>Websites</li><li>Landing Pages</li><li>App Prototypes</li><li>Digital Experiences</li></ul>
-    </div>
-    <div class="svc-cell">
-      <div class="svc-icon-wrap">
-        <svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-      </div>
-      <div class="svc-name">INAI Growth</div>
-      <div class="svc-sub">Marketing · Leads · Business Dev</div>
-      <ul class="svc-list"><li>Business Development Support</li><li>Marketing Strategy</li><li>Lead Generation</li><li>Business Communication</li></ul>
-    </div>
+  <div class="services-2x2 svc-3 stagger">
+    <div class="svc-cell"><div class="svc-name">INAI Advisory</div><div class="svc-sub">Understand the problem. Find the opportunity. Define the direction.</div><ul class="svc-list"><li>Business and operational diagnostics</li><li>Market and competitor research</li><li>Brand and market positioning</li><li>Digital transformation roadmaps</li><li>Technology and AI readiness</li></ul></div>
+    <div class="svc-cell"><div class="svc-name">INAI Innovation</div><div class="svc-sub">Turn ideas into practical solutions.</div><ul class="svc-list"><li>Websites and web applications</li><li>CRM architecture and implementation</li><li>Customer and student portals</li><li>Workflow automation and AI workflows</li><li>MVPs and prototypes</li></ul></div>
+    <div class="svc-cell"><div class="svc-name">INAI Ventures</div><div class="svc-sub">Explore what comes next. Build beyond individual projects.</div><ul class="svc-list"><li>Interactive products and assessment tools</li><li>Product intelligence and retail technology (in development)</li><li>Reusable automation tools (conceptual)</li><li>Industry-specific products (conceptual)</li></ul></div>
   </div>
   <div class="svc-tagline-footer reveal">
     <span class="gold-dot"></span>
-    TRANSFORMING IDEAS INTO OPPORTUNITIES,<br>OPPORTUNITIES INTO ACTION, AND ACTION INTO IMPACT.
+    FIVE PRACTICE AREAS &middot; ONE METHOD &middot; <a href="services.html" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold)">SEE ALL SERVICES &rarr;</a>
   </div>
 </section>
 
-<!-- ══ FRAMEWORK ══ -->
+<!-- ══ METHOD ══ -->
 <section class="framework" id="framework">
-  <div style="max-width:860px;margin:0 auto">
-    <div class="sec-eyebrow reveal" style="justify-content:center">The INAI Framework</div>
-    <h2 class="sec-title reveal" style="text-align:center">Every project follows<br>one <em>intentional journey.</em></h2>
-    <div class="fw-grid stagger">
-      <div class="fw-step"><div class="fw-letter">I</div><div class="fw-dot-sm"></div><div class="fw-word">Idea</div><div class="fw-desc">Every transformation begins with a vision worth pursuing.</div><div class="fw-step-arr">→</div></div>
-      <div class="fw-step"><div class="fw-letter">N</div><div class="fw-dot-sm"></div><div class="fw-word">Network</div><div class="fw-desc">Connecting people, systems, and opportunities seamlessly.</div><div class="fw-step-arr">→</div></div>
-      <div class="fw-step"><div class="fw-letter">A</div><div class="fw-dot-sm"></div><div class="fw-word">Action</div><div class="fw-desc">Turning strategy into precise, purposeful execution.</div><div class="fw-step-arr">→</div></div>
-      <div class="fw-step"><div class="fw-letter">I</div><div class="fw-dot-sm"></div><div class="fw-word">Impact</div><div class="fw-desc">Creating measurable growth and lasting business value.</div></div>
-    </div>
+  <div style="max-width:960px;margin:0 auto">
+    <div class="sec-eyebrow reveal" style="justify-content:center">The INAI Method</div>
+    <h2 class="sec-title reveal" style="text-align:center">Our working method,<br><em>from first question to lasting change.</em></h2>
+    <div class="fw-grid stagger"><div class="fw-step"><div class="fw-letter">O</div><div class="fw-dot-sm"></div><div class="fw-word">Observe</div><div class="fw-desc">Understand the organisation, people, processes and customers.</div><div class="fw-step-arr">→</div></div><div class="fw-step"><div class="fw-letter">Q</div><div class="fw-dot-sm"></div><div class="fw-word">Question</div><div class="fw-desc">Challenge assumptions and find root causes.</div><div class="fw-step-arr">→</div></div><div class="fw-step"><div class="fw-letter">R</div><div class="fw-dot-sm"></div><div class="fw-word">Reimagine</div><div class="fw-desc">Develop new approaches and possible solutions.</div><div class="fw-step-arr">→</div></div><div class="fw-step"><div class="fw-letter">E</div><div class="fw-dot-sm"></div><div class="fw-word">Engineer</div><div class="fw-desc">Design, build, implement and test.</div><div class="fw-step-arr">→</div></div><div class="fw-step"><div class="fw-letter">E</div><div class="fw-dot-sm"></div><div class="fw-word">Evolve</div><div class="fw-desc">Measure outcomes, learn and keep improving.</div></div></div>
   </div>
 </section>
 
@@ -701,7 +671,7 @@ footer{
     <div class="work-card">
       <div class="work-bg"></div>
       <div class="work-pat"><svg width="120" height="120" viewBox="0 0 120 120" fill="none"><polygon points="60,6 114,33 114,87 60,114 6,87 6,33" stroke="white" stroke-width="0.5" fill="none"/><circle cx="60" cy="60" r="28" stroke="white" stroke-width="0.5"/></svg></div>
-      <div class="work-info"><div class="work-cat">Brand Identity</div><div class="work-title">INAI Creative-Tech Collective</div></div>
+      <div class="work-info"><div class="work-cat">Brand Identity</div><div class="work-title">INAI Brand Identity</div></div>
       <div class="work-arr">↗</div>
     </div>
     <div class="work-card">
@@ -770,9 +740,9 @@ footer{
 <footer>
   <div>
     <div class="footer-brand"><svg class="logo-mark" viewBox="70 0 870 180" role="img" aria-label="INAI"><rect x="90" y="10" width="20" height="160" fill="currentColor"/><polygon points="245,10 270,10 425,170 400,170" fill="currentColor"/><rect x="245" y="10" width="20" height="160" fill="currentColor"/><rect x="405" y="10" width="20" height="160" fill="currentColor"/><polyline points="556,170 640,22 724,170" fill="none" stroke="currentColor" stroke-width="22" stroke-linejoin="miter"/><circle class="dot" cx="643" cy="148" r="22"/><rect x="860" y="10" width="20" height="160" fill="currentColor"/></svg></div>
-    <div class="footer-tag">Where Creativity Meets Intelligence</div>
+    <div class="footer-tag">Ideas Made Intelligent</div>
   </div>
-  <div class="footer-fw">I → N → A → I &nbsp;·&nbsp; IDEA · NETWORK · ACTION · IMPACT</div>
+  <div class="footer-fw">THINK · RETHINK · BUILD · EVOLVE</div>
   <div class="footer-copy">© 2026 INAI. All rights reserved.</div>
 </footer>
 

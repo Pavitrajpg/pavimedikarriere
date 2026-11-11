@@ -1,0 +1,9 @@
+#intro{position:fixed;inset:0;z-index:9999;background:#0F172A;display:grid;place-items:center;cursor:pointer;transition:opacity .7s ease}
+#intro.out{opacity:0;pointer-events:none}
+#intro svg{width:min(78vmin,520px);height:auto}
+#intro .idot{fill:#D4A843}
+#intro .iln{fill:none;stroke:#D4A843;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+#intro text{font-family:'Cormorant Garamond',Georgia,serif;fill:#F8F6F2;letter-spacing:.5em}
+#iskip{position:absolute;right:1.4rem;bottom:1.4rem;background:none;border:1px solid rgba(248,246,242,.35);color:#F8F6F2;font:inherit;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;padding:.55rem 1.1rem;cursor:pointer}
+#iskip:hover{border-color:#D4A843;color:#D4A843}
+html.intro-on body{overflow:hidden}

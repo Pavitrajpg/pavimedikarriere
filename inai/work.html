@@ -11,7 +11,7 @@
 :root{--navy:#0F172A;--charcoal:#111827;--gold:#B8860B;--copper:#C47A2C;--ivory:#F8F6F2;--muted:#94A3B8;--gold-light:#D4A843;--black:#06090F}
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--ivory);overflow-x:hidden}
-nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:1rem 4rem;background:rgba(15,23,42,0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(184,134,11,0.1)}
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:1rem 4rem;background:rgba(var(--navrgb),0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(184,134,11,0.1)}
 .nav-brand{display:flex;align-items:center;gap:0.7rem}
 .nav-kolam{width:36px;height:36px;border-radius:50%;border:1px solid rgba(184,134,11,0.3);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
 .nav-wordmark{font-family:'Cinzel Decorative',serif;font-size:1.1rem;letter-spacing:0.2em;color:var(--ivory);text-decoration:none}
@@ -75,9 +75,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .case-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;color:var(--ivory);margin-bottom:0.8rem;line-height:1.2}
 .case-desc{font-size:0.82rem;color:var(--muted);line-height:1.7;font-weight:300;margin-bottom:1.2rem}
 .case-tags{display:flex;gap:0.5rem;flex-wrap:wrap}
-.case-tag{padding:0.25rem 0.7rem;border:1px solid rgba(148,163,184,0.15);border-radius:2px;font-size:0.65rem;color:rgba(148,163,184,0.6);letter-spacing:0.06em}
+.case-tag{padding:0.25rem 0.7rem;border:1px solid rgba(var(--mutrgb),0.15);border-radius:2px;font-size:0.65rem;color:rgba(var(--mutrgb),0.6);letter-spacing:0.06em}
 .case-result{
-  margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,0.05);
+  margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid rgba(var(--whrgb),0.05);
   display:flex;gap:2rem;
 }
 .result-item .r-num{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--gold);font-weight:300;line-height:1}
@@ -108,7 +108,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .case-featured-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;line-height:1.2;margin-bottom:1rem;color:var(--ivory)}
 .case-featured-title em{color:var(--gold);font-style:italic}
 .case-featured-desc{font-size:0.88rem;color:var(--muted);line-height:1.8;font-weight:300;margin-bottom:1.8rem}
-.case-featured-results{display:flex;gap:2.5rem;margin-bottom:2rem;padding:1.5rem 0;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05)}
+.case-featured-results{display:flex;gap:2.5rem;margin-bottom:2rem;padding:1.5rem 0;border-top:1px solid rgba(var(--whrgb),0.05);border-bottom:1px solid rgba(var(--whrgb),0.05)}
 .fr-num{font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:var(--gold);font-weight:300;line-height:1}
 .fr-label{font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-top:0.3rem;max-width:120px;line-height:1.4}
 .btn-gold{background:var(--gold);color:var(--navy);padding:0.82rem 1.8rem;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.74rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;transition:background 0.3s;text-decoration:none;display:inline-block}
@@ -122,9 +122,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 
 footer{background:#040710;padding:2.2rem 4rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(184,134,11,0.07)}
 .footer-brand{font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--ivory);letter-spacing:0.18em}
-.footer-tag{font-size:0.6rem;color:rgba(148,163,184,0.35);letter-spacing:0.12em;text-transform:uppercase;margin-top:0.2rem}
-.footer-fw{font-size:0.58rem;color:rgba(148,163,184,0.25);letter-spacing:0.18em}
-.footer-copy{font-size:0.62rem;color:rgba(148,163,184,0.25)}
+.footer-tag{font-size:0.6rem;color:rgba(var(--mutrgb),0.35);letter-spacing:0.12em;text-transform:uppercase;margin-top:0.2rem}
+.footer-fw{font-size:0.58rem;color:rgba(var(--mutrgb),0.25);letter-spacing:0.18em}
+.footer-copy{font-size:0.62rem;color:rgba(var(--mutrgb),0.25)}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
 .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.75s ease,transform 0.75s ease}
@@ -154,10 +154,10 @@ footer{background:#040710;padding:2.2rem 4rem;display:flex;justify-content:space
 .g-desks{display:grid;grid-template-columns:repeat(2,1fr);gap:1.6rem}
 .g-desk{margin:0}
 .g-desk .bar{height:26px;background:#0a1020;border:1px solid rgba(184,134,11,.18);border-bottom:none;border-radius:8px 8px 0 0;display:flex;align-items:center;gap:6px;padding:0 12px}
-.g-desk .bar i{width:8px;height:8px;border-radius:50%;background:rgba(148,163,184,.35)}
+.g-desk .bar i{width:8px;height:8px;border-radius:50%;background:rgba(var(--mutrgb),.35)}
 .g-desk .shot{height:420px;overflow:hidden;border:1px solid rgba(184,134,11,.18);border-radius:0 0 8px 8px;background:#fff}
 .g-desk img{display:block;width:100%;height:auto}
-.g-note{font-size:.72rem;color:rgba(148,163,184,.6);font-style:italic;margin-top:1.6rem}
+.g-note{font-size:.72rem;color:rgba(var(--mutrgb),.6);font-style:italic;margin-top:1.6rem}
 @media(max-width:1100px){
  .gallery{padding:4rem 2rem}
  .g-phones{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:1rem;padding-bottom:1rem;margin:0 -2rem;padding-left:2rem;padding-right:2rem}
@@ -171,6 +171,7 @@ footer{background:#040710;padding:2.2rem 4rem;display:flex;justify-content:space
 </style>
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/inai-responsive.css">
+<link rel="stylesheet" href="assets/inai-theme.css">
 </head>
 <body>
 
@@ -380,7 +381,7 @@ footer{background:#040710;padding:2.2rem 4rem;display:flex;justify-content:space
   </div>
 </section>
 
-<div class="work-cta">
+<div class="work-cta dk">
   <h2>Your problem could be<br>the next <em>case study.</em></h2>
   <p>Every project starts with a conversation about what is not working. Let us have that conversation.</p>
   <a href="contact.html" class="btn-gold">Book a Consultation</a>

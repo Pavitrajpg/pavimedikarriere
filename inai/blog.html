@@ -11,7 +11,7 @@
 :root{--navy:#0F172A;--charcoal:#111827;--gold:#B8860B;--copper:#C47A2C;--ivory:#F8F6F2;--muted:#94A3B8;--gold-light:#D4A843;--black:#06090F}
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--ivory);overflow-x:hidden}
-nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:1rem 4rem;background:rgba(15,23,42,0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(184,134,11,0.1)}
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:1rem 4rem;background:rgba(var(--navrgb),0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(184,134,11,0.1)}
 .nav-brand{display:flex;align-items:center;gap:0.7rem}
 .nav-kolam{width:36px;height:36px;border-radius:50%;border:1px solid rgba(184,134,11,0.3);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
 .nav-wordmark{font-family:'Cinzel Decorative',serif;font-size:1.1rem;letter-spacing:0.2em;color:var(--ivory);text-decoration:none}
@@ -70,9 +70,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 
 footer{background:#040710;padding:2.2rem 4rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(184,134,11,0.07)}
 .footer-brand{font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--ivory);letter-spacing:0.18em}
-.footer-tag{font-size:0.6rem;color:rgba(148,163,184,0.35);letter-spacing:0.12em;text-transform:uppercase;margin-top:0.2rem}
-.footer-fw{font-size:0.58rem;color:rgba(148,163,184,0.25);letter-spacing:0.18em}
-.footer-copy{font-size:0.62rem;color:rgba(148,163,184,0.25)}
+.footer-tag{font-size:0.6rem;color:rgba(var(--mutrgb),0.35);letter-spacing:0.12em;text-transform:uppercase;margin-top:0.2rem}
+.footer-fw{font-size:0.58rem;color:rgba(var(--mutrgb),0.25);letter-spacing:0.18em}
+.footer-copy{font-size:0.62rem;color:rgba(var(--mutrgb),0.25)}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
 .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.75s ease,transform 0.75s ease}
@@ -84,6 +84,7 @@ footer{background:#040710;padding:2.2rem 4rem;display:flex;justify-content:space
 </style>
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/inai-responsive.css">
+<link rel="stylesheet" href="assets/inai-theme.css">
 </head>
 <body>
 <nav>
@@ -125,7 +126,7 @@ footer{background:#040710;padding:2.2rem 4rem;display:flex;justify-content:space
       <div style="font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.8rem;opacity:0.6">Pavitra Muthukrishnan &nbsp;·&nbsp; June 2025</div>
       <h2 class="feat-title">Why I named it <em>INAI.</em></h2>
       <p class="feat-excerpt">A Tamil word, a kolam drawn at dawn, and the realisation that everything I had built across ten years of work was actually about one thing: connection. This is the story of how a brand name became a belief system.</p>
-      <a href="why-i-named-it-inai.html" class="btn-gold">Read the Story</a>
+      <span class="btn-gold">Read the Story</span>
     </div>
   </a>
 

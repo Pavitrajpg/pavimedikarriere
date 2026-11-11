@@ -14,7 +14,7 @@
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--ivory);overflow-x:hidden}
 
-nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:1rem 4rem;background:rgba(15,23,42,0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(184,134,11,0.1)}
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:1rem 4rem;background:rgba(var(--navrgb),0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(184,134,11,0.1)}
 .nav-brand{display:flex;align-items:center;gap:0.7rem}
 .nav-kolam{width:36px;height:36px;border-radius:50%;border:1px solid rgba(184,134,11,0.3);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
 .nav-wordmark{font-family:'Cinzel Decorative',serif;font-size:1.1rem;letter-spacing:0.2em;color:var(--ivory);text-decoration:none}
@@ -33,9 +33,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 
 footer{background:#040710;padding:2.2rem 4rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(184,134,11,0.07)}
 .footer-brand{font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--ivory);letter-spacing:0.18em}
-.footer-tag{font-size:0.6rem;color:rgba(148,163,184,0.35);letter-spacing:0.12em;text-transform:uppercase;margin-top:0.2rem}
-.footer-fw{font-size:0.58rem;color:rgba(148,163,184,0.25);letter-spacing:0.18em}
-.footer-copy{font-size:0.62rem;color:rgba(148,163,184,0.25)}
+.footer-tag{font-size:0.6rem;color:rgba(var(--mutrgb),0.35);letter-spacing:0.12em;text-transform:uppercase;margin-top:0.2rem}
+.footer-fw{font-size:0.58rem;color:rgba(var(--mutrgb),0.25);letter-spacing:0.18em}
+.footer-copy{font-size:0.62rem;color:rgba(var(--mutrgb),0.25)}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
 .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.75s ease,transform 0.75s ease}
@@ -53,8 +53,8 @@ html{scroll-padding-top:128px}
 .eyebrow::before{content:'';width:1.8rem;height:1px;background:var(--gold)}
 .h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(2.1rem,3.8vw,3.4rem);line-height:1.1}
 .h2 em{color:var(--gold);font-style:italic}
-.lede{font-size:1rem;line-height:1.85;color:rgba(248,246,242,.68);font-weight:300}
-.btn-ghost{border:1px solid rgba(248,246,242,.28);color:var(--ivory);padding:.82rem 1.8rem;font-size:.74rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;border-radius:2px;text-decoration:none;display:inline-block;transition:border-color .3s,color .3s}
+.lede{font-size:1rem;line-height:1.85;color:rgba(var(--ivrgb),.68);font-weight:300}
+.btn-ghost{border:1px solid rgba(var(--ivrgb),.28);color:var(--ivory);padding:.82rem 1.8rem;font-size:.74rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;border-radius:2px;text-decoration:none;display:inline-block;transition:border-color .3s,color .3s}
 .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
 .btn-row{display:flex;gap:.9rem;flex-wrap:wrap}
 
@@ -73,7 +73,7 @@ html{scroll-padding-top:128px}
 .hero-art .ko{fill:none;stroke:rgba(212,168,67,.35);stroke-width:1.2;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.2s ease 4s forwards}
 .hero-art .core{fill:var(--gold-light);opacity:0;animation:pop .8s ease 3.9s forwards;transform-origin:center;transform-box:fill-box}
 .hero-art .halo{fill:none;stroke:rgba(212,168,67,.35);opacity:0;animation:halo 3s ease-in-out 4.6s infinite;transform-origin:center;transform-box:fill-box}
-.hero-art text{font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.2em;fill:rgba(148,163,184,.8);text-transform:uppercase;opacity:0;animation:pop .8s ease forwards}
+.hero-art text{font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.2em;fill:rgba(var(--mutrgb),.8);text-transform:uppercase;opacity:0;animation:pop .8s ease forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
 @keyframes kdIn{to{opacity:.55}}
 @keyframes kdMove{from{transform:translate(var(--dx),var(--dy))}to{transform:none}}
@@ -83,7 +83,7 @@ html{scroll-padding-top:128px}
 @keyframes halo{0%{opacity:0;transform:scale(.6)}40%{opacity:.8}100%{opacity:0;transform:scale(1.7)}}
 
 /* sub nav */
-.subnav{position:sticky;top:67px;z-index:200;display:flex;justify-content:center;gap:2.4rem;padding:.9rem 1rem;background:rgba(15,23,42,.97);backdrop-filter:blur(14px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow-x:auto}
+.subnav{position:sticky;top:67px;z-index:200;display:flex;justify-content:center;gap:2.4rem;padding:.9rem 1rem;background:rgba(var(--navrgb),.97);backdrop-filter:blur(14px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow-x:auto}
 .subnav a{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;white-space:nowrap;padding:.2rem 0;border-bottom:1px solid transparent;transition:color .3s,border-color .3s}
 .subnav a:hover,.subnav a.on{color:var(--gold);border-color:var(--gold)}
 
@@ -92,7 +92,7 @@ section.s.alt{background:var(--charcoal)}
 
 /* what we do */
 .what{display:grid;grid-template-columns:1.05fr .95fr;gap:5rem;align-items:start}
-.what .big{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.5rem,2.3vw,2.1rem);line-height:1.5;color:rgba(248,246,242,.92)}
+.what .big{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.5rem,2.3vw,2.1rem);line-height:1.5;color:rgba(var(--ivrgb),.92)}
 .what .big em{color:var(--gold)}
 .what .lede{margin-top:1.6rem}
 .connect{list-style:none;columns:2;column-gap:2.5rem;counter-reset:c}
@@ -110,11 +110,11 @@ section.s.alt{background:var(--charcoal)}
 .engine h3{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:1.9rem;margin-bottom:.5rem}
 .engine .say{font-size:.9rem;color:var(--gold-light);line-height:1.6;margin-bottom:1.6rem;font-weight:300}
 .engine ul{list-style:none}
-.engine li{font-size:.82rem;color:var(--muted);padding:.55rem 0;border-top:1px solid rgba(255,255,255,.05);font-weight:300;display:flex;justify-content:space-between;gap:.8rem;align-items:baseline}
+.engine li{font-size:.82rem;color:var(--muted);padding:.55rem 0;border-top:1px solid rgba(var(--whrgb),.05);font-weight:300;display:flex;justify-content:space-between;gap:.8rem;align-items:baseline}
 .st{font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;padding:.15rem .5rem;border-radius:2px;border:1px solid rgba(184,134,11,.35);color:var(--gold)}
 .st.dev{color:#c4b5fd;border-color:rgba(167,139,250,.4)}
-.st.idea{color:var(--muted);border-color:rgba(148,163,184,.3);border-style:dashed}
-.note{font-size:.76rem;color:rgba(148,163,184,.65);line-height:1.7;margin-top:1.4rem;font-style:italic;max-width:760px}
+.st.idea{color:var(--muted);border-color:rgba(var(--mutrgb),.3);border-style:dashed}
+.note{font-size:.76rem;color:rgba(var(--mutrgb),.65);line-height:1.7;margin-top:1.4rem;font-style:italic;max-width:760px}
 
 /* practice areas */
 .areas{margin-top:3.2rem;border-top:1px solid var(--line)}
@@ -123,7 +123,7 @@ section.s.alt{background:var(--charcoal)}
 .area.on::before{width:100%}
 .area .n{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:2.4rem;color:var(--gold);line-height:1}
 .area h3{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:1.75rem;line-height:1.2;margin-bottom:.7rem}
-.area .d{font-size:.88rem;line-height:1.75;color:rgba(248,246,242,.62);font-weight:300}
+.area .d{font-size:.88rem;line-height:1.75;color:rgba(var(--ivrgb),.62);font-weight:300}
 .area ul{list-style:none;columns:2;column-gap:2rem}
 .area li{font-size:.82rem;color:var(--muted);padding:.42rem 0;font-weight:300;break-inside:avoid;display:flex;gap:.6rem}
 .area li::before{content:'';width:.35rem;height:1px;background:var(--gold);margin-top:.8em;flex-shrink:0}
@@ -134,7 +134,7 @@ section.s.alt{background:var(--charcoal)}
 .ind{padding:0 1.8rem;border-left:1px solid var(--line)}
 .ind:first-child{padding-left:0;border-left:none}
 .ind h3{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:1.5rem;line-height:1.2;margin-bottom:1.1rem;min-height:3.6rem}
-.ind li{list-style:none;font-size:.82rem;color:var(--muted);padding:.5rem 0;border-top:1px solid rgba(255,255,255,.05);font-weight:300}
+.ind li{list-style:none;font-size:.82rem;color:var(--muted);padding:.5rem 0;border-top:1px solid rgba(var(--whrgb),.05);font-weight:300}
 
 /* method */
 .method{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:1.5rem;margin-top:4rem}
@@ -164,20 +164,20 @@ section.s.alt{background:var(--charcoal)}
 .tier .k{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem}
 .tier h3{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:1.8rem;line-height:1.15;margin-bottom:.4rem}
 .tier .say{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--gold-light);margin-bottom:1.2rem}
-.tier .for{font-size:.84rem;line-height:1.7;color:rgba(248,246,242,.72);font-weight:300;margin-bottom:1.1rem}
+.tier .for{font-size:.84rem;line-height:1.7;color:rgba(var(--ivrgb),.72);font-weight:300;margin-bottom:1.1rem}
 .tier ul{list-style:none}
 .tier li{font-size:.82rem;color:var(--muted);padding:.42rem 0;font-weight:300;display:flex;gap:.6rem}
 .tier li::before{content:'';width:.35rem;height:1px;background:var(--gold);margin-top:.8em;flex-shrink:0}
-.tier .eng{margin-top:auto;padding-top:1.4rem;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(148,163,184,.7)}
+.tier .eng{margin-top:auto;padding-top:1.4rem;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(var(--mutrgb),.7)}
 /* stance */
 .stance{margin-top:3rem;border-top:1px solid var(--line)}
 .pr{display:grid;grid-template-columns:.85fr 1.15fr;gap:3rem;padding:1.7rem 0;border-bottom:1px solid var(--line)}
 .pr h3{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:1.55rem;line-height:1.25}
 .pr h3 em{color:var(--gold)}
-.pr p{font-size:.88rem;line-height:1.8;color:rgba(248,246,242,.64);font-weight:300}
+.pr p{font-size:.88rem;line-height:1.8;color:rgba(var(--ivrgb),.64);font-weight:300}
 
 /* who */
-.who{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.3rem,2.2vw,1.9rem);line-height:1.8;color:rgba(248,246,242,.85);max-width:980px}
+.who{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.3rem,2.2vw,1.9rem);line-height:1.8;color:rgba(var(--ivrgb),.85);max-width:980px}
 .who i{color:var(--gold);font-style:normal;padding:0 .5rem}
 
 /* cta */
@@ -225,6 +225,7 @@ section.s.alt{background:var(--charcoal)}
 </style>
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/inai-responsive.css">
+<link rel="stylesheet" href="assets/inai-theme.css">
 </head>
 <body>
 <nav>
@@ -313,7 +314,7 @@ section.s.alt{background:var(--charcoal)}
   </div>
 </div></section>
 
-<section class="s alt" id="engines"><div class="wrap">
+<section class="s alt dk" id="engines"><div class="wrap">
   <div class="reveal"><div class="eyebrow">Three business engines</div>
   <h2 class="h2">Understand. Build. <em>Explore.</em></h2></div>
   <div class="engines stagger"><article class="engine reveal"><div class="ltr">A</div><h3>INAI Advisory</h3><p class="say">Understand the problem. Find the opportunity. Define the direction.</p><ul><li>Business and operational diagnostics</li><li>Business research and intelligence</li><li>Market and competitor research</li><li>Business model assessment</li><li>Brand and market positioning</li><li>Customer experience assessment</li><li>Innovation opportunity identification</li><li>Operational assessments</li><li>Digital transformation roadmaps</li><li>Technology and AI readiness assessments</li><li>Strategic planning and consulting</li></ul></article><article class="engine reveal"><div class="ltr">B</div><h3>INAI Innovation</h3><p class="say">Turn ideas into practical solutions.</p><ul><li>Digital product and solution design</li><li>Website and web application development</li><li>CRM architecture and implementation</li><li>Business management systems</li><li>Customer and student portals</li><li>Workflow automation</li><li>AI-powered business workflows</li><li>Interactive digital experiences</li><li>MVP and prototype development</li><li>Process redesign</li><li>Systems integration</li><li>Custom technology solutions</li></ul></article><article class="engine reveal"><div class="ltr">C</div><h3>INAI Ventures</h3><p class="say">Explore what comes next. Build beyond individual projects.</p><ul><li><span>Interactive products and assessment tools</span><span class="st av">Demos available</span></li><li><span>Product intelligence and retail technology</span><span class="st dev">In development</span></li><li><span>Reusable business automation tools</span><span class="st idea">Conceptual</span></li><li><span>Digital platforms and specialised applications</span><span class="st idea">Conceptual</span></li><li><span>Industry-specific technology products</span><span class="st idea">Conceptual</span></li><li><span>Experimental AI-enabled products</span><span class="st idea">Conceptual</span></li></ul></article></div>
@@ -379,7 +380,7 @@ section.s.alt{background:var(--charcoal)}
   <p class="who">Small and medium-sized businesses<i>·</i>independent business owners and retailers<i>·</i>startups and founders<i>·</i>education and training organisations<i>·</i>professional service providers<i>·</i>growing companies<i>·</i>established organisations exploring transformation.</p></div>
 </div></section>
 
-<section class="cta">
+<section class="cta dk">
   <h2>Every business has a challenge <em>worth understanding.</em></h2>
   <p class="sub">Tell us what you’re trying to solve. Let’s explore what can be done.</p>
   <div class="btn-row"><a class="btn-gold" href="contact.html">Start a Conversation</a><a class="btn-ghost" href="work.html">Explore Our Work</a></div>

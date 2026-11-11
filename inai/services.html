@@ -67,13 +67,18 @@ html{scroll-padding-top:128px}
 .motto b{color:var(--gold);font-weight:500}
 .hero-art{position:relative}
 .hero-art svg{width:100%;height:auto;display:block;overflow:visible}
-.hero-art .scrawl{fill:none;stroke:rgba(212,168,67,.55);stroke-width:1.3;stroke-linecap:round;stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 3.2s ease .4s forwards}
-.hero-art .clear{fill:none;stroke:var(--gold-light);stroke-width:1.8;stroke-linecap:round;stroke-dasharray:420;stroke-dashoffset:420;animation:draw 1.6s ease 3s forwards}
-.hero-art .node{fill:#0F172A;stroke:rgba(212,168,67,.7);stroke-width:1.2;opacity:0;animation:pop .6s ease forwards}
-.hero-art .core{fill:var(--gold-light);opacity:0;animation:pop .8s ease 4.2s forwards;transform-origin:center;transform-box:fill-box}
-.hero-art .halo{fill:none;stroke:rgba(212,168,67,.35);opacity:0;animation:halo 3s ease-in-out 4.4s infinite;transform-origin:center;transform-box:fill-box}
+.hero-art .kd{fill:var(--gold-light);opacity:0;animation:kdIn .6s ease forwards,kdMove 1.7s cubic-bezier(.65,0,.35,1) forwards}
+.hero-art .kr{fill:none;stroke:rgba(212,168,67,.6);stroke-width:1.3;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1s ease forwards}
+.hero-art .kl{fill:none;stroke:rgba(212,168,67,.4);stroke-width:1.1;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;animation:draw .9s ease forwards}
+.hero-art .ko{fill:none;stroke:rgba(212,168,67,.35);stroke-width:1.2;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.2s ease 4s forwards}
+.hero-art .core{fill:var(--gold-light);opacity:0;animation:pop .8s ease 3.9s forwards;transform-origin:center;transform-box:fill-box}
+.hero-art .halo{fill:none;stroke:rgba(212,168,67,.35);opacity:0;animation:halo 3s ease-in-out 4.6s infinite;transform-origin:center;transform-box:fill-box}
 .hero-art text{font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.2em;fill:rgba(148,163,184,.8);text-transform:uppercase;opacity:0;animation:pop .8s ease forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
+@keyframes kdIn{to{opacity:.55}}
+@keyframes kdMove{from{transform:translate(var(--dx),var(--dy))}to{transform:none}}
+@keyframes labOut{0%{opacity:0}18%{opacity:1}78%{opacity:1}100%{opacity:0}}
+.hero-art .lab1{animation:labOut 2.6s ease .2s forwards}
 @keyframes pop{to{opacity:1}}
 @keyframes halo{0%{opacity:0;transform:scale(.6)}40%{opacity:.8}100%{opacity:0;transform:scale(1.7)}}
 
@@ -211,8 +216,9 @@ section.s.alt{background:var(--charcoal)}
  html{scroll-padding-top:116px}
 }
 @media(prefers-reduced-motion:reduce){
- .hero-art .scrawl,.hero-art .clear{animation:none;stroke-dashoffset:0}
- .hero-art .node,.hero-art .core,.hero-art text{animation:none;opacity:1}.hero-art .halo{animation:none}
+ .hero-art .kr,.hero-art .kl,.hero-art .ko{animation:none;stroke-dashoffset:0}
+ .hero-art .kd{animation:none;opacity:.8;transform:none}
+ .hero-art .core,.hero-art text{animation:none;opacity:1}.hero-art .lab1{display:none}.hero-art .halo{animation:none}
  .method::before{transition:none;transform:none}.reveal,.stagger>*{opacity:1;transform:none;transition:none}
 }
 
@@ -242,17 +248,52 @@ section.s.alt{background:var(--charcoal)}
     <div class="btn-row"><a class="btn-gold" href="contact.html">Start a Conversation</a><a class="btn-ghost" href="work.html">Explore Our Work</a></div>
     <div class="motto"><b>Think.</b> Rethink. <b>Build.</b> Evolve.</div>
   </div>
-  <div class="hero-art" aria-hidden="false"><svg viewBox="0 0 520 440" role="img" aria-label="A tangled line resolving into one clear path ending in a gold point">
- <path class="scrawl" d="M20 300 C 60 120, 150 380, 120 210 S 40 70, 140 120 C 220 160, 90 330, 190 330 S 230 120, 170 190 C 130 240, 250 300, 255 220"/>
- <path class="scrawl" style="animation-delay:.9s" d="M30 130 C 110 40, 80 260, 160 250 S 260 60, 215 140"/>
- <path class="clear" d="M255 220 L 470 220"/>
- <circle class="halo" cx="470" cy="220" r="34"/>
- <circle class="core" cx="470" cy="220" r="12"/>
- <circle class="node" style="animation-delay:.5s" cx="20" cy="300" r="5"/><circle class="node" style="animation-delay:1s" cx="140" cy="120" r="5"/>
- <circle class="node" style="animation-delay:1.5s" cx="190" cy="330" r="5"/><circle class="node" style="animation-delay:2s" cx="30" cy="130" r="5"/>
- <circle class="node" style="animation-delay:2.4s" cx="255" cy="220" r="6"/>
- <text style="animation-delay:.8s" x="14" y="345">Complexity</text>
- <text style="animation-delay:4.4s" x="400" y="268">Possibility</text>
+  <div class="hero-art" aria-hidden="false"><svg viewBox="0 0 520 440" role="img" aria-label="Scattered dots drifting into place and connecting into a kolam-like pattern around one gold point">
+ <path class="kl" style="animation-delay:3.30s" pathLength="1" d="M260 79 L260 111"/>
+ <path class="kl" style="animation-delay:3.35s" pathLength="1" d="M204 135 L236 135"/>
+ <path class="kl" style="animation-delay:3.40s" pathLength="1" d="M180 159 L180 191"/>
+ <path class="kl" style="animation-delay:3.57s" pathLength="1" d="M284 135 L316 135"/>
+ <path class="kl" style="animation-delay:3.62s" pathLength="1" d="M260 159 L260 191"/>
+ <path class="kl" style="animation-delay:3.55s" pathLength="1" d="M340 159 L340 191"/>
+ <path class="kl" style="animation-delay:3.60s" pathLength="1" d="M124 215 L156 215"/>
+ <path class="kl" style="animation-delay:3.77s" pathLength="1" d="M204 215 L236 215"/>
+ <path class="kl" style="animation-delay:3.82s" pathLength="1" d="M180 239 L180 271"/>
+ <path class="kl" style="animation-delay:3.99s" pathLength="1" d="M284 215 L316 215"/>
+ <path class="kl" style="animation-delay:4.04s" pathLength="1" d="M260 239 L260 271"/>
+ <path class="kl" style="animation-delay:3.97s" pathLength="1" d="M364 215 L396 215"/>
+ <path class="kl" style="animation-delay:4.02s" pathLength="1" d="M340 239 L340 271"/>
+ <path class="kl" style="animation-delay:3.95s" pathLength="1" d="M204 295 L236 295"/>
+ <path class="kl" style="animation-delay:4.12s" pathLength="1" d="M284 295 L316 295"/>
+ <path class="kl" style="animation-delay:4.17s" pathLength="1" d="M260 319 L260 351"/>
+ <circle class="kr" style="animation-delay:2.86s" pathLength="1" cx="260" cy="55" r="24"/>
+ <circle class="kr" style="animation-delay:2.86s" pathLength="1" cx="180" cy="135" r="24"/>
+ <circle class="kr" style="animation-delay:2.68s" pathLength="1" cx="260" cy="135" r="24"/>
+ <circle class="kr" style="animation-delay:2.86s" pathLength="1" cx="340" cy="135" r="24"/>
+ <circle class="kr" style="animation-delay:2.86s" pathLength="1" cx="100" cy="215" r="24"/>
+ <circle class="kr" style="animation-delay:2.68s" pathLength="1" cx="180" cy="215" r="24"/>
+ <circle class="kr" style="animation-delay:2.68s" pathLength="1" cx="340" cy="215" r="24"/>
+ <circle class="kr" style="animation-delay:2.86s" pathLength="1" cx="420" cy="215" r="24"/>
+ <circle class="kr" style="animation-delay:2.86s" pathLength="1" cx="180" cy="295" r="24"/>
+ <circle class="kr" style="animation-delay:2.68s" pathLength="1" cx="260" cy="295" r="24"/>
+ <circle class="kr" style="animation-delay:2.86s" pathLength="1" cx="340" cy="295" r="24"/>
+ <circle class="kr" style="animation-delay:2.86s" pathLength="1" cx="260" cy="375" r="24"/>
+ <circle class="kd" style="--dx:-120px;--dy:70px;animation-delay:0.10s,1s" cx="260" cy="55" r="4.5"/>
+ <circle class="kd" style="--dx:90px;--dy:-110px;animation-delay:0.15s,1s" cx="180" cy="135" r="4.5"/>
+ <circle class="kd" style="--dx:-60px;--dy:-130px;animation-delay:0.20s,1s" cx="260" cy="135" r="4.5"/>
+ <circle class="kd" style="--dx:140px;--dy:40px;animation-delay:0.25s,1s" cx="340" cy="135" r="4.5"/>
+ <circle class="kd" style="--dx:-150px;--dy:-20px;animation-delay:0.30s,1s" cx="100" cy="215" r="4.5"/>
+ <circle class="kd" style="--dx:30px;--dy:120px;animation-delay:0.35s,1s" cx="180" cy="215" r="4.5"/>
+ <circle class="kd" style="--dx:-100px;--dy:110px;animation-delay:0.45s,1s" cx="340" cy="215" r="4.5"/>
+ <circle class="kd" style="--dx:60px;--dy:-60px;animation-delay:0.50s,1s" cx="420" cy="215" r="4.5"/>
+ <circle class="kd" style="--dx:-40px;--dy:60px;animation-delay:0.55s,1s" cx="180" cy="295" r="4.5"/>
+ <circle class="kd" style="--dx:130px;--dy:-80px;animation-delay:0.60s,1s" cx="260" cy="295" r="4.5"/>
+ <circle class="kd" style="--dx:-130px;--dy:-90px;animation-delay:0.65s,1s" cx="340" cy="295" r="4.5"/>
+ <circle class="kd" style="--dx:20px;--dy:-140px;animation-delay:0.70s,1s" cx="260" cy="375" r="4.5"/>
+ <path class="ko" pathLength="1" d="M260 22 Q380 98 458 215 Q380 332 260 408 Q140 332 62 215 Q140 98 260 22Z"/>
+ <circle class="halo" cx="260" cy="215" r="34"/>
+ <circle class="core" cx="260" cy="215" r="9"/>
+ <text class="lab1" x="260" y="436" text-anchor="middle">Complexity</text>
+ <text style="animation-delay:4.6s" x="260" y="436" text-anchor="middle">Possibility</text>
 </svg></div>
 </header>
 
